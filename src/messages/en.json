@@ -1,0 +1,270 @@
+{
+  "metadata": {
+    "title": "Nguyen Dinh Bang | Portfolio",
+    "description": "Personal portfolio of Nguyen Dinh Bang — Fullstack Developer"
+  },
+  "site": {
+    "name": "N.D.Bang",
+    "nav": {
+      "about": "About",
+      "projects": "Projects",
+      "stack": "Stack",
+      "profile": "Profile",
+      "contact": "Contact"
+    },
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu"
+  },
+  "hero": {
+    "name": "Nguyen Dinh Bang",
+    "role": "Fullstack Developer",
+    "description": "Full-stack developer building scalable web apps with Next.js, NestJS, GraphQL, PostgreSQL, and Redis — expanding into software architecture and AI.",
+    "cta": "View projects",
+    "ctaContact": "Contact",
+    "ctaResume": "Resume",
+    "avatarAlt": "Avatar of {name}",
+    "typewriter": [
+      "I build scalable web apps\nwith Next.js, NestJS, GraphQL, and PostgreSQL.",
+      "Shipping production features\nand expanding into architecture and AI."
+    ],
+    "github": {
+      "contributions": "contributions in the last 6 months",
+      "organizations": "Organizations",
+      "less": "Less",
+      "more": "More",
+      "privateHint": "Private contributions are hidden by this token. Use a Classic PAT with read:user to fill the full heatmap.",
+      "dayTooltip": "{count, plural, =0 {No contributions} one {# contribution} other {# contributions}} on {date}",
+      "orgOpen": "Open @{login} on GitHub",
+      "orgTooltips": {
+        "UCTalent": "Unchain Talent Lab — current fullstack role shipping production talent products.",
+        "sfastvn": "Collaborative GitHub org for shared product and experiment repos."
+      }
+    },
+    "collage": {
+      "moreSkills": "See all skills in Profile",
+      "moreAi": "See all AI skills in Profile",
+      "location": "Location",
+      "repos": "Repos",
+      "stars": "Stars",
+      "openPrs": "Open PRs",
+      "contrib": "Contrib",
+      "experienceLabel": "years building web apps"
+    }
+  },
+  "profile": {
+    "badge": "Profile",
+    "title": "About me",
+    "description": "Identity, education, and the roles that shaped how I ship products.",
+    "fields": {
+      "name": "Name",
+      "role": "Role",
+      "birth": "Born",
+      "location": "Location",
+      "education": "Education"
+    },
+    "skills": {
+      "languages": "Programming languages",
+      "databases": "Databases",
+      "frameworks": "Frameworks & libraries",
+      "api": "API & rendering",
+      "security": "Security",
+      "other": "Other skills",
+      "ai": "AI & LLM"
+    },
+    "identity": "Identity",
+    "career": "Career journey",
+    "githubTitle": "GitHub activity"
+  },
+  "stack": {
+    "badge": "Stack",
+    "title": "Featured stack",
+    "description": "Languages, frameworks, data, APIs, and AI tooling I use to ship production systems.",
+    "featured": "Core tools",
+    "more": "Also in the kit"
+  },
+  "experience": {
+    "badge": "Experience",
+    "title": "Work experience",
+    "repo": "Project repository",
+    "items": {
+      "uctalent": {
+        "company": "UC Talent Labs",
+        "role": "Fullstack Developer",
+        "summary": "Product + outsourcing studio building an HRTech platform and client solutions.",
+        "bullets": {
+          "production": "Built and maintained production web apps for the HRTech platform and client projects.",
+          "performance": "Implemented scalable features and optimized performance across frontend and backend.",
+          "reliability": "Debugged and resolved production issues to improve reliability and maintainability.",
+          "endToEnd": "Delivered end-to-end solutions for internal products and outsourcing engagements.",
+          "agile": "Collaborated with developers, designers, and stakeholders in Agile sprints."
+        }
+      },
+      "fsoft": {
+        "company": "FPT Software",
+        "role": "Software Intern (OJT)",
+        "summary": "Three-month on-the-job training internship — built a school grading / learning-management project for the university program.",
+        "bullets": {
+          "ojt": "Delivered an OJT project for school grading and learning management used in the internship evaluation.",
+          "fullstack": "Built full-stack features with a Spring Boot (Java) API and a Vite + React frontend (Tailwind).",
+          "delivery": "Worked in a 3-month internship cadence — requirements, implementation, and demo handoff."
+        }
+      }
+    }
+  },
+  "projects": {
+    "badge": "Projects",
+    "title": "Selected work",
+    "description": "Production work I ship — focused on scalable full-stack systems and AI-assisted workflows.",
+    "live": "Live site",
+    "repo": "Repository",
+    "repoFrontend": "Frontend",
+    "repoBackend": "Backend",
+    "teamSize": "Team of {count}",
+    "solo": "Solo · Capstone",
+    "caseStudy": "Case study",
+    "items": {
+      "uctalent": {
+        "title": "uctalent.io",
+        "role": "Fullstack developer",
+        "summary": "Web3-enabled HRTech platform for recruitment, AI-powered candidate matching, and blockchain-based referral rewards.",
+        "highlights": {
+          "fullstack": "Shipped production full-stack features with Next.js, NestJS, GraphQL, PostgreSQL, and Redis.",
+          "ddd": "Designed backend services with Clean Architecture and Domain-Driven Design for long-term maintainability.",
+          "llm": "Integrated LLMs into recruitment workflows — prompt pipelines, structured outputs, and candidate-job matching.",
+          "vector": "Built vector-based semantic search and recommendations beyond keyword matching.",
+          "microservices": "Designed resilient GraphQL + Redis + async job integrations across microservices.",
+          "performance": "Improved performance via API, query, and Redis caching optimization plus code reviews."
+        }
+      },
+      "matchtutors": {
+        "title": "Match Tutors",
+        "role": "Fullstack developer · Capstone",
+        "summary": "Personal capstone platform that connects tutors and students — scheduling, AI-assisted matching, realtime chat, and payments.",
+        "highlights": {
+          "platform": "Built a tutor–student connection product end-to-end: profiles, scheduling, and learning management flows.",
+          "matching": "Implemented AI-assisted matching with OpenAI embeddings and background match workers on Redis/BullMQ.",
+          "realtime": "Added realtime messaging and live updates with Socket.io across the booking experience.",
+          "workers": "Designed async job workers for embeddings, email, notifications, and match processing.",
+          "payments": "Integrated PayOS checkout plus auth (JWT / Google OAuth) and file uploads (S3 / Cloudinary).",
+          "fullstack": "Shipped React + Vite frontend and Express + MongoDB API as separate repos — production builds deployed on AWS, with Cloudinary for image and file storage."
+        }
+      }
+    }
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "en": "English",
+    "vi": "Vietnamese"
+  },
+  "theme": {
+    "toggle": "Toggle theme"
+  },
+  "uiToolkit": {
+    "badge": "Design System",
+    "title": "UI Toolkit",
+    "description": "A flat minimalism component library — solid surfaces, sharp corners, yellow accents, and Lucide icons.",
+    "icons": {
+      "title": "Icons",
+      "description": "All UI icons come from lucide-react. Import by name; size with Tailwind.",
+      "sparkles": "Sparkles",
+      "zap": "Zap",
+      "layers": "Layers",
+      "code": "Code",
+      "github": "Git",
+      "globe": "Globe",
+      "mail": "Mail",
+      "sun": "Sun",
+      "moon": "Moon",
+      "arrow": "Arrow"
+    },
+    "buttons": {
+      "title": "Buttons",
+      "description": "Flat buttons with multiple variants and sizes.",
+      "default": "Default",
+      "primary": "Primary",
+      "outline": "Outline",
+      "ghost": "Ghost",
+      "destructive": "Destructive",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large",
+      "icon": "Icon button"
+    },
+    "tooltips": {
+      "title": "Tooltips",
+      "description": "Hover or focus to reveal short helper text. Flat popup, sharp corners.",
+      "basicTrigger": "Hover me",
+      "basicContent": "Short helper text for this control.",
+      "iconTrigger": "Info",
+      "iconContent": "Useful context without cluttering the layout.",
+      "primaryTrigger": "Primary action",
+      "primaryContent": "Explain what this action does before click.",
+      "sideTop": "Top",
+      "sideRight": "Right",
+      "sideBottom": "Bottom",
+      "sideLeft": "Left",
+      "sideHint": "Tooltip on the {side} side."
+    },
+    "cards": {
+      "title": "Cards",
+      "description": "Solid panels for grouping content with clear borders.",
+      "basic": {
+        "title": "Basic Card",
+        "description": "Simple container for any content block.",
+        "content": "Inset surface for nested content."
+      },
+      "featured": {
+        "title": "Featured",
+        "description": "Card with Lucide icon accent and call-to-action.",
+        "action": "Learn more"
+      },
+      "highlight": {
+        "title": "Stats Card",
+        "description": "Showcase metrics or highlights in a flat layout.",
+        "stat1": "Solid",
+        "stat2": "Border",
+        "stat3": "Sharp",
+        "primary": "Apply",
+        "secondary": "Reset"
+      }
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "builtWith": "Built with Next.js"
+  },
+  "cv": {
+    "back": "Back to portfolio",
+    "print": "Print / Save PDF",
+    "skills": "Skills"
+  },
+  "caseStudy": {
+    "back": "Back to projects",
+    "highlights": "What I shipped"
+  },
+  "contact": {
+    "eyebrow": "Available for work",
+    "title": "Let's talk about your project",
+    "email": "Email",
+    "phone": "Phone",
+    "github": "GitHub",
+    "resume": "Resume",
+    "buildCaption": "What I can build — drag the chips",
+    "blocks": {
+      "uiux": "UI/UX",
+      "backend": "Backend",
+      "aiml": "AI & ML",
+      "microservices": "Microservices",
+      "automation": "Automation",
+      "devops": "DevOps",
+      "frontend": "Frontend",
+      "data": "Data",
+      "qa": "QA & Testing",
+      "mobile": "Mobile",
+      "api": "API",
+      "desktop": "Desktop",
+      "cloud": "Cloud",
+      "web": "Web"
+    }
+  }
+}

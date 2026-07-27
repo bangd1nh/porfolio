@@ -1,0 +1,539 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-heading);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Light — flat yellow + white minimalism */
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.18 0.025 90);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.025 90);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.025 90);
+  /* Darker gold than dark-mode yellow (0.84) — stronger on white */
+  --primary: oklch(0.68 0.16 90);
+  --primary-foreground: oklch(0.18 0.04 90);
+  --secondary: oklch(0.96 0.02 95);
+  --secondary-foreground: oklch(0.22 0.03 90);
+  --muted: oklch(0.96 0.015 95);
+  --muted-foreground: oklch(0.38 0.02 90);
+  --accent: oklch(0.96 0.04 90);
+  --accent-foreground: oklch(0.22 0.03 90);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(0.86 0.02 90);
+  --input: oklch(0.86 0.02 90);
+  --ring: oklch(0.62 0.15 90);
+  --chart-1: oklch(0.68 0.16 90);
+  --chart-2: oklch(0.62 0.15 85);
+  --chart-3: oklch(0.56 0.14 80);
+  --chart-4: oklch(0.5 0.12 75);
+  --chart-5: oklch(0.44 0.1 70);
+  --radius: 0;
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.18 0.025 90);
+  --sidebar-primary: oklch(0.68 0.16 90);
+  --sidebar-primary-foreground: oklch(0.18 0.04 90);
+  --sidebar-accent: oklch(0.96 0.02 95);
+  --sidebar-accent-foreground: oklch(0.22 0.03 90);
+  --sidebar-border: oklch(0.86 0.02 90);
+  --sidebar-ring: oklch(0.62 0.15 90);
+
+  --surface-bg: var(--card);
+  --surface-bg-elevated: var(--muted);
+  --surface-border: var(--border);
+
+  /* Legacy aliases — solid flat only */
+  --glass-bg: var(--card);
+  --glass-bg-heavy: var(--card);
+  --glass-border: var(--border);
+  --glass-highlight: transparent;
+  --glass-shadow: none;
+  --glass-blur: 0px;
+  --glass-blur-lg: 0px;
+  --glass-blur-button: 0px;
+  --glass-blur-card: 0px;
+  --glass-edge-top: var(--border);
+  --glass-edge-bottom: var(--border);
+  --glass-edge-side: var(--border);
+  --glass-lift-shadow: none;
+  --glass-lift-shadow-hover: none;
+  --glass-fallback-bg: var(--card);
+
+  /* Page shell — shared by floating header + page-grid */
+  --page-pad-inline: clamp(1rem, 4vw, 2.5rem);
+  --page-col-gap: clamp(0.75rem, 2vw, 1.5rem);
+  --site-header-offset: 0.75rem;
+  --site-header-height: 3.5rem;
+  /* Fixed header + breathing room before section content */
+  --site-header-clearance: calc(
+    var(--site-header-offset) + var(--site-header-height) + 1.5rem
+  );
+}
+
+.dark {
+  /* Near-black neutrals — chroma off yellow/brown hue 90 */
+  --background: oklch(0.145 0.004 260);
+  --foreground: oklch(0.96 0.005 260);
+  --card: oklch(0.19 0.005 260);
+  --card-foreground: oklch(0.96 0.005 260);
+  --popover: oklch(0.19 0.005 260);
+  --popover-foreground: oklch(0.96 0.005 260);
+  --primary: oklch(0.84 0.17 92);
+  --primary-foreground: oklch(0.18 0.04 90);
+  --secondary: oklch(0.24 0.006 260);
+  --secondary-foreground: oklch(0.96 0.005 260);
+  --muted: oklch(0.24 0.006 260);
+  /* ~AA on near-black background (4.5:1+) */
+  --muted-foreground: oklch(0.84 0.01 260);
+  --accent: oklch(0.26 0.008 260);
+  --accent-foreground: oklch(0.96 0.005 260);
+  --destructive: oklch(0.65 0.2 25);
+  --border: oklch(0.34 0.008 260);
+  --input: oklch(0.34 0.008 260);
+  --ring: oklch(0.84 0.17 92);
+  --chart-1: oklch(0.82 0.16 90);
+  --chart-2: oklch(0.75 0.14 85);
+  --chart-3: oklch(0.68 0.12 80);
+  --chart-4: oklch(0.6 0.1 75);
+  --chart-5: oklch(0.52 0.08 70);
+  --sidebar: oklch(0.145 0.004 260);
+  --sidebar-foreground: oklch(0.96 0.005 260);
+  --sidebar-primary: oklch(0.84 0.17 92);
+  --sidebar-primary-foreground: oklch(0.18 0.04 90);
+  --sidebar-accent: oklch(0.24 0.006 260);
+  --sidebar-accent-foreground: oklch(0.96 0.005 260);
+  --sidebar-border: oklch(0.34 0.008 260);
+  --sidebar-ring: oklch(0.84 0.17 92);
+
+  --surface-bg: var(--card);
+  --surface-bg-elevated: var(--muted);
+  --surface-border: var(--border);
+
+  --glass-bg: var(--card);
+  --glass-bg-heavy: var(--card);
+  --glass-border: var(--border);
+  --glass-highlight: transparent;
+  --glass-shadow: none;
+  --glass-blur: 0px;
+  --glass-blur-lg: 0px;
+  --glass-blur-button: 0px;
+  --glass-blur-card: 0px;
+  --glass-edge-top: var(--border);
+  --glass-edge-bottom: var(--border);
+  --glass-edge-side: var(--border);
+  --glass-lift-shadow: none;
+  --glass-lift-shadow-hover: none;
+  --glass-fallback-bg: var(--card);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans antialiased;
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--site-header-clearance);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Circular theme reveal — Ant Design–style clip-path on root VT snapshots. */
+::view-transition-group(root) {
+  animation-duration: 600ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+  width: 100%;
+  height: 100%;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+  animation: none;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+  /* Start clipped so Firefox never flashes the full new theme. */
+  clip-path: circle(0px at var(--theme-reveal-x) var(--theme-reveal-y));
+  animation: theme-circle-reveal 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes theme-circle-reveal {
+  from {
+    clip-path: circle(0px at var(--theme-reveal-x) var(--theme-reveal-y));
+  }
+  to {
+    clip-path: circle(
+      var(--theme-reveal-r) at var(--theme-reveal-x) var(--theme-reveal-y)
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
+@layer utilities {
+  /* 10-column page grid — all page/section layout uses this system */
+  .page-grid {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    column-gap: var(--page-col-gap);
+    row-gap: 0;
+    width: 100%;
+    min-height: 100%;
+    padding-inline: var(--page-pad-inline);
+    /* Top clearance via Tailwind on PageGrid so lg:pt-0 can override. */
+  }
+
+  .page-section {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    column-gap: inherit;
+  }
+
+  /* Tall section — full viewport from md up; content-sized on small screens */
+  .page-section-screen {
+    align-content: center;
+  }
+
+  @media (min-width: 768px) {
+    .page-section-screen {
+      min-height: 100svh;
+    }
+  }
+
+  /* Floating fixed site header — viewport-anchored, above page content */
+  .site-header-float {
+    position: fixed;
+    top: var(--site-header-offset);
+    left: var(--page-pad-inline);
+    right: var(--page-pad-inline);
+    z-index: 100;
+    isolation: isolate;
+    pointer-events: none;
+  }
+
+  .site-header-float > * {
+    pointer-events: auto;
+  }
+
+  /*
+   * Cursor spotlight dots — decorative page background only.
+   * Dim grid always visible; bright layer masked to a circle at --spot-x/--spot-y.
+   */
+  .dot-spotlight {
+    --spot-x: 50%;
+    --spot-y: 40%;
+    --spot-radius: 240px;
+    --dot-gap: 20px;
+    --dot-dim: oklch(0.55 0.03 90 / 0.35);
+    --dot-bright: oklch(0.35 0.06 90 / 0.85);
+    background: var(--background);
+  }
+
+  .dark .dot-spotlight {
+    --dot-dim: oklch(1 0 0 / 0.1);
+    --dot-bright: oklch(1 0 0 / 0.85);
+  }
+
+  @keyframes heatmap-cell-in {
+    from {
+      opacity: 0;
+      transform: scale(0.55);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes terminal-caret-blink {
+    0%,
+    45% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes terminal-flicker {
+    0% {
+      opacity: 0.72;
+    }
+    18% {
+      opacity: 1;
+    }
+    32% {
+      opacity: 0.85;
+    }
+    55% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .terminal-caret {
+    display: inline-block;
+    width: 0.55ch;
+    height: 1.05em;
+    margin-left: 1px;
+    vertical-align: text-bottom;
+    background: var(--primary);
+    animation: terminal-caret-blink 1.05s step-end infinite;
+  }
+
+  .terminal-scanlines {
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      oklch(0 0 0 / 0.06) 2px,
+      oklch(0 0 0 / 0.06) 3px
+    );
+  }
+
+  .dark .terminal-scanlines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      oklch(1 0 0 / 0.035) 2px,
+      oklch(1 0 0 / 0.035) 3px
+    );
+  }
+
+  .terminal-noise {
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 128px 128px;
+  }
+
+  .terminal-flicker {
+    animation: terminal-flicker 0.45s ease-out 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .terminal-caret {
+      animation: none;
+      opacity: 1;
+    }
+
+    .terminal-flicker {
+      animation: none;
+    }
+  }
+
+  .heatmap-cell {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+
+  .heatmap-inview .heatmap-cell {
+    animation: heatmap-cell-in 0.32s ease-out both;
+    animation-delay: calc(var(--cell-i, 0) * 6ms);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .heatmap-cell {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .motion-safe-only {
+      display: none;
+    }
+  }
+
+  @media print {
+    .dot-spotlight,
+    .site-header-float,
+    .print\:hidden {
+      display: none !important;
+    }
+
+    body {
+      background: white;
+      color: black;
+    }
+
+    .page-grid {
+      padding-top: 0;
+    }
+  }
+
+  .dot-spotlight::before,
+  .dot-spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      circle at center,
+      var(--dot-color) 0,
+      var(--dot-color) 1px,
+      transparent 1.5px
+    );
+    background-size: var(--dot-gap) var(--dot-gap);
+    background-repeat: repeat;
+  }
+
+  .dot-spotlight::before {
+    --dot-color: var(--dot-dim);
+  }
+
+  .dot-spotlight::after {
+    --dot-color: var(--dot-bright);
+    -webkit-mask-image: radial-gradient(
+      circle var(--spot-radius) at var(--spot-x) var(--spot-y),
+      #000 0%,
+      #000 25%,
+      transparent 70%
+    );
+    mask-image: radial-gradient(
+      circle var(--spot-radius) at var(--spot-x) var(--spot-y),
+      #000 0%,
+      #000 25%,
+      transparent 70%
+    );
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dot-spotlight::after {
+      opacity: 0;
+    }
+  }
+
+  /* Solid page background only — no gradients on UI surfaces */
+  .bg-minimal-canvas,
+  .bg-glass-canvas {
+    background: var(--background);
+  }
+
+  .surface,
+  .glass {
+    background: var(--surface-bg);
+    border: 1px solid var(--surface-border);
+  }
+
+  .surface-sm,
+  .glass-sm {
+    background: var(--surface-bg);
+    border: 1px solid var(--surface-border);
+  }
+
+  .surface-lg,
+  .glass-lg {
+    background: var(--surface-bg);
+    border: 1px solid var(--surface-border);
+  }
+
+  .surface-nav,
+  .glass-nav {
+    background: var(--background);
+    border-bottom: 1px solid var(--surface-border);
+  }
+
+  .surface-inset,
+  .glass-inset {
+    background: var(--surface-bg-elevated);
+    border: 1px solid var(--surface-border);
+  }
+
+  .surface-elevated,
+  .glass-elevated {
+    border: 1px solid var(--surface-border);
+    transition: background 0.15s ease, filter 0.15s ease;
+  }
+
+  .glass-button-ghost {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .glass-button-ghost:hover:not(:disabled) {
+    background: var(--muted);
+  }
+
+  .surface-card,
+  .glass-card-surface,
+  .glass-card-surface-sm,
+  .glass-card-surface-lg {
+    background: var(--surface-bg);
+    border: 1px solid var(--surface-border);
+  }
+}

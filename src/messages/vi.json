@@ -1,0 +1,270 @@
+{
+  "metadata": {
+    "title": "Nguyễn Đình Bảng | Portfolio",
+    "description": "Portfolio cá nhân của Nguyễn Đình Bảng — Fullstack Developer"
+  },
+  "site": {
+    "name": "N.Đ.Bảng",
+    "nav": {
+      "about": "Giới thiệu",
+      "projects": "Dự án",
+      "stack": "Stack",
+      "profile": "Hồ sơ",
+      "contact": "Liên hệ"
+    },
+    "menuOpen": "Mở menu",
+    "menuClose": "Đóng menu"
+  },
+  "hero": {
+    "name": "Nguyễn Đình Bảng",
+    "role": "Fullstack Developer",
+    "description": "Fullstack developer xây ứng dụng web scalable với Next.js, NestJS, GraphQL, PostgreSQL và Redis — đang mở rộng sang kiến trúc phần mềm và AI.",
+    "cta": "Xem dự án",
+    "ctaContact": "Liên hệ",
+    "ctaResume": "CV",
+    "avatarAlt": "Ảnh đại diện {name}",
+    "typewriter": [
+      "Tôi xây ứng dụng web scalable\nvới Next.js, NestJS, GraphQL và PostgreSQL.",
+      "Ship tính năng production\nvà mở rộng sang kiến trúc cùng AI."
+    ],
+    "github": {
+      "contributions": "đóng góp trong 6 tháng gần nhất",
+      "organizations": "Organizations",
+      "less": "Ít",
+      "more": "Nhiều",
+      "privateHint": "Token hiện tại đang ẩn private contributions. Dùng Classic PAT với quyền read:user để hiện đủ heatmap.",
+      "dayTooltip": "{count, plural, =0 {Không có đóng góp} other {# đóng góp}} vào {date}",
+      "orgOpen": "Mở @{login} trên GitHub",
+      "orgTooltips": {
+        "UCTalent": "Unchain Talent Lab — vai trò fullstack hiện tại, ship sản phẩm talent production.",
+        "sfastvn": "Org GitHub hợp tác cho các repo sản phẩm và thử nghiệm chung."
+      }
+    },
+    "collage": {
+      "moreSkills": "Xem tất cả kỹ năng ở Hồ sơ",
+      "moreAi": "Xem tất cả kỹ năng AI ở Hồ sơ",
+      "location": "Địa điểm",
+      "repos": "Repos",
+      "stars": "Stars",
+      "openPrs": "Open PRs",
+      "contrib": "Contrib",
+      "experienceLabel": "năm xây ứng dụng web"
+    }
+  },
+  "profile": {
+    "badge": "Hồ sơ",
+    "title": "Giới thiệu",
+    "description": "Thông tin cá nhân, học vấn và các vai trò định hình cách tôi ship sản phẩm.",
+    "fields": {
+      "name": "Họ tên",
+      "role": "Vai trò",
+      "birth": "Sinh",
+      "location": "Địa chỉ",
+      "education": "Học vấn"
+    },
+    "skills": {
+      "languages": "Ngôn ngữ lập trình",
+      "databases": "Cơ sở dữ liệu",
+      "frameworks": "Framework & thư viện",
+      "api": "API & rendering",
+      "security": "Bảo mật",
+      "other": "Kỹ năng khác",
+      "ai": "AI & LLM"
+    },
+    "identity": "Hồ sơ",
+    "career": "Hành trình nghề nghiệp",
+    "githubTitle": "Hoạt động GitHub"
+  },
+  "stack": {
+    "badge": "Stack",
+    "title": "Stack chính",
+    "description": "Ngôn ngữ, framework, data, API và tooling AI tôi dùng để ship hệ thống production.",
+    "featured": "Công cụ chính",
+    "more": "Thêm trong toolkit"
+  },
+  "experience": {
+    "badge": "Kinh nghiệm",
+    "title": "Kinh nghiệm làm việc",
+    "repo": "Repository dự án",
+    "items": {
+      "uctalent": {
+        "company": "UC Talent Labs",
+        "role": "Fullstack Developer",
+        "summary": "Studio product + outsourcing xây nền tảng HRTech và giải pháp cho khách hàng.",
+        "bullets": {
+          "production": "Xây và duy trì ứng dụng web production cho nền tảng HRTech và dự án khách.",
+          "performance": "Triển khai tính năng scalable và tối ưu hiệu năng frontend/backend.",
+          "reliability": "Điều tra, debug và xử lý sự cố production để tăng độ tin cậy.",
+          "endToEnd": "Giao giải pháp end-to-end cho sản phẩm nội bộ và outsourcing.",
+          "agile": "Phối hợp với developer, designer và stakeholder theo Agile sprint."
+        }
+      },
+      "fsoft": {
+        "company": "FPT Software",
+        "role": "Thực tập sinh (OJT)",
+        "summary": "Thực tập OJT 3 tháng — xây dự án chấm điểm / quản lý học tập cho chương trình đào tạo của trường.",
+        "bullets": {
+          "ojt": "Hoàn thành đồ án OJT phục vụ chấm điểm và quản lý học tập trong kỳ thực tập.",
+          "fullstack": "Xây tính năng full-stack với API Spring Boot (Java) và frontend Vite + React (Tailwind).",
+          "delivery": "Làm việc theo nhịp thực tập 3 tháng — nhận yêu cầu, implement và demo bàn giao."
+        }
+      }
+    }
+  },
+  "projects": {
+    "badge": "Dự án",
+    "title": "Dự án tiêu biểu",
+    "description": "Công việc production tôi đang ship — tập trung hệ thống full-stack scalable và workflow AI.",
+    "live": "Xem live",
+    "repo": "Repository",
+    "repoFrontend": "Frontend",
+    "repoBackend": "Backend",
+    "teamSize": "Nhóm {count} người",
+    "solo": "Cá nhân · Capstone",
+    "caseStudy": "Case study",
+    "items": {
+      "uctalent": {
+        "title": "uctalent.io",
+        "role": "Fullstack developer",
+        "summary": "Nền tảng HRTech Web3 cho tuyển dụng, matching ứng viên bằng AI và thưởng referral trên blockchain.",
+        "highlights": {
+          "fullstack": "Ship tính năng full-stack production với Next.js, NestJS, GraphQL, PostgreSQL và Redis.",
+          "ddd": "Thiết kế backend theo Clean Architecture và Domain-Driven Design để dễ bảo trì lâu dài.",
+          "llm": "Tích hợp LLM vào quy trình tuyển dụng — prompt pipeline, structured output và matching ứng viên-job.",
+          "vector": "Xây semantic search và recommendation dựa trên vector embeddings, vượt keyword matching.",
+          "microservices": "Thiết kế tích hợp GraphQL + Redis + background jobs bền vững giữa các microservice.",
+          "performance": "Cải thiện hiệu năng qua tối ưu API, query, Redis cache và code review."
+        }
+      },
+      "matchtutors": {
+        "title": "Match Tutors",
+        "role": "Fullstack developer · Capstone",
+        "summary": "Đồ án cá nhân (capstone) kết nối gia sư và học viên — lịch học, matching bằng AI, chat realtime và thanh toán.",
+        "highlights": {
+          "platform": "Xây end-to-end nền tảng tutor–student: hồ sơ, đặt lịch và quản lý buổi học.",
+          "matching": "Matching hỗ trợ AI với OpenAI embeddings và worker match trên Redis/BullMQ.",
+          "realtime": "Chat và cập nhật realtime bằng Socket.io trong luồng đặt lịch.",
+          "workers": "Thiết kế job worker bất đồng bộ cho embedding, email, notification và matching.",
+          "payments": "Tích hợp thanh toán PayOS, auth JWT/Google OAuth và upload file (S3/Cloudinary).",
+          "fullstack": "Ship frontend React + Vite và API Express + MongoDB (hai repo) — build production deploy trên AWS, lưu ảnh và file trên Cloudinary."
+        }
+      }
+    }
+  },
+  "localeSwitcher": {
+    "label": "Ngôn ngữ",
+    "en": "English",
+    "vi": "Tiếng Việt"
+  },
+  "theme": {
+    "toggle": "Đổi giao diện"
+  },
+  "uiToolkit": {
+    "badge": "Design System",
+    "title": "UI Toolkit",
+    "description": "Bộ component minimalism — bề mặt đặc, góc vuông, accent vàng và icon Lucide.",
+    "icons": {
+      "title": "Icons",
+      "description": "Mọi icon UI dùng lucide-react. Import theo tên; chỉnh size bằng Tailwind.",
+      "sparkles": "Sparkles",
+      "zap": "Zap",
+      "layers": "Layers",
+      "code": "Code",
+      "github": "Git",
+      "globe": "Globe",
+      "mail": "Mail",
+      "sun": "Sun",
+      "moon": "Moon",
+      "arrow": "Arrow"
+    },
+    "buttons": {
+      "title": "Buttons",
+      "description": "Nút flat với nhiều biến thể và kích thước.",
+      "default": "Mặc định",
+      "primary": "Primary",
+      "outline": "Viền",
+      "ghost": "Ghost",
+      "destructive": "Nguy hiểm",
+      "small": "Nhỏ",
+      "medium": "Vừa",
+      "large": "Lớn",
+      "icon": "Nút icon"
+    },
+    "tooltips": {
+      "title": "Tooltips",
+      "description": "Hover hoặc focus để hiện gợi ý ngắn. Popup flat, góc vuông.",
+      "basicTrigger": "Hover tôi",
+      "basicContent": "Đoạn gợi ý ngắn cho control này.",
+      "iconTrigger": "Info",
+      "iconContent": "Ngữ cảnh hữu ích mà không làm rối layout.",
+      "primaryTrigger": "Hành động chính",
+      "primaryContent": "Giải thích action trước khi người dùng bấm.",
+      "sideTop": "Trên",
+      "sideRight": "Phải",
+      "sideBottom": "Dưới",
+      "sideLeft": "Trái",
+      "sideHint": "Tooltip phía {side}."
+    },
+    "cards": {
+      "title": "Cards",
+      "description": "Panel đặc để nhóm nội dung với viền rõ.",
+      "basic": {
+        "title": "Card cơ bản",
+        "description": "Container đơn giản cho mọi khối nội dung.",
+        "content": "Bề mặt inset cho nội dung lồng nhau."
+      },
+      "featured": {
+        "title": "Nổi bật",
+        "description": "Card có icon Lucide và nút hành động.",
+        "action": "Tìm hiểu thêm"
+      },
+      "highlight": {
+        "title": "Thống kê",
+        "description": "Hiển thị số liệu trong layout flat.",
+        "stat1": "Solid",
+        "stat2": "Border",
+        "stat3": "Sharp",
+        "primary": "Áp dụng",
+        "secondary": "Đặt lại"
+      }
+    }
+  },
+  "footer": {
+    "rights": "Đã đăng ký bản quyền.",
+    "builtWith": "Xây bằng Next.js"
+  },
+  "cv": {
+    "back": "Về portfolio",
+    "print": "In / Lưu PDF",
+    "skills": "Kỹ năng"
+  },
+  "caseStudy": {
+    "back": "Về dự án",
+    "highlights": "Những gì tôi đã ship"
+  },
+  "contact": {
+    "eyebrow": "Sẵn sàng nhận việc",
+    "title": "Hãy nói về dự án của bạn",
+    "email": "Email",
+    "phone": "Điện thoại",
+    "github": "GitHub",
+    "resume": "CV",
+    "buildCaption": "Tôi có thể xây — kéo các chip",
+    "blocks": {
+      "uiux": "UI/UX",
+      "backend": "Backend",
+      "aiml": "AI & ML",
+      "microservices": "Microservices",
+      "automation": "Automation",
+      "devops": "DevOps",
+      "frontend": "Frontend",
+      "data": "Data",
+      "qa": "QA & Testing",
+      "mobile": "Mobile",
+      "api": "API",
+      "desktop": "Desktop",
+      "cloud": "Cloud",
+      "web": "Web"
+    }
+  }
+}
