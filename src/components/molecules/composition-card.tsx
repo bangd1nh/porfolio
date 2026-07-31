@@ -12,6 +12,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { bentoContent, bentoIcons, getStackTeaserGroups } from "@/data/bento"
+import { githubAvatarFallback } from "@/lib/github-stats"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { cn, formatCompact } from "@/lib/utils"
 
@@ -20,6 +21,7 @@ type GithubStatsView = {
   stars: number
   openPullRequests?: number
   contributions: number
+  avatarUrl?: string
 }
 
 type CompositionCardProps = {
@@ -71,6 +73,9 @@ export function CompositionCard({
   const openPullRequests =
     githubStats?.openPullRequests ?? github.openPullRequests
   const contributions = githubStats?.contributions ?? github.contributions
+  const avatarSrc =
+    githubStats?.avatarUrl ?? avatar.src ?? githubAvatarFallback
+  const avatarAlt = t("avatarAlt", { name: t("name") })
 
   return (
     <aside
@@ -82,7 +87,7 @@ export function CompositionCard({
     >
       <div
         ref={constraintsRef}
-        className="absolute inset-[7%] min-h-0 min-w-0 overflow-hidden"
+        className="absolute inset-[4%] min-h-0 min-w-0 overflow-hidden"
       >
         {/* Large yellow — stack preview */}
         <DraggableSticker
@@ -286,7 +291,7 @@ export function CompositionCard({
 
         {/* Avatar */}
         <DraggableSticker
-          aria-label={avatar.alt}
+          aria-label={avatarAlt}
           dragConstraints={constraintsRef}
           dragEnabled={isMdUp}
           initialRotate={stickerRotate("avatar")}
@@ -299,20 +304,15 @@ export function CompositionCard({
             zIndex: 5,
           }}
         >
-          <div className="relative size-full overflow-hidden rounded-full bg-card">
-            {avatar.src ? (
-              <Image
-                src={avatar.src}
-                alt={avatar.alt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 40vw, 20vw"
-              />
-            ) : (
-              <div className="grid size-full place-items-center bg-muted font-heading text-2xl font-bold text-foreground md:text-3xl">
-                {avatar.initials}
-              </div>
-            )}
+          <div className="pointer-events-none relative size-full overflow-hidden rounded-full bg-card">
+            <Image
+              src={avatarSrc}
+              alt={avatarAlt}
+              fill
+              draggable={false}
+              className="pointer-events-none object-cover"
+              sizes="(max-width: 768px) 40vw, 20vw"
+            />
           </div>
         </DraggableSticker>
       </div>

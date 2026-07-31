@@ -3,7 +3,7 @@ import {
   ProfileSkillGroupCard,
   profileSkillIcons,
 } from "@/components/molecules/profile-meta"
-import { VIEWPORT_UNDER_HEADER } from "@/data/site"
+import { VIEWPORT_SECTION } from "@/data/site"
 import {
   featuredStackGroupIds,
   getSkillGroupsById,
@@ -23,7 +23,7 @@ export async function FeaturedStackSection() {
   return (
     <section
       id="stack"
-      className={`page-section box-border content-start gap-y-4 border-t border-border pt-10 pb-10 sm:gap-y-5 sm:pt-12 sm:pb-12 lg:grid-rows-[auto_minmax(0,1fr)] lg:gap-y-5 lg:overflow-hidden lg:pb-8 ${VIEWPORT_UNDER_HEADER}`}
+      className={`page-section box-border content-start gap-y-4 border-t border-border pt-10 pb-10 sm:gap-y-5 sm:pt-12 sm:pb-12 lg:grid-rows-[auto_minmax(0,1fr)] lg:gap-y-5 lg:pb-8 ${VIEWPORT_SECTION}`}
     >
       <header className="col-span-10 grid h-fit gap-y-2 self-start">
         <span className="w-fit justify-self-start border border-border bg-card px-4 py-2 text-xs font-semibold tracking-widest text-muted-foreground uppercase">

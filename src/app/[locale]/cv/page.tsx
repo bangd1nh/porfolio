@@ -7,7 +7,7 @@ import { DotSpotlightBackground } from "@/components/atoms/dot-spotlight-backgro
 import { PageGrid } from "@/components/atoms/page-grid"
 import { PrintButton } from "@/components/atoms/print-button"
 import { SkillIcon } from "@/components/atoms/skill-icon"
-import { SiteHeader } from "@/components/organisms/site-header"
+import { SiteDock } from "@/components/organisms/site-dock"
 import { Button } from "@/components/ui/button"
 import { contactLinks } from "@/data/contact"
 import { experienceContent } from "@/data/experience"
@@ -42,7 +42,7 @@ export default async function CvPage({ params }: PageProps) {
     <div className="relative min-h-full">
       <div className="print:hidden">
         <DotSpotlightBackground />
-        <SiteHeader />
+        <SiteDock />
       </div>
       <PageGrid className="relative z-10 pb-16">
         <main className="col-span-10 grid gap-6 py-10">
@@ -66,8 +66,7 @@ export default async function CvPage({ params }: PageProps) {
               </h1>
               <p className="text-base font-medium">{role[loc]}</p>
               <p className="text-sm text-muted-foreground print:text-neutral-600">
-                {location[loc]} · {birth} · {contactLinks.email} ·{" "}
-                {contactLinks.phone}
+                {location[loc]} · {birth} · {contactLinks.email}
               </p>
               <p className="text-sm text-muted-foreground print:text-neutral-600">
                 {contactLinks.github}

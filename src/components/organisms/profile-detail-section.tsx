@@ -7,12 +7,13 @@ import {
 } from "@/components/molecules/profile-meta"
 import { experienceContent } from "@/data/experience"
 import { profileContent } from "@/data/profile"
+import { VIEWPORT_SECTION } from "@/data/site"
 import { getLocale, getTranslations } from "next-intl/server"
 
 type LocaleKey = "en" | "vi"
 
 /**
- * Profile detail — content-sized (no nested scrollbars).
+ * Profile detail — one viewport on desktop with internal scroll for career timeline.
  */
 export async function ProfileDetailSection() {
   const t = await getTranslations("profile")
@@ -54,7 +55,7 @@ export async function ProfileDetailSection() {
   return (
     <section
       id="profile"
-      className="page-section box-border content-start gap-y-4 border-t border-border pt-10 pb-10 sm:pt-12 sm:pb-12 lg:min-h-svh lg:gap-y-5 lg:pt-[var(--site-header-clearance)] lg:pb-10"
+      className={`page-section box-border content-start gap-y-4 border-t border-border pt-10 pb-10 sm:pt-12 sm:pb-12 lg:grid-rows-[auto_minmax(0,1fr)] lg:gap-y-5 lg:pb-10 ${VIEWPORT_SECTION}`}
     >
       <header className="col-span-10 grid h-fit gap-y-2 self-start">
         <span className="w-fit justify-self-start border border-border bg-card px-4 py-2 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
@@ -70,7 +71,7 @@ export async function ProfileDetailSection() {
         </div>
       </header>
 
-      <div className="col-span-10 grid content-start grid-cols-10 items-stretch gap-x-[inherit] gap-y-6 lg:gap-y-8">
+      <div className="col-span-10 grid min-h-0 content-start grid-cols-10 items-stretch gap-x-[inherit] gap-y-6 lg:min-h-0 lg:gap-y-8">
         <ScrollReveal className="col-span-10 grid grid-cols-1 content-start gap-3 md:col-span-4 md:h-0 md:min-h-full md:grid-rows-[auto_auto_auto_auto_minmax(0,1fr)] md:overflow-hidden">
           <h3 className="font-heading text-lg tracking-tight sm:text-xl md:text-2xl">
             {t("identity")}
@@ -101,7 +102,7 @@ export async function ProfileDetailSection() {
         </ScrollReveal>
 
         <ScrollReveal
-          className="col-span-10 grid gap-3 md:col-span-6 md:pl-1"
+          className="col-span-10 grid gap-3 md:col-span-6 md:min-h-0 md:overflow-y-auto md:pl-1 md:[scrollbar-width:none] md:[-ms-overflow-style:none] md:[&::-webkit-scrollbar]:hidden"
           delayMs={40}
         >
           <h3 className="font-heading text-lg tracking-tight sm:text-xl md:text-2xl">

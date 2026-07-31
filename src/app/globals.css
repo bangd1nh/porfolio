@@ -105,15 +105,11 @@
   --glass-lift-shadow-hover: none;
   --glass-fallback-bg: var(--card);
 
-  /* Page shell — shared by floating header + page-grid */
+  /* Page shell — shared by floating dock + page-grid */
   --page-pad-inline: clamp(1rem, 4vw, 2.5rem);
   --page-col-gap: clamp(0.75rem, 2vw, 1.5rem);
-  --site-header-offset: 0.75rem;
-  --site-header-height: 3.5rem;
-  /* Fixed header + breathing room before section content */
-  --site-header-clearance: calc(
-    var(--site-header-offset) + var(--site-header-height) + 1.5rem
-  );
+  --site-dock-offset: 1rem;
+  --site-dock-height: 3rem;
 }
 
 .dark {
@@ -182,12 +178,19 @@
   html {
     @apply font-sans antialiased;
     scroll-behavior: smooth;
-    scroll-padding-top: var(--site-header-clearance);
+    scroll-padding-top: 0;
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      scroll-snap-type: y proximity;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+      scroll-snap-type: none;
     }
   }
 }
@@ -260,6 +263,12 @@
     column-gap: inherit;
   }
 
+  @media (min-width: 1024px) {
+    .page-section {
+      scroll-snap-align: start;
+    }
+  }
+
   /* Tall section — full viewport from md up; content-sized on small screens */
   .page-section-screen {
     align-content: center;
@@ -271,19 +280,40 @@
     }
   }
 
-  /* Floating fixed site header — viewport-anchored, above page content */
-  .site-header-float {
+  /* macOS-style bottom dock — auto-hide, centered above page content */
+  .site-dock {
     position: fixed;
-    top: var(--site-header-offset);
-    left: var(--page-pad-inline);
-    right: var(--page-pad-inline);
+    bottom: var(--site-dock-offset);
+    left: 50%;
     z-index: 100;
+    width: max-content;
+    max-width: calc(100vw - 2 * var(--page-pad-inline));
     isolation: isolate;
     pointer-events: none;
+    transform: translate(-50%, calc(100% + var(--site-dock-offset)));
+    transition: transform 300ms ease-out;
   }
 
-  .site-header-float > * {
+  .site-dock.site-dock-visible,
+  .site-dock:focus-within {
+    transform: translate(-50%, 0);
+  }
+
+  .site-dock > * {
     pointer-events: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-dock {
+      transform: translate(-50%, 0);
+      transition: none;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .site-dock {
+      transform: translate(-50%, 0);
+    }
   }
 
   /*
@@ -422,7 +452,7 @@
 
   @media print {
     .dot-spotlight,
-    .site-header-float,
+    .site-dock,
     .print\:hidden {
       display: none !important;
     }

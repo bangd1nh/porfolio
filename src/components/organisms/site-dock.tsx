@@ -9,12 +9,15 @@ import { NavLink } from "@/components/molecules/nav-link"
 import { ThemeToggle } from "@/components/molecules/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { NAV_ITEMS } from "@/data/site"
+import { useDockVisibility } from "@/hooks/use-dock-visibility"
 import { Link } from "@/i18n/navigation"
+import { cn } from "@/lib/utils"
 
-export function SiteHeader() {
+export function SiteDock() {
   const t = useTranslations("site")
   const [menuOpen, setMenuOpen] = useState(false)
   const menuId = useId()
+  const { visible } = useDockVisibility({ menuOpen })
 
   useEffect(() => {
     if (!menuOpen) return
@@ -28,59 +31,17 @@ export function SiteHeader() {
   }, [menuOpen])
 
   return (
-    <header className="site-header-float">
-      <div className="grid grid-cols-10 items-center gap-x-[var(--page-col-gap)] border border-border bg-card px-3 py-2.5 md:px-4">
-        <Link
-          href="/"
-          className="font-heading col-span-5 self-center text-base tracking-tight transition-opacity hover:opacity-80 sm:text-lg lg:col-span-2"
-          onClick={() => setMenuOpen(false)}
-        >
-          {t("name")}
-        </Link>
-
-        <nav
-          aria-label="Main navigation"
-          className="col-span-6 hidden grid-flow-col items-center justify-end gap-0.5 self-center lg:grid"
-        >
-          {NAV_ITEMS.map((item) => (
-            <NavLink
-              key={item.href}
-              href={item.href}
-              label={t(`nav.${item.labelKey}`)}
-            />
-          ))}
-        </nav>
-
-        <div className="col-span-5 grid grid-flow-col items-center justify-end gap-1.5 self-center lg:col-span-2">
-          <Button
-            type="button"
-            variant="outline"
-            size="icon-sm"
-            className="min-h-10 min-w-10 rounded-none lg:hidden"
-            aria-expanded={menuOpen}
-            aria-controls={menuId}
-            aria-label={menuOpen ? t("menuClose") : t("menuOpen")}
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            {menuOpen ? (
-              <X className="size-4" aria-hidden />
-            ) : (
-              <Menu className="size-4" aria-hidden />
-            )}
-          </Button>
-
-          <div className="glass-inset grid grid-flow-col items-center gap-1.5 rounded-none border border-border p-1">
-            <ThemeToggle />
-            <LocaleSwitcher />
-          </div>
-        </div>
-      </div>
-
+    <header
+      className={cn(
+        "site-dock",
+        visible && "site-dock-visible"
+      )}
+    >
       {menuOpen ? (
         <nav
           id={menuId}
           aria-label="Mobile navigation"
-          className="mt-2 grid gap-1 border border-border bg-card p-2 lg:hidden"
+          className="mb-2 grid gap-1 border border-border bg-card p-2 lg:hidden"
         >
           {NAV_ITEMS.map((item) => (
             <NavLink
@@ -93,6 +54,58 @@ export function SiteHeader() {
           ))}
         </nav>
       ) : null}
+
+      <div className="grid grid-flow-col items-center gap-2 border border-border bg-card px-3 py-2 sm:gap-3 sm:px-4">
+        <Link
+          href="/"
+          className="font-heading shrink-0 text-sm tracking-tight transition-opacity hover:opacity-80 sm:text-base"
+          onClick={() => setMenuOpen(false)}
+        >
+          {t("name")}
+        </Link>
+
+        <span
+          className="hidden h-4 w-px bg-border lg:block"
+          aria-hidden
+        />
+
+        <nav
+          aria-label="Main navigation"
+          className="hidden grid-flow-col items-center gap-0.5 lg:grid"
+        >
+          {NAV_ITEMS.map((item) => (
+            <NavLink
+              key={item.href}
+              href={item.href}
+              label={t(`nav.${item.labelKey}`)}
+            />
+          ))}
+        </nav>
+
+        <div className="grid grid-flow-col items-center gap-1.5">
+          <Button
+            type="button"
+            variant="outline"
+            size="icon-sm"
+            className="min-h-9 min-w-9 rounded-none lg:hidden"
+            aria-expanded={menuOpen}
+            aria-controls={menuId}
+            aria-label={menuOpen ? t("menuClose") : t("menuOpen")}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? (
+              <X className="size-4" aria-hidden />
+            ) : (
+              <Menu className="size-4" aria-hidden />
+            )}
+          </Button>
+
+          <div className="grid grid-flow-col items-center gap-1.5 border border-border p-1">
+            <ThemeToggle />
+            <LocaleSwitcher />
+          </div>
+        </div>
+      </div>
     </header>
   )
 }

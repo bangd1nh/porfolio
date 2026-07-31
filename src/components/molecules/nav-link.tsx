@@ -27,7 +27,7 @@ function releasePointerCapture(event: React.PointerEvent<HTMLAnchorElement>) {
 /**
  * In-page hash anchors use plain `<a>` — App Router Link can break scroll targets.
  * Pointer capture + preventDefault keep smooth scroll running when the cursor leaves
- * the link before mouseup (site-header-float uses pointer-events: none on its shell).
+ * the link before mouseup (site-dock uses pointer-events: none on its shell).
  */
 export function NavLink({ href, label, isActive, className, onNavigate }: NavLinkProps) {
   const activatedRef = useRef(false)

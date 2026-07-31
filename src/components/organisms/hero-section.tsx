@@ -7,6 +7,7 @@ import { GithubActivity } from "@/components/molecules/github-activity"
 import { Button } from "@/components/ui/button"
 import { bentoContent } from "@/data/bento"
 import { resumeLinks } from "@/data/resume"
+import { VIEWPORT_SECTION } from "@/data/site"
 import { Link } from "@/i18n/navigation"
 import { getGithubStats, githubOrgFallback } from "@/lib/github-stats"
 import { getLocale, getTranslations } from "next-intl/server"
@@ -25,9 +26,9 @@ export async function HeroSection() {
   return (
     <section
       id="about"
-      className="page-section box-border items-center gap-y-5 pt-8 pb-8 sm:gap-y-6 sm:pt-12 sm:pb-12 lg:box-border lg:h-svh lg:gap-y-6 lg:overflow-hidden lg:!pt-0 lg:pb-6"
+      className={`page-section box-border items-center gap-y-5 pt-8 pb-8 sm:gap-y-6 sm:pt-12 sm:pb-12 md:grid-rows-1 md:items-center lg:gap-y-6 lg:pb-6 ${VIEWPORT_SECTION}`}
     >
-      <div className="col-span-10 grid content-center justify-items-center gap-3 text-center sm:gap-4 md:col-span-5 md:justify-items-start md:text-left">
+      <div className="col-span-10 grid content-center justify-items-center gap-3 text-center sm:gap-4 md:col-span-5 md:min-h-0 md:justify-items-start md:self-center md:text-left">
         <span className="rounded-none border border-border bg-card px-3 py-1.5 text-[11px] font-semibold tracking-widest text-muted-foreground uppercase sm:px-4 sm:text-xs">
           {t("role")}
         </span>
@@ -86,7 +87,7 @@ export async function HeroSection() {
       </div>
 
       <CompositionCard
-        className="col-span-10 max-h-[42vh] max-w-[16rem] justify-self-center sm:max-w-xs md:col-span-5 md:max-h-[min(80svh,40rem)] md:max-w-[min(100%,40rem)] md:justify-self-center lg:max-h-[min(82svh,40rem)]"
+        className="col-span-10 aspect-square w-full max-h-[min(56vh,22rem)] max-w-[min(92vw,22rem)] justify-self-center sm:max-h-[min(60vh,26rem)] sm:max-w-[min(88vw,26rem)] md:col-span-5 md:max-h-[min(74svh,30rem)] md:max-w-full lg:max-h-[min(80svh,36rem)] xl:max-h-[min(84svh,40rem)]"
         githubStats={githubStats}
       />
     </section>

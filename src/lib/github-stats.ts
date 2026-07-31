@@ -22,6 +22,8 @@ export type GithubStats = {
   openPullRequests: number
   /** Total contributions in the selected window (default: last 6 months). */
   contributions: number
+  /** Profile avatar from GitHub GraphQL. */
+  avatarUrl: string
   /** Contribution weeks for the heatmap (Sun→Sat columns). */
   weeks: GithubContributionWeek[]
   organizations: GithubOrganization[]
@@ -60,12 +62,14 @@ type GithubGraphqlResponse = {
   data?: {
     viewer?: {
       login: string
+      avatarUrl: string
       contributionsCollection: ContributionsCollection
       pullRequests: {
         totalCount: number
       }
     }
     user?: {
+      avatarUrl: string
       repositories: {
         totalCount: number
         nodes: Array<{ stargazerCount: number }>
@@ -92,7 +96,9 @@ const LEVEL_MAP: Record<ContributionLevel, 0 | 1 | 2 | 3 | 4> = {
   FOURTH_QUARTILE: 4,
 }
 
-/** Orgs that may not appear via API (private membership) — still shown on the site. */
+/** Public avatar when GraphQL stats are unavailable. */
+export const githubAvatarFallback = "https://github.com/bangd1nh.png"
+
 export const githubOrgFallback: readonly GithubOrganization[] = [
   {
     login: "UCTalent",
@@ -116,6 +122,7 @@ const PROFILE_QUERY = `
   query($login: String!, $from: DateTime!, $to: DateTime!, $after: String) {
     viewer {
       login
+      avatarUrl
       pullRequests(states: OPEN) {
         totalCount
       }
@@ -135,6 +142,7 @@ const PROFILE_QUERY = `
       }
     }
     user(login: $login) {
+      avatarUrl
       repositories(
         ownerAffiliations: OWNER
         isFork: false
@@ -247,6 +255,7 @@ export async function getGithubStats(): Promise<GithubStats | null> {
     let contributions = 0
     let weeks: GithubContributionWeek[] = []
     let organizations: GithubOrganization[] = []
+    let avatarUrl = githubAvatarFallback
     let privateHidden = false
     let pages = 0
 
@@ -279,6 +288,7 @@ export async function getGithubStats(): Promise<GithubStats | null> {
         contributions = calendar.totalContributions
         weeks = mapWeeks(calendar.weeks)
         openPullRequests = viewer.pullRequests.totalCount
+        avatarUrl = viewer.avatarUrl || user.avatarUrl || githubAvatarFallback
         privateHidden =
           collection.hasAnyRestrictedContributions ||
           collection.restrictedContributionsCount > 0
@@ -315,6 +325,7 @@ export async function getGithubStats(): Promise<GithubStats | null> {
       stars,
       openPullRequests,
       contributions,
+      avatarUrl,
       weeks,
       organizations: mergeOrganizations(organizations, githubOrgFallback),
       privateHidden,

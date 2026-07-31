@@ -121,7 +121,9 @@
     "repoBackend": "Backend",
     "teamSize": "Team of {count}",
     "solo": "Solo · Capstone",
-    "caseStudy": "Case study",
+    "tabsLabel": "Select a project",
+    "shipped": "What I shipped",
+    "embedFallback": "Preview blocked by this site. Open the live site instead.",
     "items": {
       "uctalent": {
         "title": "uctalent.io",
@@ -134,6 +136,19 @@
           "vector": "Built vector-based semantic search and recommendations beyond keyword matching.",
           "microservices": "Designed resilient GraphQL + Redis + async job integrations across microservices.",
           "performance": "Improved performance via API, query, and Redis caching optimization plus code reviews."
+        }
+      },
+      "unchainlabs": {
+        "title": "Unchain Labs",
+        "role": "Fullstack developer",
+        "summary": "Enterprise marketing site and headless CMS for Unchain Labs — content-managed pages, full SEO, and contact flows for business leads.",
+        "highlights": {
+          "cms": "Built a Strapi headless CMS with structured content types, media library, and role-based admin for marketing teams.",
+          "seo": "Implemented end-to-end SEO — metadata, Open Graph, sitemap, robots, and semantic HTML for crawlable business pages.",
+          "contact": "Shipped contact and lead-capture flows with validated forms and reliable delivery for inbound business inquiries.",
+          "content": "Modeled flexible page sections and reusable components so non-developers can publish case studies, services, and blog posts.",
+          "fullstack": "Delivered a Next.js frontend consuming Strapi REST APIs with SSR for performance and indexable marketing content.",
+          "delivery": "Deployed production builds with environment-based config, image optimization, and maintainable content workflows."
         }
       },
       "matchtutors": {
@@ -237,10 +252,6 @@
     "back": "Back to portfolio",
     "print": "Print / Save PDF",
     "skills": "Skills"
-  },
-  "caseStudy": {
-    "back": "Back to projects",
-    "highlights": "What I shipped"
   },
   "contact": {
     "eyebrow": "Available for work",

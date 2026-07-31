@@ -9,10 +9,7 @@ export function PageGrid({ className, ...props }: PageGridProps) {
   return (
     <div
       data-slot="page-grid"
-      className={cn(
-        "page-grid pt-[var(--site-header-clearance)]",
-        className
-      )}
+      className={cn("page-grid", className)}
       {...props}
     />
   )

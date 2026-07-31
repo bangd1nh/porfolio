@@ -121,7 +121,9 @@
     "repoBackend": "Backend",
     "teamSize": "Nhóm {count} người",
     "solo": "Cá nhân · Capstone",
-    "caseStudy": "Case study",
+    "tabsLabel": "Chọn dự án",
+    "shipped": "Những gì tôi ship",
+    "embedFallback": "Site chặn xem trước tại đây. Mở trang live để xem.",
     "items": {
       "uctalent": {
         "title": "uctalent.io",
@@ -134,6 +136,19 @@
           "vector": "Xây semantic search và recommendation dựa trên vector embeddings, vượt keyword matching.",
           "microservices": "Thiết kế tích hợp GraphQL + Redis + background jobs bền vững giữa các microservice.",
           "performance": "Cải thiện hiệu năng qua tối ưu API, query, Redis cache và code review."
+        }
+      },
+      "unchainlabs": {
+        "title": "Unchain Labs",
+        "role": "Fullstack developer",
+        "summary": "Website marketing và headless CMS cho Unchain Labs — trang quản lý nội dung, SEO đầy đủ và luồng contact cho khách hàng doanh nghiệp.",
+        "highlights": {
+          "cms": "Xây Strapi headless CMS với content type có cấu trúc, media library và phân quyền admin cho team marketing.",
+          "seo": "Triển khai SEO end-to-end — metadata, Open Graph, sitemap, robots và HTML semantic cho trang doanh nghiệp.",
+          "contact": "Ship form contact và thu lead với validation, gửi tin cậy cho yêu cầu tư vấn từ khách hàng.",
+          "content": "Thiết kế section linh hoạt và component tái sử dụng để team không dev tự publish case study, dịch vụ và blog.",
+          "fullstack": "Frontend Next.js consume Strapi REST API với SSR — hiệu năng tốt và nội dung marketing index được.",
+          "delivery": "Deploy production với config theo môi trường, tối ưu ảnh và workflow quản lý nội dung bền vững."
         }
       },
       "matchtutors": {
@@ -237,10 +252,6 @@
     "back": "Về portfolio",
     "print": "In / Lưu PDF",
     "skills": "Kỹ năng"
-  },
-  "caseStudy": {
-    "back": "Về dự án",
-    "highlights": "Những gì tôi đã ship"
   },
   "contact": {
     "eyebrow": "Sẵn sàng nhận việc",

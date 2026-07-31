@@ -1,4 +1,4 @@
-export type ProjectId = "uctalent" | "matchtutors"
+export type ProjectId = "uctalent" | "unchainlabs" | "matchtutors"
 
 export type ProjectItem = {
   id: ProjectId
@@ -42,12 +42,37 @@ export const projectsContent: readonly ProjectItem[] = [
     ],
   },
   {
+    id: "unchainlabs",
+    liveUrl: "https://unchain-labs.com",
+    githubUrl: "https://github.com/UCTalent/ucl-web",
+    githubBackendUrl: "https://github.com/UCTalent/ucl-web-cms",
+    period: "2026 – Present",
+    teamSize: 1,
+    stack: [
+      "Next.js",
+      "Strapi",
+      "TypeScript",
+      "PostgreSQL",
+      "REST API",
+      "SEO",
+      "Tailwind CSS",
+    ],
+    highlightKeys: [
+      "cms",
+      "seo",
+      "contact",
+      "content",
+      "fullstack",
+      "delivery",
+    ],
+  },
+  {
     id: "matchtutors",
     liveUrl: "https://match-tutors.vercel.app",
     githubUrl: "https://github.com/bangd1nh/MatchTutors",
     githubBackendUrl: "https://github.com/bangd1nh/match_Tutor_BE",
     period: "09/2025 – 12/2025",
-    teamSize: 1,
+    teamSize: 4,
     stack: [
       "React",
       "Vite",

@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/organisms/site-footer"
 import { Button } from "@/components/ui/button"
 import { contactLinks } from "@/data/contact"
 import { resumeLinks } from "@/data/resume"
-import { VIEWPORT_UNDER_HEADER } from "@/data/site"
+import { VIEWPORT_SECTION } from "@/data/site"
 import { Link } from "@/i18n/navigation"
 import { getTranslations } from "next-intl/server"
 
@@ -18,7 +18,7 @@ export async function ContactCtaSection() {
   return (
     <section
       id="contact"
-      className={`page-section relative isolate box-border gap-y-3 border-t border-border bg-transparent pt-8 pb-8 lg:grid-rows-[minmax(0,1fr)_auto] lg:gap-y-2 lg:overflow-hidden lg:pb-5 ${VIEWPORT_UNDER_HEADER}`}
+      className={`page-section relative isolate box-border gap-y-3 border-t border-border bg-transparent pt-8 pb-8 lg:grid-rows-[minmax(0,1fr)_auto] lg:gap-y-2 lg:pb-8 ${VIEWPORT_SECTION}`}
     >
       <div className="col-span-10 grid min-h-0 content-stretch gap-y-3 lg:h-full lg:grid-rows-[auto_minmax(0,1fr)] lg:gap-y-4">
         <header className="grid justify-items-center gap-3 px-2 text-center">

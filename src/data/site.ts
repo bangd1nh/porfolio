@@ -20,11 +20,8 @@ export const HOME_SECTIONS = [
 export type HomeSectionId = (typeof HOME_SECTIONS)[number]
 
 /**
- * One full viewport per section on desktop: height 100svh + top padding clears
- * the fixed navbar (box-border so bottom aligns with the screen edge).
- * Pair with `lg:pt-0` on homepage PageGrid to avoid double clearance.
- * Do not combine with `lg:py-*` / `sm:py-*` — those override `lg:pt-*`.
+ * One full viewport per section on desktop (box-border so height includes padding).
  * Phone/tablet: content-sized sections + native scroll.
  */
-export const VIEWPORT_UNDER_HEADER =
-  "lg:box-border lg:h-svh lg:!pt-[var(--site-header-clearance)]"
+export const VIEWPORT_SECTION =
+  "lg:box-border lg:h-svh lg:overflow-hidden"
