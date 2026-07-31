@@ -4,12 +4,17 @@ import { useEffect, useRef } from "react"
 
 import { HOME_SECTIONS } from "@/data/site"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import {
+  SECTION_PAGER_LOCK_EVENT,
+  SECTION_SCROLL_LOCK_MS,
+  scrollToHashSection,
+} from "@/lib/scroll-to-section"
 
-const LOCK_MS = 550
-/** Pixel-equivalent intent before paging (after deltaMode normalize). */
+const LOCK_MS = SECTION_SCROLL_LOCK_MS
+/** Pixel intent before paging — deltaY is already in pixels on all browsers. */
 const PAGE_ACCUM_PX = 72
 const SWIPE_THRESHOLD = 48
-const LINE_HEIGHT_PX = 18
+const EDGE_TOLERANCE_PX = 8
 
 function getSectionElements(): HTMLElement[] {
   return HOME_SECTIONS.map((id) => document.getElementById(id)).filter(
@@ -34,37 +39,33 @@ function getActiveIndex(sections: HTMLElement[]): number {
 }
 
 /** True when the active section still has room to scroll in `direction`. */
-function sectionHasMore(section: HTMLElement, direction: 1 | -1): boolean {
-  const rect = section.getBoundingClientRect()
+function sectionHasMore(
+  section: HTMLElement,
+  direction: 1 | -1,
+  tolerance = EDGE_TOLERANCE_PX
+): boolean {
+  const scrollY = window.scrollY
+  const viewportBottom = scrollY + window.innerHeight
+  const sectionTop = section.offsetTop
+  const sectionBottom = sectionTop + section.offsetHeight
+
   if (direction > 0) {
-    return rect.bottom > window.innerHeight + 4
+    return sectionBottom - viewportBottom > tolerance
   }
-  return rect.top < -4
+  return scrollY - sectionTop > tolerance
 }
 
-/** Firefox often uses DOM_DELTA_LINE — normalize everything to pixels. */
+/**
+ * Use deltaY only — do not read deltaMode.
+ * Firefox auto-converts LINE deltas to pixels when deltaMode is untouched.
+ */
 function normalizeWheelDeltaY(event: WheelEvent): number {
-  const { deltaY, deltaMode } = event
-  if (deltaMode === WheelEvent.DOM_DELTA_LINE) {
-    return deltaY * LINE_HEIGHT_PX
-  }
-  if (deltaMode === WheelEvent.DOM_DELTA_PAGE) {
-    return deltaY * window.innerHeight
-  }
-  return deltaY
-}
-
-function scrollToSection(el: HTMLElement, smooth: boolean) {
-  const top = el.getBoundingClientRect().top + window.scrollY
-  window.scrollTo({
-    top,
-    behavior: smooth ? "smooth" : "auto",
-  })
+  return event.deltaY
 }
 
 /**
  * Homepage wheel/trackpad pager — desktop (lg+) only.
- * Normalizes Firefox line-based wheel deltas; tall sections use native scroll.
+ * Tall sections use native scroll; fixed-height sections page on wheel intent.
  */
 export function SectionPager({ children }: { children: React.ReactNode }) {
   const isDesktop = useMediaQuery("(min-width: 1024px)")
@@ -95,18 +96,16 @@ export function SectionPager({ children }: { children: React.ReactNode }) {
       if (!target) return false
 
       lock()
-      scrollToSection(target, !reducedMotion)
-      history.replaceState(null, "", `#${target.id}`)
+      scrollToHashSection(`#${target.id}`, !reducedMotion)
       return true
     }
 
     const onWheel = (event: WheelEvent) => {
       if (event.ctrlKey) return
 
-      if (lockedRef.current) {
-        event.preventDefault()
-        return
-      }
+      // Ignore wheel while a programmatic scroll runs — do not preventDefault
+      // or Firefox/Chrome cancel the in-flight smooth scroll animation.
+      if (lockedRef.current) return
 
       const dy = normalizeWheelDeltaY(event)
       if (dy === 0) return
@@ -117,14 +116,11 @@ export function SectionPager({ children }: { children: React.ReactNode }) {
       const section = sections[index]
       if (!section) return
 
-      // Tall section: never hijack — Firefox needs native wheel here.
       if (sectionHasMore(section, direction)) {
         accumRef.current = 0
         return
       }
 
-      // At section edge: accumulate intent, then page once.
-      // Ignore opposite-direction noise from trackpads.
       if (Math.sign(accumRef.current) === -direction) {
         accumRef.current = 0
       }
@@ -177,7 +173,11 @@ export function SectionPager({ children }: { children: React.ReactNode }) {
       const el = document.getElementById(id)
       if (!el) return
       lock()
-      scrollToSection(el, !reducedMotion)
+      scrollToHashSection(`#${id}`, !reducedMotion)
+    }
+
+    const onPagerLock = () => {
+      lock()
     }
 
     if (window.location.hash) {
@@ -188,12 +188,14 @@ export function SectionPager({ children }: { children: React.ReactNode }) {
     window.addEventListener("touchstart", onTouchStart, { passive: true })
     window.addEventListener("touchend", onTouchEnd, { passive: true })
     window.addEventListener("hashchange", onHashChange)
+    window.addEventListener(SECTION_PAGER_LOCK_EVENT, onPagerLock)
 
     return () => {
       window.removeEventListener("wheel", onWheel)
       window.removeEventListener("touchstart", onTouchStart)
       window.removeEventListener("touchend", onTouchEnd)
       window.removeEventListener("hashchange", onHashChange)
+      window.removeEventListener(SECTION_PAGER_LOCK_EVENT, onPagerLock)
       if (unlockTimerRef.current) clearTimeout(unlockTimerRef.current)
     }
   }, [isDesktop, reducedMotion])

@@ -83,14 +83,13 @@ export function SiteHeader() {
           className="mt-2 grid gap-1 border border-border bg-card p-2 lg:hidden"
         >
           {NAV_ITEMS.map((item) => (
-            <a
+            <NavLink
               key={item.href}
               href={item.href}
-              className="cursor-pointer rounded-none px-4 py-3 text-sm font-medium tracking-wide text-foreground transition-colors duration-200 hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-              onClick={() => setMenuOpen(false)}
-            >
-              {t(`nav.${item.labelKey}`)}
-            </a>
+              label={t(`nav.${item.labelKey}`)}
+              className="px-4 py-3 text-foreground"
+              onNavigate={() => setMenuOpen(false)}
+            />
           ))}
         </nav>
       ) : null}
