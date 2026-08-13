@@ -96,31 +96,31 @@ export async function ProfileDetailSection() {
             ]}
           />
 
-          <div className="hidden min-h-0 md:grid md:h-full md:grid-rows-[auto_auto_auto_minmax(0,1fr)] md:gap-3">
+          <ProfileMetaItem
+            className="hidden md:grid"
+            icon={profileMetaIcons.name}
+            label={t("fields.name")}
+            value={name[locale]}
+          />
+          <ProfileMetaItem
+            className="hidden md:grid"
+            icon={profileMetaIcons.role}
+            label={t("fields.role")}
+            value={role[locale]}
+          />
+          <div className="hidden grid-cols-2 gap-3 md:grid">
             <ProfileMetaItem
-              icon={profileMetaIcons.name}
-              label={t("fields.name")}
-              value={name[locale]}
+              icon={profileMetaIcons.birth}
+              label={t("fields.birth")}
+              value={birth}
             />
             <ProfileMetaItem
-              icon={profileMetaIcons.role}
-              label={t("fields.role")}
-              value={role[locale]}
+              icon={profileMetaIcons.location}
+              label={t("fields.location")}
+              value={location[locale]}
             />
-            <div className="grid grid-cols-2 gap-3">
-              <ProfileMetaItem
-                icon={profileMetaIcons.birth}
-                label={t("fields.birth")}
-                value={birth}
-              />
-              <ProfileMetaItem
-                icon={profileMetaIcons.location}
-                label={t("fields.location")}
-                value={location[locale]}
-              />
-            </div>
-            <IdentityTerminal className="min-h-0 md:h-full" />
           </div>
+          <IdentityTerminal className="hidden min-h-0 md:grid md:h-full" />
         </ScrollReveal>
 
         <ScrollReveal
