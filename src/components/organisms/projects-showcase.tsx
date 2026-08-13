@@ -88,7 +88,7 @@ export function ProjectsShowcase({
         role="tabpanel"
         id={`${tablistId}-panel-${active.id}`}
         aria-labelledby={`${tablistId}-tab-${active.id}`}
-        className="grid min-h-0 gap-4 lg:h-full lg:min-h-0 lg:grid-cols-10 lg:items-start lg:gap-x-[inherit] lg:gap-y-0"
+        className="grid min-h-0 gap-4 lg:h-full lg:min-h-0 lg:grid-cols-10 lg:items-stretch lg:gap-x-[inherit] lg:gap-y-0"
       >
         <ProjectLiveEmbed
           key={active.id}
@@ -99,7 +99,7 @@ export function ProjectsShowcase({
           className="col-span-10 h-full min-h-[14rem] lg:col-span-6 lg:min-h-0"
         />
 
-        <div className="col-span-10 grid h-fit w-full gap-2.5 self-start border border-border bg-card p-3 lg:col-span-4 lg:gap-2 lg:p-3.5">
+        <div className="col-span-10 grid h-fit min-h-0 w-full content-start gap-2.5 self-start overflow-y-auto border border-border bg-card p-3 lg:col-span-4 lg:h-full lg:max-h-full lg:gap-2 lg:p-3.5 lg:[scrollbar-width:none] lg:[-ms-overflow-style:none] lg:[&::-webkit-scrollbar]:hidden">
           <header className="grid gap-1">
             <p className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
               {active.period}

@@ -7,10 +7,10 @@ import { useEffect, useId, useState } from "react"
 import { LocaleSwitcher } from "@/components/molecules/locale-switcher"
 import { NavLink } from "@/components/molecules/nav-link"
 import { ThemeToggle } from "@/components/molecules/theme-toggle"
+import { TransitionLink } from "@/components/molecules/transition-link"
 import { Button } from "@/components/ui/button"
 import { NAV_ITEMS } from "@/data/site"
 import { useDockVisibility } from "@/hooks/use-dock-visibility"
-import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
 
 export function SiteDock() {
@@ -56,13 +56,13 @@ export function SiteDock() {
       ) : null}
 
       <div className="grid grid-flow-col items-center gap-2 border border-border bg-card px-3 py-2 sm:gap-3 sm:px-4">
-        <Link
+        <TransitionLink
           href="/"
           className="font-heading shrink-0 text-sm tracking-tight transition-opacity hover:opacity-80 sm:text-base"
           onClick={() => setMenuOpen(false)}
         >
           {t("name")}
-        </Link>
+        </TransitionLink>
 
         <span
           className="hidden h-4 w-px bg-border lg:block"

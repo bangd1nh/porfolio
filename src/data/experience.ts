@@ -13,7 +13,7 @@ export type ExperienceItem = {
 export const experienceContent: readonly ExperienceItem[] = [
   {
     id: "uctalent",
-    period: "03/2025 – Present",
+    period: "03/2026 – Present",
     bulletKeys: [
       "production",
       "performance",

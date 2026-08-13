@@ -6,6 +6,7 @@ import { notFound } from "next/navigation"
 import { DotSpotlightBackground } from "@/components/atoms/dot-spotlight-background"
 import { PageGrid } from "@/components/atoms/page-grid"
 import { PrintButton } from "@/components/atoms/print-button"
+import { TransitionLink } from "@/components/molecules/transition-link"
 import { SkillIcon } from "@/components/atoms/skill-icon"
 import { SiteDock } from "@/components/organisms/site-dock"
 import { Button } from "@/components/ui/button"
@@ -13,7 +14,6 @@ import { contactLinks } from "@/data/contact"
 import { experienceContent } from "@/data/experience"
 import { profileContent } from "@/data/profile"
 import { projectsContent } from "@/data/projects"
-import { Link } from "@/i18n/navigation"
 import { routing, type Locale } from "@/i18n/routing"
 
 type PageProps = {
@@ -51,7 +51,7 @@ export default async function CvPage({ params }: PageProps) {
               variant="outline"
               className="cursor-pointer rounded-none"
               nativeButton={false}
-              render={<Link href="/" />}
+              render={<TransitionLink href="/" />}
             >
               <ArrowLeft className="size-4" aria-hidden />
               {t("back")}

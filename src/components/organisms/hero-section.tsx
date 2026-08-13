@@ -4,11 +4,11 @@ import { ScrollReveal } from "@/components/atoms/scroll-reveal"
 import { TypewriterText } from "@/components/atoms/typewriter-text"
 import { CompositionCard } from "@/components/molecules/composition-card"
 import { GithubActivity } from "@/components/molecules/github-activity"
+import { TransitionLink } from "@/components/molecules/transition-link"
 import { Button } from "@/components/ui/button"
 import { bentoContent } from "@/data/bento"
 import { resumeLinks } from "@/data/resume"
 import { VIEWPORT_SECTION } from "@/data/site"
-import { Link } from "@/i18n/navigation"
 import { getGithubStats, githubOrgFallback } from "@/lib/github-stats"
 import { getLocale, getTranslations } from "next-intl/server"
 
@@ -60,7 +60,7 @@ export async function HeroSection() {
             variant="outline"
             className="min-h-10 cursor-pointer rounded-none"
             nativeButton={false}
-            render={<Link href={resumeLinks.pagePath} />}
+            render={<TransitionLink href={resumeLinks.pagePath} />}
           >
             <FileDown className="size-4" aria-hidden />
             {t("ctaResume")}

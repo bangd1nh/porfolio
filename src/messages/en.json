@@ -71,8 +71,6 @@
       "other": "Other skills",
       "ai": "AI & LLM"
     },
-    "identity": "Identity",
-    "career": "Career journey",
     "githubTitle": "GitHub activity"
   },
   "stack": {
@@ -128,13 +126,15 @@
       "uctalent": {
         "title": "uctalent.io",
         "role": "Fullstack developer",
-        "summary": "Web3-enabled HRTech platform for recruitment, AI-powered candidate matching, and blockchain-based referral rewards.",
+        "summary": "HRTech platform: talent marketplace on uctalent.io and a React workspace for head hunters on business.uctalent.io — AI matching, semantic search, blockchain referrals.",
         "highlights": {
-          "fullstack": "Shipped production full-stack features with Next.js, NestJS, GraphQL, PostgreSQL, and Redis.",
+          "hunterPortal": "Built business.uctalent.io — a React app for head hunters to source candidates, run pipelines, and close placements.",
+          "fullstack": "Shipped production full-stack features across uctalent.io and the hunter workspace with Next.js, NestJS, GraphQL, PostgreSQL, and Redis.",
+          "hrAi": "Applied LLMs to HR workflows — resume screening, job–candidate matching, and outreach drafts that cut recruiter busywork.",
+          "elasticsearch": "Indexed jobs and talent profiles on Elasticsearch for fast, faceted search at platform scale.",
+          "semantic": "Combined Elasticsearch with vector embeddings for semantic search and recommendations beyond keyword matching.",
+          "microservices": "Designed GraphQL + Redis + async job integrations across microservices so matching, search, and notifications stay resilient.",
           "ddd": "Designed backend services with Clean Architecture and Domain-Driven Design for long-term maintainability.",
-          "llm": "Integrated LLMs into recruitment workflows — prompt pipelines, structured outputs, and candidate-job matching.",
-          "vector": "Built vector-based semantic search and recommendations beyond keyword matching.",
-          "microservices": "Designed resilient GraphQL + Redis + async job integrations across microservices.",
           "performance": "Improved performance via API, query, and Redis caching optimization plus code reviews."
         }
       },
@@ -148,7 +148,9 @@
           "contact": "Shipped contact and lead-capture flows with validated forms and reliable delivery for inbound business inquiries.",
           "content": "Modeled flexible page sections and reusable components so non-developers can publish case studies, services, and blog posts.",
           "fullstack": "Delivered a Next.js frontend consuming Strapi REST APIs with SSR for performance and indexable marketing content.",
-          "delivery": "Deployed production builds with environment-based config, image optimization, and maintainable content workflows."
+          "delivery": "Deployed production builds with environment-based config, image optimization, and maintainable content workflows.",
+          "responsive": "Built a responsive Tailwind CSS interface that keeps the marketing experience polished across desktop, tablet, and mobile.",
+          "architecture": "Separated the presentation layer from CMS-driven data so new pages and campaigns can be assembled without reworking the frontend."
         }
       },
       "matchtutors": {
@@ -161,7 +163,9 @@
           "realtime": "Added realtime messaging and live updates with Socket.io across the booking experience.",
           "workers": "Designed async job workers for embeddings, email, notifications, and match processing.",
           "payments": "Integrated PayOS checkout plus auth (JWT / Google OAuth) and file uploads (S3 / Cloudinary).",
-          "fullstack": "Shipped React + Vite frontend and Express + MongoDB API as separate repos — production builds deployed on AWS, with Cloudinary for image and file storage."
+          "fullstack": "Shipped React + Vite frontend and Express + MongoDB API as separate repos — production builds deployed on AWS, with Cloudinary for image and file storage.",
+          "scheduling": "Delivered scheduling flows that let tutors and students coordinate lessons and manage the learning journey in one place.",
+          "auth": "Implemented secure access with JWT and Google OAuth so each user can safely manage their profile, bookings, and payments."
         }
       }
     }
@@ -170,6 +174,16 @@
     "label": "Language",
     "en": "English",
     "vi": "Vietnamese"
+  },
+  "loader": {
+    "label": "Loading portfolio",
+    "eyebrow": "SYSTEM / PORTFOLIO",
+    "signature": "FULLSTACK ENGINEER · BANG DINH",
+    "steps": {
+      "map": "MAP INTERFACES",
+      "compile": "COMPILE SELECTED WORK",
+      "ready": "PORTFOLIO READY"
+    }
   },
   "theme": {
     "toggle": "Toggle theme"

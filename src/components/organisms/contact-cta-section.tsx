@@ -1,12 +1,12 @@
 import { FileDown, GitBranch, Mail, Phone } from "lucide-react"
 
 import { BuildBlocksStage } from "@/components/molecules/build-blocks-stage"
+import { TransitionLink } from "@/components/molecules/transition-link"
 import { SiteFooter } from "@/components/organisms/site-footer"
 import { Button } from "@/components/ui/button"
 import { contactLinks } from "@/data/contact"
 import { resumeLinks } from "@/data/resume"
 import { VIEWPORT_SECTION } from "@/data/site"
-import { Link } from "@/i18n/navigation"
 import { getTranslations } from "next-intl/server"
 
 /**
@@ -70,7 +70,7 @@ export async function ContactCtaSection() {
               variant="outline"
               className="min-h-10 rounded-none"
               nativeButton={false}
-              render={<Link href={resumeLinks.pagePath} />}
+              render={<TransitionLink href={resumeLinks.pagePath} />}
             >
               <FileDown className="size-4" aria-hidden />
               {t("resume")}

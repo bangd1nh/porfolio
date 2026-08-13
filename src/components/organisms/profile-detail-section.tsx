@@ -1,6 +1,7 @@
 import { ScrollReveal } from "@/components/atoms/scroll-reveal"
 import { CareerTimeline } from "@/components/molecules/career-timeline"
 import { IdentityTerminal } from "@/components/molecules/identity-terminal"
+import { MobileProfileTerminal } from "@/components/molecules/mobile-profile-terminal"
 import {
   ProfileMetaItem,
   profileMetaIcons,
@@ -72,42 +73,60 @@ export async function ProfileDetailSection() {
       </header>
 
       <div className="col-span-10 grid min-h-0 content-start grid-cols-10 items-stretch gap-x-[inherit] gap-y-6 lg:min-h-0 lg:gap-y-8">
-        <ScrollReveal className="col-span-10 grid grid-cols-1 content-start gap-3 md:col-span-4 md:h-0 md:min-h-full md:grid-rows-[auto_auto_auto_auto_minmax(0,1fr)] md:overflow-hidden">
-          <h3 className="font-heading text-lg tracking-tight sm:text-xl md:text-2xl">
-            {t("identity")}
-          </h3>
-          <ProfileMetaItem
-            icon={profileMetaIcons.name}
-            label={t("fields.name")}
-            value={name[locale]}
+        <ScrollReveal className="col-span-10 grid grid-cols-1 content-start gap-3 md:col-span-4 md:h-0 md:min-h-full md:grid-rows-[auto_auto_auto_minmax(0,1fr)] md:overflow-hidden">
+          <MobileProfileTerminal
+            className="md:hidden"
+            steps={[
+              {
+                command: "whoami",
+                output: `${t("fields.name")}: ${name[locale]}`,
+              },
+              {
+                command: "cat profile/role.txt",
+                output: `${t("fields.role")}: ${role[locale]}`,
+              },
+              {
+                command: "cat profile/born.txt",
+                output: `${t("fields.birth")}: ${birth}`,
+              },
+              {
+                command: "cat profile/location.txt",
+                output: `${t("fields.location")}: ${location[locale]}`,
+              },
+            ]}
           />
-          <ProfileMetaItem
-            icon={profileMetaIcons.role}
-            label={t("fields.role")}
-            value={role[locale]}
-          />
-          <div className="grid grid-cols-2 gap-3">
+
+          <div className="hidden min-h-0 md:grid md:h-full md:grid-rows-[auto_auto_auto_minmax(0,1fr)] md:gap-3">
             <ProfileMetaItem
-              icon={profileMetaIcons.birth}
-              label={t("fields.birth")}
-              value={birth}
+              icon={profileMetaIcons.name}
+              label={t("fields.name")}
+              value={name[locale]}
             />
             <ProfileMetaItem
-              icon={profileMetaIcons.location}
-              label={t("fields.location")}
-              value={location[locale]}
+              icon={profileMetaIcons.role}
+              label={t("fields.role")}
+              value={role[locale]}
             />
+            <div className="grid grid-cols-2 gap-3">
+              <ProfileMetaItem
+                icon={profileMetaIcons.birth}
+                label={t("fields.birth")}
+                value={birth}
+              />
+              <ProfileMetaItem
+                icon={profileMetaIcons.location}
+                label={t("fields.location")}
+                value={location[locale]}
+              />
+            </div>
+            <IdentityTerminal className="min-h-0 md:h-full" />
           </div>
-          <IdentityTerminal className="min-h-0 md:h-full" />
         </ScrollReveal>
 
         <ScrollReveal
           className="col-span-10 grid gap-3 md:col-span-6 md:min-h-0 md:overflow-y-auto md:pl-1 md:[scrollbar-width:none] md:[-ms-overflow-style:none] md:[&::-webkit-scrollbar]:hidden"
           delayMs={40}
         >
-          <h3 className="font-heading text-lg tracking-tight sm:text-xl md:text-2xl">
-            {t("career")}
-          </h3>
           <CareerTimeline entries={timelineEntries} />
         </ScrollReveal>
       </div>

@@ -39,6 +39,7 @@ const WALL_INSET = 10
 export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
   const t = useTranslations("contact.blocks")
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
+  const compactLayout = useMediaQuery("(max-width: 1023px)")
   const containerRef = useRef<HTMLDivElement>(null)
   const chipRefs = useRef<Map<string, HTMLSpanElement>>(new Map())
   const physicsRef = useRef<PhysicsRefs | null>(null)
@@ -48,7 +49,7 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
   const [draggingId, setDraggingId] = useState<string | null>(null)
 
   useEffect(() => {
-    if (reducedMotion) return
+    if (reducedMotion || compactLayout) return
 
     const container = containerRef.current
     if (!container) return
@@ -229,13 +230,16 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
       physicsRef.current = null
       dragRef.current = null
     }
-  }, [reducedMotion])
+  }, [compactLayout, reducedMotion])
 
-  if (reducedMotion) {
+  // On compact screens, a flow layout keeps every chip readable and prevents
+  // the physics pile from colliding with the footer. The draggable stage stays
+  // available on larger viewports where there is room to interact with it.
+  if (reducedMotion || compactLayout) {
     return (
       <div
         className={cn(
-          "flex min-h-48 w-full flex-wrap content-end items-end justify-center gap-2 py-4 md:gap-3",
+          "!h-auto flex min-h-52 w-full flex-wrap content-center items-center justify-center gap-2 py-4 sm:gap-2.5",
           className
         )}
       >
@@ -243,8 +247,8 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
           <span
             key={block.id}
             className={cn(
-              "inline-flex items-center justify-center border border-border bg-card px-5 py-3",
-              "font-sans text-sm font-bold tracking-widest text-foreground uppercase",
+              "inline-flex max-w-full items-center justify-center border border-border bg-card px-3.5 py-2.5",
+              "font-sans text-[0.65rem] font-bold tracking-[0.12em] text-foreground uppercase whitespace-nowrap sm:px-4 sm:text-xs",
               "shadow-[4px_5px_0_0_oklch(0_0_0_/_0.12)] dark:shadow-[4px_5px_0_0_oklch(0_0_0_/_0.35)]"
             )}
           >
@@ -395,8 +399,8 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
   }
 
   const chipClassName = cn(
-    "inline-flex items-center justify-center border border-border bg-card px-6 py-3.5 md:px-7 md:py-4",
-    "font-sans text-sm font-bold tracking-widest text-foreground uppercase whitespace-nowrap md:text-base",
+    "inline-flex items-center justify-center border border-border bg-card px-3.5 py-2.5 sm:px-5 sm:py-3 lg:px-7 lg:py-4",
+    "font-sans text-xs font-bold tracking-[0.12em] text-foreground uppercase whitespace-nowrap sm:text-sm sm:tracking-widest lg:text-base",
     "shadow-[6px_7px_0_0_oklch(0_0_0_/_0.14)] dark:shadow-[6px_7px_0_0_oklch(0_0_0_/_0.4)]"
   )
 

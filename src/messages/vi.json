@@ -71,8 +71,6 @@
       "other": "Kỹ năng khác",
       "ai": "AI & LLM"
     },
-    "identity": "Hồ sơ",
-    "career": "Hành trình nghề nghiệp",
     "githubTitle": "Hoạt động GitHub"
   },
   "stack": {
@@ -128,13 +126,15 @@
       "uctalent": {
         "title": "uctalent.io",
         "role": "Fullstack developer",
-        "summary": "Nền tảng HRTech Web3 cho tuyển dụng, matching ứng viên bằng AI và thưởng referral trên blockchain.",
+        "summary": "Nền tảng HRTech: marketplace talent trên uctalent.io và workspace React cho head hunter trên business.uctalent.io — matching AI, semantic search, thưởng referral blockchain.",
         "highlights": {
-          "fullstack": "Ship tính năng full-stack production với Next.js, NestJS, GraphQL, PostgreSQL và Redis.",
+          "hunterPortal": "Xây business.uctalent.io — web React cho head hunter: source ứng viên, chạy pipeline và chốt placement.",
+          "fullstack": "Ship tính năng full-stack production trên uctalent.io và workspace hunter với Next.js, NestJS, GraphQL, PostgreSQL và Redis.",
+          "hrAi": "Ứng dụng LLM vào workflow HR — screening CV, matching job–ứng viên và draft outreach, giảm việc thủ công cho recruiter.",
+          "elasticsearch": "Index job và hồ sơ talent trên Elasticsearch để search nhanh, faceted ở quy mô platform.",
+          "semantic": "Kết hợp Elasticsearch với vector embeddings cho semantic search và recommendation, vượt keyword matching.",
+          "microservices": "Thiết kế tích hợp GraphQL + Redis + background jobs giữa các microservice — matching, search và notification bền vững.",
           "ddd": "Thiết kế backend theo Clean Architecture và Domain-Driven Design để dễ bảo trì lâu dài.",
-          "llm": "Tích hợp LLM vào quy trình tuyển dụng — prompt pipeline, structured output và matching ứng viên-job.",
-          "vector": "Xây semantic search và recommendation dựa trên vector embeddings, vượt keyword matching.",
-          "microservices": "Thiết kế tích hợp GraphQL + Redis + background jobs bền vững giữa các microservice.",
           "performance": "Cải thiện hiệu năng qua tối ưu API, query, Redis cache và code review."
         }
       },
@@ -148,7 +148,9 @@
           "contact": "Ship form contact và thu lead với validation, gửi tin cậy cho yêu cầu tư vấn từ khách hàng.",
           "content": "Thiết kế section linh hoạt và component tái sử dụng để team không dev tự publish case study, dịch vụ và blog.",
           "fullstack": "Frontend Next.js consume Strapi REST API với SSR — hiệu năng tốt và nội dung marketing index được.",
-          "delivery": "Deploy production với config theo môi trường, tối ưu ảnh và workflow quản lý nội dung bền vững."
+          "delivery": "Deploy production với config theo môi trường, tối ưu ảnh và workflow quản lý nội dung bền vững.",
+          "responsive": "Xây giao diện Tailwind CSS responsive, giữ trải nghiệm marketing chỉn chu trên desktop, tablet và mobile.",
+          "architecture": "Tách lớp hiển thị khỏi dữ liệu CMS để thêm trang và campaign mới mà không phải làm lại frontend."
         }
       },
       "matchtutors": {
@@ -161,7 +163,9 @@
           "realtime": "Chat và cập nhật realtime bằng Socket.io trong luồng đặt lịch.",
           "workers": "Thiết kế job worker bất đồng bộ cho embedding, email, notification và matching.",
           "payments": "Tích hợp thanh toán PayOS, auth JWT/Google OAuth và upload file (S3/Cloudinary).",
-          "fullstack": "Ship frontend React + Vite và API Express + MongoDB (hai repo) — build production deploy trên AWS, lưu ảnh và file trên Cloudinary."
+          "fullstack": "Ship frontend React + Vite và API Express + MongoDB (hai repo) — build production deploy trên AWS, lưu ảnh và file trên Cloudinary.",
+          "scheduling": "Hoàn thiện luồng đặt lịch để gia sư và học viên phối hợp buổi học, đồng thời quản lý hành trình học tập tại một nơi.",
+          "auth": "Triển khai JWT và Google OAuth để mỗi người dùng quản lý an toàn hồ sơ, lịch đặt và thanh toán của mình."
         }
       }
     }
@@ -170,6 +174,16 @@
     "label": "Ngôn ngữ",
     "en": "English",
     "vi": "Tiếng Việt"
+  },
+  "loader": {
+    "label": "Đang tải portfolio",
+    "eyebrow": "HỆ THỐNG / PORTFOLIO",
+    "signature": "FULLSTACK ENGINEER · BANG DINH",
+    "steps": {
+      "map": "SẮP XẾP GIAO DIỆN",
+      "compile": "NẠP DỰ ÁN TIÊU BIỂU",
+      "ready": "PORTFOLIO SẴN SÀNG"
+    }
   },
   "theme": {
     "toggle": "Đổi giao diện"

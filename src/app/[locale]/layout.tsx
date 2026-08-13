@@ -5,6 +5,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { notFound } from "next/navigation"
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { ThemeTransition } from "@/components/providers/theme-transition"
+import { GlobalLoaderProvider } from "@/components/providers/global-loader"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { routing, type Locale } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
@@ -91,7 +92,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
           <ThemeTransition>
             <TooltipProvider delay={200}>
               <NextIntlClientProvider messages={messages}>
-                {children}
+                <GlobalLoaderProvider>{children}</GlobalLoaderProvider>
               </NextIntlClientProvider>
             </TooltipProvider>
           </ThemeTransition>
