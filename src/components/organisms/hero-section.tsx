@@ -87,7 +87,7 @@ export async function HeroSection() {
       </div>
 
       <CompositionCard
-        className="col-span-10 aspect-square w-full max-h-[min(56vh,22rem)] max-w-[min(92vw,22rem)] justify-self-center sm:max-h-[min(60vh,26rem)] sm:max-w-[min(88vw,26rem)] md:col-span-5 md:max-h-[min(74svh,30rem)] md:max-w-full lg:max-h-[min(80svh,36rem)] xl:max-h-[min(84svh,40rem)]"
+        className="col-span-10 hidden aspect-square w-full max-h-[min(56vh,22rem)] max-w-[min(92vw,22rem)] justify-self-center sm:max-h-[min(60vh,26rem)] sm:max-w-[min(88vw,26rem)] md:col-span-5 md:block md:max-h-[min(74svh,30rem)] md:max-w-full lg:max-h-[min(80svh,36rem)] xl:max-h-[min(84svh,40rem)]"
         githubStats={githubStats}
       />
     </section>
