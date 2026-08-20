@@ -54,6 +54,14 @@ export async function ProjectsSection() {
           projects={projects}
           tabsLabel={t("tabsLabel")}
           shippedLabel={t("shipped")}
+          notesHint={t("notesHint")}
+          shippingPressLabels={{
+            ticket: t("shippingPress.ticket"),
+            building: t("shippingPress.building"),
+            scanning: t("shippingPress.scanning"),
+            shipped: t("shippingPress.shipped"),
+            archive: t("shippingPress.archive"),
+          }}
           embedFallback={t("embedFallback")}
         />
       </ScrollReveal>

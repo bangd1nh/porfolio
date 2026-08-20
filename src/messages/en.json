@@ -121,6 +121,14 @@
     "solo": "Solo · Capstone",
     "tabsLabel": "Select a project",
     "shipped": "What I shipped",
+    "notesHint": "Drag, stack, double-click to reset",
+    "shippingPress": {
+      "ticket": "Project ticket",
+      "building": "Building",
+      "scanning": "Scanning",
+      "shipped": "Shipped",
+      "archive": "Archive"
+    },
     "embedFallback": "Preview blocked by this site. Open the live site instead.",
     "items": {
       "guscent": {

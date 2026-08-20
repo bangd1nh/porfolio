@@ -121,6 +121,14 @@
     "solo": "Cá nhân · Capstone",
     "tabsLabel": "Chọn dự án",
     "shipped": "Những gì tôi ship",
+    "notesHint": "Kéo, chồng, nhấp đúp để đặt lại",
+    "shippingPress": {
+      "ticket": "Phiếu dự án",
+      "building": "Đang build",
+      "scanning": "Đang quét",
+      "shipped": "Đã ship",
+      "archive": "Lưu trữ"
+    },
     "embedFallback": "Site chặn xem trước tại đây. Mở trang live để xem.",
     "items": {
       "guscent": {

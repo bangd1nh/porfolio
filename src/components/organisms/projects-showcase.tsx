@@ -5,6 +5,10 @@ import { useId, useState } from "react"
 
 import { ProjectLiveEmbed } from "@/components/molecules/project-live-embed"
 import { DraggableHighlightNotes } from "@/components/molecules/draggable-highlight-notes"
+import {
+  ProjectNotesDeskDecor,
+  type ShippingPressLabels,
+} from "@/components/molecules/project-notes-desk-decor"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -25,6 +29,8 @@ type ProjectsShowcaseProps = {
   projects: readonly ProjectShowcaseItem[]
   tabsLabel: string
   shippedLabel: string
+  notesHint: string
+  shippingPressLabels: ShippingPressLabels
   embedFallback: string
 }
 
@@ -35,6 +41,8 @@ export function ProjectsShowcase({
   projects,
   tabsLabel,
   shippedLabel,
+  notesHint,
+  shippingPressLabels,
   embedFallback,
 }: ProjectsShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -96,8 +104,8 @@ export function ProjectsShowcase({
           className="col-span-10 h-full min-h-[14rem] lg:col-span-6 lg:min-h-0"
         />
 
-        <div className="col-span-10 grid h-fit min-h-0 w-full content-start gap-2.5 self-start overflow-y-auto border border-border bg-card p-3 lg:col-span-4 lg:h-full lg:max-h-full lg:gap-2 lg:p-3.5 lg:[scrollbar-width:none] lg:[-ms-overflow-style:none] lg:[&::-webkit-scrollbar]:hidden">
-          <header className="grid gap-1">
+        <div className="relative col-span-10 grid h-fit min-h-0 w-full content-start gap-2.5 self-start border border-border bg-card p-3 lg:col-span-4 lg:h-full lg:max-h-full lg:grid-rows-[auto_auto_auto_minmax(3.5rem,1fr)] lg:gap-2 lg:overflow-hidden lg:p-3.5">
+          <header className="grid gap-1 lg:pr-28">
             <p className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
               {active.period}
             </p>
@@ -137,12 +145,21 @@ export function ProjectsShowcase({
             </h4>
             <DraggableHighlightNotes
               key={active.id}
+              projectId={active.id}
               highlights={active.highlights}
               label={shippedLabel}
             />
           </div>
 
-          <div className="flex flex-wrap gap-1.5 border-t border-border pt-2">
+          <ProjectNotesDeskDecor
+            key={active.id}
+            projectId={active.id}
+            projectTitle={active.title}
+            hint={notesHint}
+            labels={shippingPressLabels}
+          />
+
+          <div className="flex flex-wrap gap-1.5 border-t border-border pt-2 lg:absolute lg:top-3.5 lg:right-3.5 lg:z-10 lg:border-0 lg:p-0">
             <Button
               size="sm"
               className="h-8 cursor-pointer rounded-none px-2.5 text-xs"
@@ -156,7 +173,7 @@ export function ProjectsShowcase({
               }
             >
               {active.liveLabel}
-              <ArrowUpRight className="size-4" aria-hidden />
+              <ArrowUpRight data-icon="inline-end" aria-hidden />
             </Button>
           </div>
         </div>
