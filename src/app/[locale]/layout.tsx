@@ -1,5 +1,11 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono, Noto_Sans, Playfair_Display } from "next/font/google"
+import {
+  Caveat,
+  Geist,
+  Geist_Mono,
+  Noto_Sans,
+  Playfair_Display,
+} from "next/font/google"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
@@ -29,6 +35,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+})
+
+const caveatHandwriting = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin", "latin-ext"],
+  weight: "variable",
 })
 
 type LayoutProps = {
@@ -79,7 +91,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         geistMono.variable,
         "font-sans",
         notoSans.variable,
-        playfairDisplayHeading.variable
+        playfairDisplayHeading.variable,
+        caveatHandwriting.variable
       )}
     >
       <body className="min-h-full">

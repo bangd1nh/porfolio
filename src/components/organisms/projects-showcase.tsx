@@ -1,9 +1,10 @@
 "use client"
 
-import { ArrowUpRight, GitBranch, Users } from "lucide-react"
+import { ArrowUpRight, Users } from "lucide-react"
 import { useId, useState } from "react"
 
 import { ProjectLiveEmbed } from "@/components/molecules/project-live-embed"
+import { DraggableHighlightNotes } from "@/components/molecules/draggable-highlight-notes"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -18,10 +19,6 @@ export type ProjectShowcaseItem = {
   highlights: readonly string[]
   liveUrl: string
   liveLabel: string
-  githubUrl?: string
-  githubBackendUrl?: string
-  repoLabel: string
-  repoBackendLabel?: string
 }
 
 type ProjectsShowcaseProps = {
@@ -138,16 +135,11 @@ export function ProjectsShowcase({
             <h4 className="font-heading text-xs tracking-tight text-foreground">
               {shippedLabel}
             </h4>
-            <ul className="grid gap-1.5">
-              {active.highlights.map((text) => (
-                <li
-                  key={text}
-                  className="border-l-2 border-primary bg-muted/40 px-2 py-1.5 text-[11px] leading-snug text-foreground"
-                >
-                  {text}
-                </li>
-              ))}
-            </ul>
+            <DraggableHighlightNotes
+              key={active.id}
+              highlights={active.highlights}
+              label={shippedLabel}
+            />
           </div>
 
           <div className="flex flex-wrap gap-1.5 border-t border-border pt-2">
@@ -166,42 +158,6 @@ export function ProjectsShowcase({
               {active.liveLabel}
               <ArrowUpRight className="size-4" aria-hidden />
             </Button>
-            {active.githubUrl ? (
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 cursor-pointer rounded-none px-2.5 text-xs"
-                nativeButton={false}
-                render={
-                  <a
-                    href={active.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  />
-                }
-              >
-                <GitBranch className="size-4" aria-hidden />
-                {active.repoLabel}
-              </Button>
-            ) : null}
-            {active.githubBackendUrl && active.repoBackendLabel ? (
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 cursor-pointer rounded-none px-2.5 text-xs"
-                nativeButton={false}
-                render={
-                  <a
-                    href={active.githubBackendUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  />
-                }
-              >
-                <GitBranch className="size-4" aria-hidden />
-                {active.repoBackendLabel}
-              </Button>
-            ) : null}
           </div>
         </div>
       </div>

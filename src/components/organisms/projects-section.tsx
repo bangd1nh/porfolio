@@ -28,14 +28,6 @@ export async function ProjectsSection() {
     ),
     liveUrl: project.liveUrl,
     liveLabel: t("live"),
-    ...(project.githubUrl ? { githubUrl: project.githubUrl } : {}),
-    ...(project.githubBackendUrl
-      ? {
-          githubBackendUrl: project.githubBackendUrl,
-          repoLabel: t("repoFrontend"),
-          repoBackendLabel: t("repoBackend"),
-        }
-      : { repoLabel: t("repo") }),
   }))
 
   return (

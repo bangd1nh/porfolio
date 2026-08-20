@@ -134,14 +134,34 @@ export default async function CvPage({ params }: PageProps) {
               </h2>
               {projectsContent.map((project) => (
                 <div key={project.id} className="grid gap-2">
-                  <h3 className="font-semibold">
-                    {tProjects(`items.${project.id}.title`)}
-                  </h3>
+                  <div className="grid gap-0.5 sm:grid-cols-[1fr_auto]">
+                    <h3 className="font-semibold">
+                      {tProjects(`items.${project.id}.title`)} —{" "}
+                      {tProjects(`items.${project.id}.role`)}
+                    </h3>
+                    <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+                      {project.period}
+                    </p>
+                  </div>
                   <p className="text-sm text-muted-foreground print:text-neutral-600">
                     {tProjects(`items.${project.id}.summary`)}
                   </p>
                   <p className="text-xs font-semibold">
                     {project.stack.join(" · ")}
+                  </p>
+                  <p className="text-xs text-muted-foreground print:text-neutral-600">
+                    {project.teamSize === 1
+                      ? tProjects("solo")
+                      : tProjects("teamSize", { count: project.teamSize })}
+                    {" · "}
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold underline underline-offset-2"
+                    >
+                      {tProjects("live")}
+                    </a>
                   </p>
                 </div>
               ))}

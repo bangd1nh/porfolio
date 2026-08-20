@@ -123,6 +123,19 @@
     "shipped": "Những gì tôi ship",
     "embedFallback": "Site chặn xem trước tại đây. Mở trang live để xem.",
     "items": {
+      "guscent": {
+        "title": "Guscent",
+        "role": "Frontend developer · Freelance",
+        "summary": "Storefront nước hoa giàu tính thẩm mỹ, giúp khách hàng khám phá sản phẩm qua storytelling theo cảm xúc, trắc nghiệm mùi hương, nội dung editorial và hành trình mua sắm chỉn chu.",
+        "highlights": {
+          "storefront": "Xây storefront Next.js production theo định hướng của designer, với các section tái sử dụng cho khám phá sản phẩm và kể câu chuyện thương hiệu.",
+          "quiz": "Triển khai trắc nghiệm mùi hương tương tác, chuyển trạng thái và sở thích của khách thành hành trình khám phá nước hoa có hướng dẫn.",
+          "commerce": "Hoàn thiện điều hướng danh mục, trình bày sản phẩm và tương tác giỏ hàng xuyên suốt hành trình khách hàng.",
+          "api": "Tích hợp backend API cùng media/nội dung từ CMS, xử lý ổn định các trạng thái loading, empty và error.",
+          "responsive": "Chuyển thiết kế giàu hình ảnh thành trải nghiệm responsive, accessible trên desktop, tablet và mobile.",
+          "collaboration": "Phụ trách frontend trong team freelance 3 người, phối hợp chặt chẽ với 1 backend developer và 1 designer."
+        }
+      },
       "uctalent": {
         "title": "uctalent.io",
         "role": "Fullstack developer",

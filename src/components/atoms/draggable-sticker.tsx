@@ -25,6 +25,8 @@ type DraggableStickerProps = {
   dragConstraints: RefObject<HTMLElement | null>
   /** When false, sticker is static (e.g. mobile). */
   dragEnabled?: boolean
+  /** Absolute for collages; relative keeps the sticker in a grid slot. */
+  layout?: "absolute" | "relative"
   style?: React.CSSProperties
   "aria-label"?: string
 }
@@ -40,6 +42,7 @@ export function DraggableSticker({
   initialRotate = 0,
   dragConstraints,
   dragEnabled = true,
+  layout = "absolute",
   style,
   "aria-label": ariaLabel,
 }: DraggableStickerProps) {
@@ -102,8 +105,10 @@ export function DraggableSticker({
           : undefined
       }
       className={cn(
-        "absolute touch-none select-none transition-[box-shadow] duration-200",
-        canAnimate && "cursor-grab focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+        "transition-[box-shadow] duration-200",
+        layout === "absolute" ? "absolute" : "relative",
+        canAnimate &&
+          "cursor-grab touch-none select-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
         className
       )}
     >

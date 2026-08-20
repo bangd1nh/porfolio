@@ -1,4 +1,4 @@
-export type ProjectId = "uctalent" | "unchainlabs" | "matchtutors"
+export type ProjectId = "guscent" | "uctalent" | "unchainlabs" | "matchtutors"
 
 export type ProjectItem = {
   id: ProjectId
@@ -17,6 +17,29 @@ export type ProjectItem = {
 
 /** Featured projects — copy lives in messages; facts live here. */
 export const projectsContent: readonly ProjectItem[] = [
+  {
+    id: "guscent",
+    liveUrl: "https://guscent.vn",
+    period: "06/2026 – 08/2026",
+    teamSize: 3,
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "REST API",
+      "SEO",
+      "Responsive UI",
+    ],
+    highlightKeys: [
+      "storefront",
+      "quiz",
+      "commerce",
+      "api",
+      "responsive",
+      "collaboration",
+    ],
+  },
   {
     id: "uctalent",
     liveUrl: "https://uctalent.io",

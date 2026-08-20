@@ -123,6 +123,19 @@
     "shipped": "What I shipped",
     "embedFallback": "Preview blocked by this site. Open the live site instead.",
     "items": {
+      "guscent": {
+        "title": "Guscent",
+        "role": "Frontend developer · Freelance",
+        "summary": "A design-led perfume storefront that helps customers discover products through mood-based storytelling, a scent quiz, editorial content, and a polished commerce journey.",
+        "highlights": {
+          "storefront": "Built the production Next.js storefront from the designer's direction, with reusable sections for product discovery and brand storytelling.",
+          "quiz": "Implemented an interactive scent quiz that turns customer moods and preferences into a guided fragrance-discovery journey.",
+          "commerce": "Delivered catalog navigation, product presentation, and shopping-cart interactions across the customer journey.",
+          "api": "Integrated backend APIs and CMS-driven media/content with resilient loading, empty, and error states.",
+          "responsive": "Translated a highly visual design into a responsive, accessible experience across desktop, tablet, and mobile.",
+          "collaboration": "Owned the frontend in a three-person freelance team, working closely with one backend developer and one designer."
+        }
+      },
       "uctalent": {
         "title": "uctalent.io",
         "role": "Fullstack developer",
