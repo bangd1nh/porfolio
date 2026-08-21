@@ -20,7 +20,12 @@
       "contact": "Contact"
     },
     "menuOpen": "Open menu",
-    "menuClose": "Close menu"
+    "menuClose": "Close menu",
+    "desktopHint": {
+      "title": "Best explored on desktop",
+      "description": "Open this portfolio on a computer to try the draggable details and full interactions.",
+      "dismiss": "Dismiss desktop experience tip"
+    }
   },
   "hero": {
     "name": "Nguyen Dinh Bang",

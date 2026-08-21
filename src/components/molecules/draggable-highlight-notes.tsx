@@ -63,7 +63,7 @@ function getNoteLayout(projectId: string, index: number) {
 }
 
 /**
- * Two-note-high board: horizontal two-row strip on mobile, seeded collage on md+.
+ * Two-note-high board: horizontal two-row strip on mobile/tablet, seeded collage on desktop.
  */
 export function DraggableHighlightNotes({
   projectId,
@@ -71,7 +71,7 @@ export function DraggableHighlightNotes({
   label,
 }: DraggableHighlightNotesProps) {
   const constraintsRef = useRef<HTMLDivElement>(null)
-  const isMdUp = useMediaQuery("(min-width: 768px)")
+  const isDesktop = useMediaQuery("(min-width: 1024px)")
 
   return (
     <div
@@ -82,7 +82,7 @@ export function DraggableHighlightNotes({
         "relative grid h-[calc(var(--note-mobile-size)*2+0.75rem)] grid-flow-col grid-rows-2 content-start gap-3 overflow-x-auto overflow-y-hidden p-1.5",
         "[--note-mobile-size:8.5rem] [--note-size:clamp(7rem,14svh,9.5rem)] [grid-auto-columns:var(--note-mobile-size)]",
         "overscroll-x-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
-        "md:block md:h-[calc(var(--note-size)*2)] md:overflow-hidden md:p-0"
+        "lg:block lg:h-[calc(var(--note-size)*2)] lg:overflow-hidden lg:p-0"
       )}
     >
       {highlights.map((text, index) => {
@@ -99,12 +99,12 @@ export function DraggableHighlightNotes({
             key={text}
             aria-label={`${noteNumber}. ${text}`}
             dragConstraints={constraintsRef}
-            dragEnabled={isMdUp}
+            dragEnabled={isDesktop}
             initialRotate={layout.tilt}
             layout="relative"
             className={cn(
               "size-[var(--note-mobile-size)] shrink-0",
-              "md:absolute md:top-[var(--note-top)] md:left-[var(--note-left)] md:z-[var(--note-layer)] md:size-[var(--note-size)]"
+              "lg:absolute lg:top-[var(--note-top)] lg:left-[var(--note-left)] lg:z-[var(--note-layer)] lg:size-[var(--note-size)]"
             )}
             style={positionStyle}
           >

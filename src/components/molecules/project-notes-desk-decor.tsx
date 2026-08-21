@@ -50,7 +50,7 @@ export function ProjectNotesDeskDecor({
 
       media.add(
         {
-          canMove: "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+          canMove: "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
         },
         ({ conditions }) => {
           if (!conditions?.canMove) return
@@ -250,7 +250,7 @@ export function ProjectNotesDeskDecor({
       ref={scopeRef}
       data-project-id={projectId}
       aria-label={`${labels.ticket}: ${projectTitle} — ${labels.shipped}`}
-      className="pointer-events-none relative hidden min-h-14 overflow-hidden border border-border bg-muted/20 md:block"
+      className="pointer-events-none relative hidden min-h-14 overflow-hidden border border-border bg-muted/20 lg:block"
     >
       <svg
         viewBox="0 0 560 145"

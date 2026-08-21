@@ -20,7 +20,12 @@
       "contact": "Liên hệ"
     },
     "menuOpen": "Mở menu",
-    "menuClose": "Đóng menu"
+    "menuClose": "Đóng menu",
+    "desktopHint": {
+      "title": "Trải nghiệm tốt nhất trên máy tính",
+      "description": "Mở portfolio trên máy tính để thử các chi tiết kéo thả và đầy đủ tương tác.",
+      "dismiss": "Đóng gợi ý trải nghiệm máy tính"
+    }
   },
   "hero": {
     "name": "Nguyễn Đình Bảng",

@@ -3,6 +3,7 @@ import { FileDown } from "lucide-react"
 import { ScrollReveal } from "@/components/atoms/scroll-reveal"
 import { TypewriterText } from "@/components/atoms/typewriter-text"
 import { CompositionCard } from "@/components/molecules/composition-card"
+import { DesktopExperienceHint } from "@/components/molecules/desktop-experience-hint"
 import { GithubActivity } from "@/components/molecules/github-activity"
 import { TransitionLink } from "@/components/molecules/transition-link"
 import { Button } from "@/components/ui/button"
@@ -29,6 +30,8 @@ export async function HeroSection() {
       className={`page-section box-border items-center gap-y-5 pt-8 pb-8 sm:gap-y-6 sm:pt-12 sm:pb-12 md:grid-rows-1 md:items-center lg:gap-y-6 lg:pb-6 ${VIEWPORT_SECTION}`}
     >
       <div className="col-span-10 grid content-center justify-items-center gap-3 text-center sm:gap-4 md:col-span-5 md:min-h-0 md:justify-items-start md:self-center md:text-left">
+        <DesktopExperienceHint />
+
         <span className="rounded-none border border-border bg-card px-3 py-1.5 text-[11px] font-semibold tracking-widest text-muted-foreground uppercase sm:px-4 sm:text-xs">
           {t("role")}
         </span>
