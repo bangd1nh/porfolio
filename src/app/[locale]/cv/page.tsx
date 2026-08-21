@@ -1,13 +1,15 @@
 import { ArrowLeft } from "lucide-react"
+import type { Metadata } from "next"
 import { hasLocale } from "next-intl"
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 
 import { DotSpotlightBackground } from "@/components/atoms/dot-spotlight-background"
+import { JsonLd } from "@/components/atoms/json-ld"
 import { PageGrid } from "@/components/atoms/page-grid"
 import { PrintButton } from "@/components/atoms/print-button"
-import { TransitionLink } from "@/components/molecules/transition-link"
 import { SkillIcon } from "@/components/atoms/skill-icon"
+import { TransitionLink } from "@/components/molecules/transition-link"
 import { SiteDock } from "@/components/organisms/site-dock"
 import { Button } from "@/components/ui/button"
 import { contactLinks } from "@/data/contact"
@@ -15,9 +17,30 @@ import { experienceContent } from "@/data/experience"
 import { profileContent } from "@/data/profile"
 import { projectsContent } from "@/data/projects"
 import { routing, type Locale } from "@/i18n/routing"
+import { buildPageMetadata, getCvJsonLd } from "@/lib/seo"
 
 type PageProps = {
   params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { locale: localeParam } = await params
+
+  if (!hasLocale(routing.locales, localeParam)) {
+    return {}
+  }
+
+  const locale = localeParam as Locale
+  const t = await getTranslations({ locale, namespace: "metadata" })
+
+  return buildPageMetadata({
+    locale,
+    path: "/cv",
+    title: t("cv.title"),
+    description: t("cv.description"),
+  })
 }
 
 type LocaleKey = "en" | "vi"
@@ -32,6 +55,7 @@ export default async function CvPage({ params }: PageProps) {
   setRequestLocale(locale)
 
   const t = await getTranslations("cv")
+  const tMetadata = await getTranslations("metadata")
   const tProfile = await getTranslations("profile")
   const tExperience = await getTranslations("experience")
   const tProjects = await getTranslations("projects")
@@ -40,6 +64,12 @@ export default async function CvPage({ params }: PageProps) {
 
   return (
     <div className="relative min-h-full">
+      <JsonLd
+        data={getCvJsonLd(locale, {
+          home: tMetadata("ogSiteName"),
+          cv: tMetadata("cv.title"),
+        })}
+      />
       <div className="print:hidden">
         <DotSpotlightBackground />
         <SiteDock />

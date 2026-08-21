@@ -5,6 +5,13 @@ import { useGlobalLoader } from "@/components/providers/global-loader"
 
 type TransitionLinkProps = React.ComponentProps<typeof Link>
 
+function getTargetPathname(href: string, currentPathname: string) {
+  if (href.startsWith("#") || href.startsWith("?")) return currentPathname
+
+  const [targetPathname] = href.split(/[?#]/, 1)
+  return targetPathname || currentPathname
+}
+
 /** Starts the branded boot sequence before navigating between full app routes. */
 export function TransitionLink({ onClick, href, ...props }: TransitionLinkProps) {
   const pathname = usePathname()
@@ -25,7 +32,7 @@ export function TransitionLink({ onClick, href, ...props }: TransitionLinkProps)
           event.shiftKey ||
           event.altKey ||
           typeof href !== "string" ||
-          href === pathname
+          getTargetPathname(href, pathname) === pathname
         ) {
           return
         }

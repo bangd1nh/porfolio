@@ -6,6 +6,20 @@ export const NAV_ITEMS = [
   { href: "#contact", labelKey: "contact" },
 ] as const
 
+export type SiteRoutePath = "/" | "/cv"
+
+export type SiteRoute = {
+  path: SiteRoutePath
+  changeFrequency: "weekly" | "monthly"
+  priority: number
+}
+
+/** Indexable App Router paths — used by sitemap.xml. */
+export const SITE_ROUTES = [
+  { path: "/", changeFrequency: "weekly", priority: 1 },
+  { path: "/cv", changeFrequency: "monthly", priority: 0.8 },
+] as const satisfies readonly SiteRoute[]
+
 export type NavItemKey = (typeof NAV_ITEMS)[number]["labelKey"]
 
 /** Homepage section ids — order matches nav + section pager. */

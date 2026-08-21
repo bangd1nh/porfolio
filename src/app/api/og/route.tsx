@@ -7,15 +7,17 @@ const OG_HEIGHT = 630
 
 const copy = {
   en: {
-    title: "Nguyen Dinh Bang | Portfolio",
-    description: "Personal portfolio of Nguyen Dinh Bang — Fullstack Developer",
+    title: "Nguyen Dinh Bang | Fullstack Developer",
+    description:
+      "Portfolio of Nguyen Dinh Bang — fullstack developer in Da Nang building scalable web apps with Next.js, NestJS, GraphQL, PostgreSQL, and Redis.",
     eyebrow: "FULLSTACK DEVELOPER",
     availability: "AVAILABLE FOR PROJECTS",
     craft: "DESIGN · CODE · SHIP",
   },
   vi: {
-    title: "Nguyễn Đình Bảng | Portfolio",
-    description: "Portfolio cá nhân của Nguyễn Đình Bảng — Fullstack Developer",
+    title: "Nguyễn Đình Bảng | Fullstack Developer",
+    description:
+      "Portfolio của Nguyễn Đình Bảng — fullstack developer tại Đà Nẵng, xây ứng dụng web scalable với Next.js, NestJS, GraphQL, PostgreSQL và Redis.",
     eyebrow: "FULLSTACK DEVELOPER",
     availability: "SẴN SÀNG CHO DỰ ÁN MỚI",
     craft: "THIẾT KẾ · CODE · SHIP",

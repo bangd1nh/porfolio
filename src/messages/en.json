@@ -1,7 +1,14 @@
 {
   "metadata": {
-    "title": "Nguyen Dinh Bang | Portfolio",
-    "description": "Personal portfolio of Nguyen Dinh Bang — Fullstack Developer"
+    "title": "Nguyen Dinh Bang | Fullstack Developer",
+    "titleTemplate": "%s | Nguyen Dinh Bang",
+    "description": "Portfolio of Nguyen Dinh Bang — fullstack developer in Da Nang building scalable web apps with Next.js, NestJS, GraphQL, PostgreSQL, and Redis.",
+    "ogSiteName": "Nguyen Dinh Bang — Portfolio",
+    "keywords": "Fullstack Developer, Next.js, NestJS, GraphQL, TypeScript, PostgreSQL, Redis, Da Nang, Portfolio",
+    "cv": {
+      "title": "Resume",
+      "description": "Resume of Nguyen Dinh Bang — fullstack developer. Experience, selected projects, and production skills in Next.js, NestJS, GraphQL, and TypeScript."
+    }
   },
   "site": {
     "name": "N.D.Bang",

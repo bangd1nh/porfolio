@@ -1,7 +1,14 @@
 {
   "metadata": {
-    "title": "Nguyễn Đình Bảng | Portfolio",
-    "description": "Portfolio cá nhân của Nguyễn Đình Bảng — Fullstack Developer"
+    "title": "Nguyễn Đình Bảng | Fullstack Developer",
+    "titleTemplate": "%s | Nguyễn Đình Bảng",
+    "description": "Portfolio của Nguyễn Đình Bảng — fullstack developer tại Đà Nẵng, xây ứng dụng web scalable với Next.js, NestJS, GraphQL, PostgreSQL và Redis.",
+    "ogSiteName": "Nguyễn Đình Bảng — Portfolio",
+    "keywords": "Fullstack Developer, Next.js, NestJS, GraphQL, TypeScript, PostgreSQL, Redis, Đà Nẵng, Portfolio",
+    "cv": {
+      "title": "CV",
+      "description": "CV của Nguyễn Đình Bảng — fullstack developer. Kinh nghiệm, dự án tiêu biểu và kỹ năng production với Next.js, NestJS, GraphQL và TypeScript."
+    }
   },
   "site": {
     "name": "N.Đ.Bảng",

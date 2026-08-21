@@ -37,6 +37,7 @@ export function GlobalLoaderProvider({ children }: { children: React.ReactNode }
   const [visible, setVisible] = useState(true)
   const [phase, setPhase] = useState<LoaderPhase>("boot")
   const initialPathRef = useRef<string | null>(null)
+  const browserPathRef = useRef<string | null>(null)
   const startedAtRef = useRef(0)
   const finishTimerRef = useRef<number | null>(null)
   const exitTimerRef = useRef<number | null>(null)
@@ -81,6 +82,8 @@ export function GlobalLoaderProvider({ children }: { children: React.ReactNode }
   }, [clearTimers, finishLoader])
 
   useEffect(() => {
+    browserPathRef.current = window.location.pathname
+
     if (initialPathRef.current === null) {
       initialPathRef.current = pathname
       startedAtRef.current = Date.now()
@@ -95,7 +98,19 @@ export function GlobalLoaderProvider({ children }: { children: React.ReactNode }
   }, [finishLoader, pathname])
 
   useEffect(() => {
-    const onPopState = () => startLoader()
+    browserPathRef.current = window.location.pathname
+
+    const onPopState = () => {
+      const nextPath = window.location.pathname
+
+      // Next patches the History API, so hash-only replaceState calls may emit
+      // popstate. Those are in-page scrolls, not route transitions.
+      if (browserPathRef.current === nextPath) return
+
+      browserPathRef.current = nextPath
+      startLoader()
+    }
+
     window.addEventListener("popstate", onPopState)
     return () => {
       window.removeEventListener("popstate", onPopState)

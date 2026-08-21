@@ -9,11 +9,18 @@ import {
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
+
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { ThemeTransition } from "@/components/providers/theme-transition"
 import { GlobalLoaderProvider } from "@/components/providers/global-loader"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { profileContent } from "@/data/profile"
 import { routing, type Locale } from "@/i18n/routing"
+import {
+  getAlternateOpenGraphLocale,
+  getOgImageUrl,
+  getOpenGraphLocale,
+} from "@/lib/seo"
 import { getSiteUrl } from "@/lib/site-url"
 import { cn } from "@/lib/utils"
 import "../globals.css"
@@ -65,29 +72,37 @@ export async function generateMetadata({
   const locale = localeParam as Locale
   const t = await getTranslations({ locale, namespace: "metadata" })
   const siteUrl = getSiteUrl()
-  const pagePath = `/${locale}`
-  const ogImageUrl = new URL("/api/og", siteUrl)
-  ogImageUrl.searchParams.set("locale", locale)
+  const ogImageUrl = getOgImageUrl(locale)
+  const authorName = profileContent.name[locale]
 
   return {
     metadataBase: siteUrl,
-    title: t("title"),
+    title: {
+      default: t("title"),
+      template: t("titleTemplate"),
+    },
     description: t("description"),
-    alternates: {
-      canonical: pagePath,
-      languages: Object.fromEntries(
-        routing.locales.map((availableLocale) => [
-          availableLocale,
-          `/${availableLocale}`,
-        ])
-      ),
+    keywords: t("keywords"),
+    authors: [{ name: authorName, url: siteUrl }],
+    creator: authorName,
+    publisher: authorName,
+    category: "technology",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
     openGraph: {
       type: "website",
-      url: pagePath,
-      siteName: "Nguyen Dinh Bang — Portfolio",
-      locale: locale === "vi" ? "vi_VN" : "en_US",
-      alternateLocale: locale === "vi" ? ["en_US"] : ["vi_VN"],
+      siteName: t("ogSiteName"),
+      locale: getOpenGraphLocale(locale),
+      alternateLocale: [getAlternateOpenGraphLocale(locale)],
       title: t("title"),
       description: t("description"),
       images: [
