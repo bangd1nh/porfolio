@@ -74,16 +74,23 @@ export function ProjectLiveEmbed({
 
   useEffect(() => {
     const nextMode: PreviewMode = isFrameBlocked(url) ? "shot" : "iframe"
-    setMode(nextMode)
-    setProbing(true)
+    const resetTimer = window.setTimeout(() => {
+      setMode(nextMode)
+      setProbing(true)
+    }, 0)
 
-    if (nextMode !== "iframe") return
+    if (nextMode !== "iframe") {
+      return () => window.clearTimeout(resetTimer)
+    }
 
     const timer = window.setTimeout(() => {
       setProbing(false)
     }, EMBED_PROBE_MS)
 
-    return () => window.clearTimeout(timer)
+    return () => {
+      window.clearTimeout(resetTimer)
+      window.clearTimeout(timer)
+    }
   }, [url])
 
   return (

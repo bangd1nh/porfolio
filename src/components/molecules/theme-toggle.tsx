@@ -3,7 +3,7 @@
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "@teispace/next-themes"
 import { useTranslations } from "next-intl"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useSyncExternalStore } from "react"
 
 import { useThemeTransition } from "@/hooks/use-theme-transition"
 import { cn } from "@/lib/utils"
@@ -12,12 +12,12 @@ export function ThemeToggle() {
   const { resolvedTheme } = useTheme()
   const { startThemeTransition, isTransitioning } = useThemeTransition()
   const t = useTranslations("theme")
-  const [mounted, setMounted] = useState(false)
+  const mounted = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false
+  )
   const buttonRef = useRef<HTMLButtonElement>(null)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   if (!mounted) {
     return <div aria-hidden className="size-8 rounded-none" />

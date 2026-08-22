@@ -29,7 +29,6 @@ export function ScrollReveal({
 
   useEffect(() => {
     if (reducedMotion) {
-      setShown(true)
       return
     }
 
@@ -62,10 +61,10 @@ export function ScrollReveal({
     <div
       ref={ref}
       className={cn(
-        "transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none",
+        "transition-[opacity,transform] duration-[550ms] ease-out motion-reduce:transition-none",
         shown || reducedMotion
           ? "translate-y-0 opacity-100"
-          : "translate-y-3 opacity-0",
+          : "translate-y-4 opacity-0",
         className
       )}
       style={

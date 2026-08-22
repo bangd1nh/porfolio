@@ -30,8 +30,14 @@
   "hero": {
     "name": "Nguyen Dinh Bang",
     "role": "Fullstack Developer",
+    "identityLabel": "Identity",
+    "headline": "I build production-grade web systems & AI-powered products.",
+    "specialization": "Full-stack Engineer",
+    "technologies": "Next.js · NestJS · Agentic AI",
+    "availability": "Available for remote / freelance",
+    "location": "Da Nang, Vietnam",
     "description": "Full-stack developer building scalable web apps with Next.js, NestJS, GraphQL, PostgreSQL, and Redis — expanding into software architecture and AI.",
-    "cta": "View projects",
+    "cta": "Explore selected work",
     "ctaContact": "Contact",
     "ctaResume": "Resume",
     "avatarAlt": "Avatar of {name}",
@@ -40,6 +46,12 @@
       "Shipping production features\nand expanding into architecture and AI."
     ],
     "github": {
+      "proofLabel": "Proof of work",
+      "loading": "Loading GitHub proof of work",
+      "live": "Live / 6 months",
+      "unavailableTitle": "GitHub signal unavailable",
+      "unavailableDescription": "The live activity feed could not be reached. The portfolio remains available while GitHub reconnects.",
+      "openProfile": "Open GitHub profile",
       "contributions": "contributions in the last 6 months",
       "organizations": "Organizations",
       "less": "Less",
@@ -51,6 +63,20 @@
         "UCTalent": "Unchain Talent Lab — current fullstack role shipping production talent products.",
         "sfastvn": "Collaborative GitHub org for shared product and experiment repos."
       }
+    },
+    "currently": {
+      "label": "Currently",
+      "note": "Active context / 2026",
+      "buildingLabel": "Building",
+      "buildingValue": "HRTech products @ UC Talent Labs",
+      "exploringLabel": "Exploring",
+      "exploringItems": [
+        "Agentic workflows",
+        "RAG architectures",
+        "AI-native developer tooling"
+      ],
+      "basedLabel": "Based in",
+      "basedValue": "Da Nang, Vietnam"
     },
     "collage": {
       "moreSkills": "See all skills in Profile",
@@ -90,7 +116,13 @@
     "title": "Featured stack",
     "description": "Languages, frameworks, data, APIs, and AI tooling I use to ship production systems.",
     "featured": "Core tools",
-    "more": "Also in the kit"
+    "more": "Also in the kit",
+    "dailyDrivers": "Daily drivers",
+    "aiSystems": "AI systems",
+    "dailyStatus": "Daily / production",
+    "aiStatus": "Active focus",
+    "viewFull": "View full stack +",
+    "hideFull": "Hide full stack −"
   },
   "experience": {
     "badge": "Experience",
@@ -211,11 +243,11 @@
   "loader": {
     "label": "Loading portfolio",
     "eyebrow": "SYSTEM / PORTFOLIO",
-    "signature": "FULLSTACK ENGINEER · BANG DINH",
     "steps": {
-      "map": "MAP INTERFACES",
-      "compile": "COMPILE SELECTED WORK",
-      "ready": "PORTFOLIO READY"
+      "initialize": "initializing portfolio",
+      "work": "loading selected_work.json",
+      "github": "connecting github...",
+      "ready": "ready"
     }
   },
   "theme": {
@@ -307,22 +339,18 @@
     "phone": "Phone",
     "github": "GitHub",
     "resume": "Resume",
-    "buildCaption": "What I can build — drag the chips",
+    "buildCaption": "What I can build",
+    "buildHintDesktop": "Drag the capabilities",
+    "buildHintMobile": "Tap to select",
     "blocks": {
-      "uiux": "UI/UX",
+      "agents": "AI Agents",
       "backend": "Backend",
-      "aiml": "AI & ML",
-      "microservices": "Microservices",
+      "rag": "RAG",
       "automation": "Automation",
       "devops": "DevOps",
       "frontend": "Frontend",
-      "data": "Data",
-      "qa": "QA & Testing",
       "mobile": "Mobile",
-      "api": "API",
-      "desktop": "Desktop",
-      "cloud": "Cloud",
-      "web": "Web"
+      "apis": "APIs"
     }
   }
 }

@@ -11,7 +11,6 @@ import { FeaturedStackSection } from "@/components/organisms/featured-stack-sect
 import { HeroSection } from "@/components/organisms/hero-section"
 import { ProfileDetailSection } from "@/components/organisms/profile-detail-section"
 import { ProjectsSection } from "@/components/organisms/projects-section"
-import { SectionPager } from "@/components/organisms/section-pager"
 import { SiteDock } from "@/components/organisms/site-dock"
 import { routing, type Locale } from "@/i18n/routing"
 import { buildPageMetadata, getHomeJsonLd } from "@/lib/seo"
@@ -59,13 +58,11 @@ export default async function HomePage({ params }: PageProps) {
       <SiteDock />
       <PageGrid className="relative z-10">
         <main className="contents">
-          <SectionPager>
-            <HeroSection />
-            <ProfileDetailSection />
-            <ProjectsSection />
-            <FeaturedStackSection />
-            <ContactCtaSection />
-          </SectionPager>
+          <HeroSection />
+          <ProfileDetailSection />
+          <ProjectsSection />
+          <FeaturedStackSection />
+          <ContactCtaSection />
         </main>
       </PageGrid>
     </div>

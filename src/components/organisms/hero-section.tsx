@@ -1,98 +1,154 @@
-import { FileDown } from "lucide-react"
+import { Suspense } from "react"
+import { ArrowDownRight, ArrowUpRight } from "lucide-react"
+import { getTranslations } from "next-intl/server"
 
-import { ScrollReveal } from "@/components/atoms/scroll-reveal"
-import { TypewriterText } from "@/components/atoms/typewriter-text"
-import { CompositionCard } from "@/components/molecules/composition-card"
-import { DesktopExperienceHint } from "@/components/molecules/desktop-experience-hint"
-import { GithubActivity } from "@/components/molecules/github-activity"
+import {
+  GithubProof,
+  GithubProofSkeleton,
+} from "@/components/molecules/github-proof"
+import { HeroReveal } from "@/components/molecules/hero-reveal"
 import { TransitionLink } from "@/components/molecules/transition-link"
 import { Button } from "@/components/ui/button"
-import { bentoContent } from "@/data/bento"
 import { resumeLinks } from "@/data/resume"
-import { VIEWPORT_SECTION } from "@/data/site"
-import { getGithubStats, githubOrgFallback } from "@/lib/github-stats"
-import { getLocale, getTranslations } from "next-intl/server"
 
 export async function HeroSection() {
   const t = await getTranslations("hero")
-  const locale = await getLocale()
-  const name = t("name")
-  const phrases = t.raw("typewriter") as string[]
-  const githubStats = await getGithubStats()
-  const organizations = githubStats?.organizations ?? [...githubOrgFallback]
-  const weeks = githubStats?.weeks ?? []
-  const contributions =
-    githubStats?.contributions ?? bentoContent.github.contributions
+  const currentFocus = t.raw("currently.exploringItems") as string[]
 
   return (
     <section
       id="about"
-      className={`page-section box-border items-center gap-y-5 pt-8 pb-8 sm:gap-y-6 sm:pt-12 sm:pb-12 md:grid-rows-1 md:items-center lg:gap-y-6 lg:pb-6 ${VIEWPORT_SECTION}`}
+      className="page-section box-border scroll-mt-0 content-start border-b border-border"
     >
-      <div className="col-span-10 grid content-center justify-items-center gap-3 text-center sm:gap-4 md:col-span-5 md:min-h-0 md:justify-items-start md:self-center md:text-left">
-        <DesktopExperienceHint />
+      <HeroReveal className="col-span-10 grid grid-cols-10 gap-x-[var(--page-col-gap)]">
+        <div className="col-span-10 grid min-h-[calc(100svh-8rem)] content-center gap-y-10 py-20 sm:min-h-[calc(100svh-10rem)] sm:py-24 lg:col-span-6 lg:min-h-[calc(100svh-12rem)] lg:py-16 lg:pr-4 xl:col-span-7 xl:pr-10">
+          <div className="grid gap-5 sm:gap-6">
+            <div
+              data-hero-reveal
+              className="flex flex-wrap items-center gap-x-4 gap-y-2"
+            >
+              <p className="system-label text-foreground">
+                01 / {t("identityLabel")}
+              </p>
+              <span className="h-px w-10 bg-border" aria-hidden />
+              <p className="font-mono text-[11px] tracking-[0.12em] text-muted-foreground uppercase">
+                {t("name")}
+              </p>
+            </div>
 
-        <span className="rounded-none border border-border bg-card px-3 py-1.5 text-[11px] font-semibold tracking-widest text-muted-foreground uppercase sm:px-4 sm:text-xs">
-          {t("role")}
-        </span>
-        <h1 className="font-heading text-3xl tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl">
-          {name}
-        </h1>
-        <TypewriterText
-          phrases={phrases}
-          className="max-w-xl justify-self-center md:justify-self-start"
-        />
+            <h1 data-hero-reveal className="hero-headline max-w-[13ch]">
+              {t("headline")}
+            </h1>
 
-        <div className="flex w-full max-w-md flex-wrap items-center justify-center gap-2 sm:max-w-none md:justify-start">
-          <Button
-            className="min-h-10 cursor-pointer rounded-none"
-            nativeButton={false}
-            render={<a href="#projects" />}
+            <div
+              data-hero-reveal
+              className="grid gap-2 border-l-2 border-primary pl-4 sm:pl-5"
+            >
+              <p className="text-base font-semibold text-foreground sm:text-lg">
+                {t("specialization")}
+              </p>
+              <p className="font-mono text-xs leading-relaxed tracking-wide text-muted-foreground sm:text-sm">
+                {t("technologies")}
+              </p>
+            </div>
+          </div>
+
+          <div data-hero-reveal className="flex flex-wrap gap-2 sm:gap-3">
+            <Button
+              className="group min-h-11 rounded-none px-5"
+              nativeButton={false}
+              render={<a href="#projects" />}
+            >
+              {t("cta")}
+              <ArrowDownRight
+                className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:translate-y-0.5"
+                aria-hidden
+              />
+            </Button>
+            <Button
+              variant="outline"
+              className="group min-h-11 rounded-none px-5"
+              nativeButton={false}
+              render={<TransitionLink href={resumeLinks.pagePath} />}
+            >
+              {t("ctaResume")}
+              <ArrowUpRight
+                className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                aria-hidden
+              />
+            </Button>
+          </div>
+
+          <div
+            data-hero-reveal
+            className="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] tracking-[0.08em] uppercase sm:text-xs"
           >
-            {t("cta")}
-          </Button>
-          <Button
-            variant="outline"
-            className="min-h-10 cursor-pointer rounded-none"
-            nativeButton={false}
-            render={<a href="#contact" />}
-          >
-            {t("ctaContact")}
-          </Button>
-          <Button
-            variant="outline"
-            className="min-h-10 cursor-pointer rounded-none"
-            nativeButton={false}
-            render={<TransitionLink href={resumeLinks.pagePath} />}
-          >
-            <FileDown className="size-4" aria-hidden />
-            {t("ctaResume")}
-          </Button>
+            <span className="flex items-center gap-2 text-foreground">
+              <span className="size-2 bg-primary" aria-hidden />
+              {t("availability")}
+            </span>
+            <span className="text-muted-foreground">{t("location")}</span>
+          </div>
         </div>
 
-        <ScrollReveal className="mt-1 w-fit max-w-full justify-self-center md:justify-self-start">
-          <GithubActivity
-            compact
-            className="border-border/80 bg-card/80"
-            contributions={contributions}
-            weeks={weeks}
-            organizations={organizations}
-            contributionsLabel={t("github.contributions")}
-            organizationsLabel={t("github.organizations")}
-            lessLabel={t("github.less")}
-            moreLabel={t("github.more")}
-            privateHint={
-              githubStats?.privateHidden ? t("github.privateHint") : null
-            }
-            locale={locale}
-          />
-        </ScrollReveal>
-      </div>
+        <div
+          data-hero-reveal
+          className="col-span-10 pb-14 lg:col-span-4 lg:self-center lg:py-16 xl:col-span-3"
+        >
+          <Suspense fallback={<GithubProofSkeleton label={t("github.loading")} />}>
+            <GithubProof />
+          </Suspense>
+        </div>
 
-      <CompositionCard
-        className="col-span-10 hidden aspect-square w-full max-h-[min(56vh,22rem)] max-w-[min(92vw,22rem)] justify-self-center sm:max-h-[min(60vh,26rem)] sm:max-w-[min(88vw,26rem)] md:col-span-5 md:block md:max-h-[min(74svh,30rem)] md:max-w-full lg:max-h-[min(80svh,36rem)] xl:max-h-[min(84svh,40rem)]"
-        githubStats={githubStats}
-      />
+        <section
+          aria-labelledby="currently-title"
+          className="col-span-10 grid grid-cols-10 gap-x-[var(--page-col-gap)] gap-y-6 border-t border-border py-8 sm:py-10"
+        >
+          <header data-hero-reveal className="col-span-10 lg:col-span-2">
+            <p id="currently-title" className="system-label text-foreground">
+              02 / {t("currently.label")}
+            </p>
+            <p className="mt-2 max-w-36 text-xs leading-relaxed text-muted-foreground">
+              {t("currently.note")}
+            </p>
+          </header>
+
+          <div className="col-span-10 grid gap-6 sm:grid-cols-3 lg:col-span-8 lg:gap-0">
+            <div data-hero-reveal className="currently-column sm:pr-5">
+              <p className="system-label">
+                01 / {t("currently.buildingLabel")}
+              </p>
+              <p className="currently-value">
+                {t("currently.buildingValue")}
+              </p>
+            </div>
+            <div
+              data-hero-reveal
+              className="currently-column sm:border-l sm:border-border sm:px-5"
+            >
+              <p className="system-label">
+                02 / {t("currently.exploringLabel")}
+              </p>
+              <ul className="grid gap-1.5">
+                {currentFocus.map((item) => (
+                  <li key={item} className="currently-value">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div
+              data-hero-reveal
+              className="currently-column sm:border-l sm:border-border sm:pl-5"
+            >
+              <p className="system-label">
+                03 / {t("currently.basedLabel")}
+              </p>
+              <p className="currently-value">{t("currently.basedValue")}</p>
+            </div>
+          </div>
+        </section>
+      </HeroReveal>
     </section>
   )
 }

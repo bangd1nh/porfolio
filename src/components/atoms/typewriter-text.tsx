@@ -42,11 +42,16 @@ export function TypewriterText({
     if (phrases.length === 0) return
 
     if (reducedMotion) {
-      setText(phrases[phraseIndex] ?? "")
+      const syncTimer = window.setTimeout(() => {
+        setText(phrases[phraseIndex] ?? "")
+      }, 0)
       const timer = window.setTimeout(() => {
         setPhraseIndex((index) => (index + 1) % phrases.length)
       }, holdMs)
-      return () => window.clearTimeout(timer)
+      return () => {
+        window.clearTimeout(syncTimer)
+        window.clearTimeout(timer)
+      }
     }
 
     const current = phrases[phraseIndex] ?? ""
@@ -57,9 +62,11 @@ export function TypewriterText({
     }
 
     if (isDeleting && text === "") {
-      setIsDeleting(false)
-      setPhraseIndex((index) => (index + 1) % phrases.length)
-      return
+      const timer = window.setTimeout(() => {
+        setIsDeleting(false)
+        setPhraseIndex((index) => (index + 1) % phrases.length)
+      }, 0)
+      return () => window.clearTimeout(timer)
     }
 
     const timer = window.setTimeout(

@@ -68,18 +68,16 @@ export function IdentityTerminal({ className }: IdentityTerminalProps) {
 
   useEffect(() => {
     if (reducedMotion) {
-      setLines(staticLines)
-      setTypedCmd("")
-      setPromptVisible(true)
-      setFlicker(false)
-      return
+      const timer = window.setTimeout(() => {
+        setLines(staticLines)
+        setTypedCmd("")
+        setPromptVisible(true)
+        setFlicker(false)
+      }, 0)
+      return () => window.clearTimeout(timer)
     }
 
     clearTimers()
-    setLines([])
-    setTypedCmd("")
-    setPromptVisible(true)
-    setFlicker(true)
 
     let cancelled = false
 
@@ -153,7 +151,14 @@ export function IdentityTerminal({ className }: IdentityTerminalProps) {
       schedule(typeCommand, BETWEEN_MS * 0.5)
     }
 
-    schedule(run, FLICKER_MS)
+    schedule(() => {
+      if (cancelled) return
+      setLines([])
+      setTypedCmd("")
+      setPromptVisible(true)
+      setFlicker(true)
+      schedule(run, FLICKER_MS)
+    }, 0)
 
     return () => {
       cancelled = true

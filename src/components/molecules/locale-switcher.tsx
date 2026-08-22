@@ -1,6 +1,7 @@
 "use client"
 
 import { useLocale, useTranslations } from "next-intl"
+import { useGlobalLoader } from "@/components/providers/global-loader"
 import { usePathname, useRouter } from "@/i18n/navigation"
 import { routing, type Locale } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
@@ -10,8 +11,12 @@ export function LocaleSwitcher() {
   const router = useRouter()
   const pathname = usePathname()
   const t = useTranslations("localeSwitcher")
+  const { startLoader } = useGlobalLoader()
 
   function switchLocale(nextLocale: Locale) {
+    if (nextLocale === locale) return
+
+    startLoader()
     router.replace(pathname, { locale: nextLocale })
   }
 

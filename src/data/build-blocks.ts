@@ -1,63 +1,28 @@
-export type BuildBlockOrientation = "horizontal" | "vertical"
-
 export type BuildBlockLabelKey =
-  | "uiux"
+  | "frontend"
   | "backend"
-  | "aiml"
-  | "microservices"
+  | "agents"
+  | "rag"
+  | "apis"
   | "automation"
   | "devops"
-  | "frontend"
-  | "data"
-  | "qa"
   | "mobile"
-  | "api"
-  | "desktop"
-  | "cloud"
-  | "web"
 
 export type BuildBlock = {
   id: string
   labelKey: BuildBlockLabelKey
-  orientation: BuildBlockOrientation
   /** Spawn column bias 0–1 across the stage width. */
   spawnX: number
 }
 
-/** Things I can build — physics chips for the contact CTA stage. */
+/** High-level capabilities only — technology detail belongs in the stack section. */
 export const buildBlocks: readonly BuildBlock[] = [
-  { id: "uiux", labelKey: "uiux", orientation: "horizontal", spawnX: 0.08 },
-  { id: "backend", labelKey: "backend", orientation: "horizontal", spawnX: 0.18 },
-  { id: "aiml", labelKey: "aiml", orientation: "vertical", spawnX: 0.3 },
-  {
-    id: "microservices",
-    labelKey: "microservices",
-    orientation: "horizontal",
-    spawnX: 0.4,
-  },
-  {
-    id: "automation",
-    labelKey: "automation",
-    orientation: "horizontal",
-    spawnX: 0.52,
-  },
-  { id: "devops", labelKey: "devops", orientation: "horizontal", spawnX: 0.64 },
-  {
-    id: "frontend",
-    labelKey: "frontend",
-    orientation: "horizontal",
-    spawnX: 0.76,
-  },
-  { id: "data", labelKey: "data", orientation: "horizontal", spawnX: 0.12 },
-  { id: "qa", labelKey: "qa", orientation: "horizontal", spawnX: 0.28 },
-  { id: "mobile", labelKey: "mobile", orientation: "horizontal", spawnX: 0.46 },
-  { id: "api", labelKey: "api", orientation: "vertical", spawnX: 0.58 },
-  {
-    id: "desktop",
-    labelKey: "desktop",
-    orientation: "horizontal",
-    spawnX: 0.7,
-  },
-  { id: "cloud", labelKey: "cloud", orientation: "vertical", spawnX: 0.84 },
-  { id: "web", labelKey: "web", orientation: "horizontal", spawnX: 0.92 },
+  { id: "frontend", labelKey: "frontend", spawnX: 0.1 },
+  { id: "backend", labelKey: "backend", spawnX: 0.23 },
+  { id: "agents", labelKey: "agents", spawnX: 0.36 },
+  { id: "rag", labelKey: "rag", spawnX: 0.48 },
+  { id: "apis", labelKey: "apis", spawnX: 0.6 },
+  { id: "automation", labelKey: "automation", spawnX: 0.72 },
+  { id: "devops", labelKey: "devops", spawnX: 0.84 },
+  { id: "mobile", labelKey: "mobile", spawnX: 0.93 },
 ] as const

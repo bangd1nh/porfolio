@@ -30,8 +30,14 @@
   "hero": {
     "name": "Nguyễn Đình Bảng",
     "role": "Fullstack Developer",
+    "identityLabel": "Danh tính",
+    "headline": "Tôi xây hệ thống web production và sản phẩm ứng dụng AI.",
+    "specialization": "Kỹ sư Full-stack",
+    "technologies": "Next.js · NestJS · Agentic AI",
+    "availability": "Sẵn sàng cho remote / freelance",
+    "location": "Đà Nẵng, Việt Nam",
     "description": "Fullstack developer xây ứng dụng web scalable với Next.js, NestJS, GraphQL, PostgreSQL và Redis — đang mở rộng sang kiến trúc phần mềm và AI.",
-    "cta": "Xem dự án",
+    "cta": "Xem dự án tiêu biểu",
     "ctaContact": "Liên hệ",
     "ctaResume": "CV",
     "avatarAlt": "Ảnh đại diện {name}",
@@ -40,6 +46,12 @@
       "Ship tính năng production\nvà mở rộng sang kiến trúc cùng AI."
     ],
     "github": {
+      "proofLabel": "Dấu ấn công việc",
+      "loading": "Đang tải dấu ấn công việc trên GitHub",
+      "live": "Trực tiếp / 6 tháng",
+      "unavailableTitle": "Chưa kết nối được GitHub",
+      "unavailableDescription": "Dữ liệu hoạt động trực tiếp đang tạm thời không truy cập được. Portfolio vẫn hoạt động trong lúc kết nối lại GitHub.",
+      "openProfile": "Mở hồ sơ GitHub",
       "contributions": "đóng góp trong 6 tháng gần nhất",
       "organizations": "Organizations",
       "less": "Ít",
@@ -51,6 +63,20 @@
         "UCTalent": "Unchain Talent Lab — vai trò fullstack hiện tại, ship sản phẩm talent production.",
         "sfastvn": "Org GitHub hợp tác cho các repo sản phẩm và thử nghiệm chung."
       }
+    },
+    "currently": {
+      "label": "Hiện tại",
+      "note": "Bối cảnh đang hoạt động / 2026",
+      "buildingLabel": "Đang xây",
+      "buildingValue": "Sản phẩm HRTech @ UC Talent Labs",
+      "exploringLabel": "Đang khám phá",
+      "exploringItems": [
+        "Agentic workflows",
+        "Kiến trúc RAG",
+        "Công cụ developer AI-native"
+      ],
+      "basedLabel": "Đang ở",
+      "basedValue": "Đà Nẵng, Việt Nam"
     },
     "collage": {
       "moreSkills": "Xem tất cả kỹ năng ở Hồ sơ",
@@ -90,7 +116,13 @@
     "title": "Stack chính",
     "description": "Ngôn ngữ, framework, data, API và tooling AI tôi dùng để ship hệ thống production.",
     "featured": "Công cụ chính",
-    "more": "Thêm trong toolkit"
+    "more": "Thêm trong toolkit",
+    "dailyDrivers": "Công cụ hằng ngày",
+    "aiSystems": "Hệ thống AI",
+    "dailyStatus": "Hằng ngày / production",
+    "aiStatus": "Trọng tâm hiện tại",
+    "viewFull": "Xem toàn bộ stack +",
+    "hideFull": "Thu gọn stack −"
   },
   "experience": {
     "badge": "Kinh nghiệm",
@@ -211,11 +243,11 @@
   "loader": {
     "label": "Đang tải portfolio",
     "eyebrow": "HỆ THỐNG / PORTFOLIO",
-    "signature": "FULLSTACK ENGINEER · BANG DINH",
     "steps": {
-      "map": "SẮP XẾP GIAO DIỆN",
-      "compile": "NẠP DỰ ÁN TIÊU BIỂU",
-      "ready": "PORTFOLIO SẴN SÀNG"
+      "initialize": "khởi tạo portfolio",
+      "work": "nạp selected_work.json",
+      "github": "kết nối github...",
+      "ready": "sẵn sàng"
     }
   },
   "theme": {
@@ -307,22 +339,18 @@
     "phone": "Điện thoại",
     "github": "GitHub",
     "resume": "CV",
-    "buildCaption": "Tôi có thể xây — kéo các chip",
+    "buildCaption": "Tôi có thể xây",
+    "buildHintDesktop": "Kéo các capability",
+    "buildHintMobile": "Chạm để chọn",
     "blocks": {
-      "uiux": "UI/UX",
+      "agents": "AI Agents",
       "backend": "Backend",
-      "aiml": "AI & ML",
-      "microservices": "Microservices",
+      "rag": "RAG",
       "automation": "Automation",
       "devops": "DevOps",
       "frontend": "Frontend",
-      "data": "Data",
-      "qa": "QA & Testing",
       "mobile": "Mobile",
-      "api": "API",
-      "desktop": "Desktop",
-      "cloud": "Cloud",
-      "web": "Web"
+      "apis": "APIs"
     }
   }
 }

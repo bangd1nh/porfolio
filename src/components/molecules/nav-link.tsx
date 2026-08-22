@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 type NavLinkProps = {
   href: string
   label: string
+  index?: number
   isActive?: boolean
   className?: string
   onNavigate?: () => void
@@ -29,19 +30,27 @@ function releasePointerCapture(event: React.PointerEvent<HTMLAnchorElement>) {
  * Pointer capture + preventDefault keep smooth scroll running when the cursor leaves
  * the link before mouseup (site-dock uses pointer-events: none on its shell).
  */
-export function NavLink({ href, label, isActive, className, onNavigate }: NavLinkProps) {
+export function NavLink({
+  href,
+  label,
+  index,
+  isActive,
+  className,
+  onNavigate,
+}: NavLinkProps) {
   const activatedRef = useRef(false)
 
   return (
     <a
       href={href}
+      aria-current={isActive ? "location" : undefined}
       className={cn(
-        "cursor-pointer rounded-none px-2.5 py-2 text-sm font-medium tracking-wide xl:px-4",
-        "transition-colors duration-200",
-        "hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+        "group relative flex cursor-pointer items-baseline gap-1.5 rounded-none px-2.5 py-2 font-mono text-[11px] font-semibold tracking-[0.08em] uppercase xl:px-3",
+        "transition-colors duration-200 after:absolute after:right-2.5 after:bottom-0.5 after:left-2.5 after:h-px after:origin-left after:bg-primary after:transition-transform after:duration-300",
+        "hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
         isActive
-          ? "text-foreground"
-          : "text-muted-foreground hover:text-foreground",
+          ? "text-foreground after:scale-x-100"
+          : "text-muted-foreground after:scale-x-0 hover:after:scale-x-100",
         className
       )}
       onPointerDown={(event) => {
@@ -66,7 +75,12 @@ export function NavLink({ href, label, isActive, className, onNavigate }: NavLin
         if (onNavigate) window.setTimeout(onNavigate, 450)
       }}
     >
-      {label}
+      {index !== undefined ? (
+        <span className="text-[9px] text-muted-foreground" aria-hidden>
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      ) : null}
+      <span>{label}</span>
     </a>
   )
 }

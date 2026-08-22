@@ -121,7 +121,6 @@ export function GithubActivity({
 
   useEffect(() => {
     if (reducedMotion) {
-      setInView(true)
       return
     }
 
@@ -154,7 +153,7 @@ export function GithubActivity({
     <div
       ref={rootRef}
       className={cn(
-        "grid w-fit max-w-full gap-2 justify-items-start border border-border bg-card",
+        "grid w-full max-w-full min-w-0 gap-2 justify-items-start border border-border bg-card",
         compact ? "p-3" : "gap-3 p-4",
         inView || reducedMotion ? "heatmap-inview" : null,
         className
@@ -178,8 +177,12 @@ export function GithubActivity({
       </p>
 
       {weeks.length > 0 ? (
-        <div className="grid w-max max-w-full gap-1" role="img" aria-label={summaryLabel}>
-          <div className={cn("relative flex", weekGap)} aria-hidden>
+        <div
+          className="grid w-full min-w-0 gap-1 overflow-x-auto pb-1 [scrollbar-width:thin]"
+          role="img"
+          aria-label={summaryLabel}
+        >
+          <div className={cn("relative flex w-max", weekGap)} aria-hidden>
             {weeks.map((_, weekIndex) => {
               const label = labels.find((item) => item.weekIndex === weekIndex)
               return (
@@ -200,7 +203,7 @@ export function GithubActivity({
             })}
           </div>
 
-          <div className={cn("relative flex", weekGap)}>
+          <div className={cn("relative flex w-max", weekGap)}>
             {weeks.map((week, weekIndex) => (
               <div
                 key={week.days[0]?.date ?? `week-${weekIndex}`}
@@ -239,7 +242,7 @@ export function GithubActivity({
           </div>
 
           <div
-            className="flex items-center justify-end gap-1 text-[10px] text-muted-foreground"
+            className="flex w-max min-w-full items-center justify-end gap-1 text-[10px] text-muted-foreground"
             aria-hidden
           >
             <span>{lessLabel}</span>

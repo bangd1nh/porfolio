@@ -29,6 +29,8 @@ type DragState = {
   pointerId: number
   constraint: Matter.Constraint
   samples: Array<{ x: number; y: number; t: number }>
+  start: { x: number; y: number }
+  moved: boolean
 }
 
 const WALL_INSET = 10
@@ -41,12 +43,13 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
   const compactLayout = useMediaQuery("(max-width: 1023px)")
   const containerRef = useRef<HTMLDivElement>(null)
-  const chipRefs = useRef<Map<string, HTMLSpanElement>>(new Map())
+  const chipRefs = useRef<Map<string, HTMLElement>>(new Map())
   const physicsRef = useRef<PhysicsRefs | null>(null)
   const dragRef = useRef<DragState | null>(null)
   const [poses, setPoses] = useState<Record<string, BlockPose>>({})
   const [ready, setReady] = useState(false)
   const [draggingId, setDraggingId] = useState<string | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
 
   useEffect(() => {
     if (reducedMotion || compactLayout) return
@@ -57,7 +60,7 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
     const { Engine, World, Bodies, Runner, Events, Composite } = Matter
 
     const engine = Engine.create({
-      gravity: { x: 0, y: 1.05, scale: 0.001 },
+      gravity: { x: 0, y: 0.82, scale: 0.001 },
     })
     engine.positionIterations = 16
     engine.velocityIterations = 12
@@ -153,7 +156,6 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
         if (!el) continue
 
         const { chipW, chipH } = measureChip(el)
-        const isVertical = block.orientation === "vertical"
         const halfSpan = Math.max(chipW, chipH) / 2 + 8
 
         const x = Math.min(
@@ -162,12 +164,10 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
         )
         // Drop from staggered heights so they settle into a pile instead of spawning overlapped.
         const y = margin + 18 + index * 10
-        const angle = isVertical
-          ? Math.PI / 2 + (Math.random() - 0.5) * 0.08
-          : (Math.random() - 0.5) * 0.25
+        const angle = (Math.random() - 0.5) * 0.12
 
         const body = Bodies.rectangle(x, y, chipW, chipH, {
-          restitution: 0.04,
+          restitution: 0.02,
           friction: 0.55,
           frictionStatic: 0.85,
           frictionAir: 0.02,
@@ -202,7 +202,6 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
       // Second frame: layout + font metrics are settled for offsetWidth.
       window.requestAnimationFrame(() => {
         rebuild()
-        Runner.run(runner, engine)
         // Remeasure once more after chips become visible (font/layout).
         window.setTimeout(() => {
           if (!dragRef.current) rebuild()
@@ -220,9 +219,34 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
     })
     resizeObserver.observe(container)
 
+    let stageVisible = false
+    let runnerActive = false
+    const syncRunner = () => {
+      const shouldRun = stageVisible && document.visibilityState === "visible"
+      if (shouldRun && !runnerActive) {
+        Runner.run(runner, engine)
+        runnerActive = true
+      } else if (!shouldRun && runnerActive) {
+        Runner.stop(runner)
+        runnerActive = false
+      }
+    }
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        stageVisible = Boolean(entry?.isIntersecting)
+        syncRunner()
+      },
+      { threshold: 0.05, rootMargin: "10% 0px" }
+    )
+    const onVisibilityChange = () => syncRunner()
+    visibilityObserver.observe(container)
+    document.addEventListener("visibilitychange", onVisibilityChange)
+
     return () => {
       window.cancelAnimationFrame(boot)
       resizeObserver.disconnect()
+      visibilityObserver.disconnect()
+      document.removeEventListener("visibilitychange", onVisibilityChange)
       Events.off(engine, "afterUpdate")
       Runner.stop(runner)
       World.clear(engine.world, false)
@@ -244,16 +268,26 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
         )}
       >
         {buildBlocks.map((block) => (
-          <span
+          <button
+            type="button"
             key={block.id}
+            aria-pressed={selectedId === block.id}
+            onClick={() =>
+              setSelectedId((current) =>
+                current === block.id ? null : block.id
+              )
+            }
             className={cn(
-              "inline-flex max-w-full items-center justify-center border border-border bg-card px-3.5 py-2.5",
+              "inline-flex max-w-full cursor-pointer items-center justify-center border px-3.5 py-2.5",
               "font-sans text-[0.65rem] font-bold tracking-[0.12em] text-foreground uppercase whitespace-nowrap sm:px-4 sm:text-xs",
-              "shadow-[4px_5px_0_0_oklch(0_0_0_/_0.12)] dark:shadow-[4px_5px_0_0_oklch(0_0_0_/_0.35)]"
+              "transition-[background-color,border-color,transform] duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+              selectedId === block.id
+                ? "border-primary bg-primary text-primary-foreground -translate-y-0.5"
+                : "border-border bg-card hover:border-foreground/40 hover:bg-muted"
             )}
           >
             {t(block.labelKey)}
-          </span>
+          </button>
         ))}
       </div>
     )
@@ -296,7 +330,7 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
 
   const onPointerDown = (
     id: string,
-    event: React.PointerEvent<HTMLSpanElement>
+    event: React.PointerEvent<HTMLButtonElement>
   ) => {
     const physics = physicsRef.current
     const body = physics?.bodiesById.get(id)
@@ -326,25 +360,31 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
       id,
       pointerId: event.pointerId,
       constraint,
-      samples: [{ x: pointA.x, y: pointA.y, t: performance.now() }],
+      samples: [{ x: pointA.x, y: pointA.y, t: event.timeStamp }],
+      start: { x: pointA.x, y: pointA.y },
+      moved: false,
     }
     setDraggingId(id)
   }
 
-  const onPointerMove = (event: React.PointerEvent<HTMLSpanElement>) => {
+  const onPointerMove = (event: React.PointerEvent<HTMLButtonElement>) => {
     const drag = dragRef.current
     if (!drag || drag.pointerId !== event.pointerId) return
 
-    const local = clampPoint(pointerToLocal(event).x, pointerToLocal(event).y)
+    const pointer = pointerToLocal(event)
+    const local = clampPoint(pointer.x, pointer.y)
     drag.constraint.pointA.x = local.x
     drag.constraint.pointA.y = local.y
+    if (Math.hypot(local.x - drag.start.x, local.y - drag.start.y) > 5) {
+      drag.moved = true
+    }
 
-    const now = performance.now()
+    const now = event.timeStamp
     drag.samples.push({ x: local.x, y: local.y, t: now })
     if (drag.samples.length > 8) drag.samples.shift()
   }
 
-  const endDrag = (event: React.PointerEvent<HTMLSpanElement>) => {
+  const endDrag = (event: React.PointerEvent<HTMLButtonElement>) => {
     const drag = dragRef.current
     const physics = physicsRef.current
     if (!drag || drag.pointerId !== event.pointerId || !physics) return
@@ -368,11 +408,11 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
         }
 
         const dt = Math.max(last.t - first.t, 16)
-        const scale = (1000 / 60 / dt) * 1.25
+        const scale = (1000 / 60 / dt) * 0.55
         vx = (last.x - first.x) * scale
         vy = (last.y - first.y) * scale
 
-        const maxSpeed = 44
+        const maxSpeed = 14
         const speed = Math.hypot(vx, vy)
         if (speed > maxSpeed) {
           const k = maxSpeed / speed
@@ -396,12 +436,15 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
 
     dragRef.current = null
     setDraggingId(null)
+    if (!drag.moved) {
+      setSelectedId((current) => (current === drag.id ? null : drag.id))
+    }
   }
 
   const chipClassName = cn(
-    "inline-flex items-center justify-center border border-border bg-card px-3.5 py-2.5 sm:px-5 sm:py-3 lg:px-7 lg:py-4",
+    "inline-flex items-center justify-center border border-border bg-card px-3.5 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-3.5",
     "font-sans text-xs font-bold tracking-[0.12em] text-foreground uppercase whitespace-nowrap sm:text-sm sm:tracking-widest lg:text-base",
-    "shadow-[6px_7px_0_0_oklch(0_0_0_/_0.14)] dark:shadow-[6px_7px_0_0_oklch(0_0_0_/_0.4)]"
+    "shadow-[3px_4px_0_0_oklch(0_0_0_/_0.12)] dark:shadow-[3px_4px_0_0_oklch(0_0_0_/_0.32)]"
   )
 
   return (
@@ -453,21 +496,30 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
             const isDragging = draggingId === block.id
 
             return (
-              <span
+              <button
+                type="button"
                 key={block.id}
-                role="button"
-                tabIndex={0}
                 aria-label={label}
+                aria-pressed={selectedId === block.id}
                 onPointerDown={(event) => onPointerDown(block.id, event)}
                 onPointerMove={onPointerMove}
                 onPointerUp={endDrag}
                 onPointerCancel={endDrag}
+                onClick={(event) => {
+                  if (event.detail === 0) {
+                    setSelectedId((current) =>
+                      current === block.id ? null : block.id
+                    )
+                  }
+                }}
                 className={cn(
                   chipClassName,
                   "absolute top-0 left-0 touch-none select-none will-change-transform",
                   "transition-shadow duration-200",
                   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
-                  isDragging ? "cursor-grabbing" : "cursor-grab"
+                  isDragging ? "cursor-grabbing" : "cursor-grab",
+                  selectedId === block.id &&
+                    "border-primary bg-primary text-primary-foreground"
                 )}
                 style={{
                   transform: `translate3d(${pose.x}px, ${pose.y}px, 0) translate(-50%, -50%) rotate(${pose.angle}rad)`,
@@ -475,7 +527,7 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
                 }}
               >
                 {label}
-              </span>
+              </button>
             )
           })
         : null}

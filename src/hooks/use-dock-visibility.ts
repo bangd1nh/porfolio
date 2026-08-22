@@ -20,17 +20,18 @@ type UseDockVisibilityOptions = {
 export function useDockVisibility({ menuOpen = false }: UseDockVisibilityOptions = {}) {
   const isDesktop = useMediaQuery("(min-width: 1024px)")
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true)
   const lastScrollY = useRef(0)
   const nearBottomRef = useRef(false)
   const menuOpenRef = useRef(menuOpen)
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  menuOpenRef.current = menuOpen
+  useEffect(() => {
+    menuOpenRef.current = menuOpen
+  }, [menuOpen])
 
   useEffect(() => {
     if (!isDesktop || reducedMotion) {
-      setVisible(true)
       return
     }
 
@@ -86,10 +87,6 @@ export function useDockVisibility({ menuOpen = false }: UseDockVisibilityOptions
       clearHideTimer()
     }
   }, [isDesktop, reducedMotion])
-
-  useEffect(() => {
-    if (menuOpen) setVisible(true)
-  }, [menuOpen])
 
   const alwaysVisible = !isDesktop || reducedMotion
 

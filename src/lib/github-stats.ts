@@ -236,7 +236,7 @@ async function fetchGithubPage(args: {
  * needed) and Profile → “Include private contributions on my profile”.
  * Fine-grained tokens usually cannot expand private days into the calendar.
  */
-export async function getGithubStats(): Promise<GithubStats | null> {
+async function fetchGithubStats(): Promise<GithubStats | null> {
   const login = process.env.GITHUB_USERNAME
   const token = process.env.GITHUB_TOKEN
 
@@ -335,3 +335,11 @@ export async function getGithubStats(): Promise<GithubStats | null> {
     return null
   }
 }
+
+/** One shared server result per hour; callers can stream it behind Suspense. */
+export const getGithubStats = unstable_cache(
+  fetchGithubStats,
+  ["portfolio-github-stats-v2"],
+  { revalidate: 3600, tags: ["github-stats"] }
+)
+import { unstable_cache } from "next/cache"
