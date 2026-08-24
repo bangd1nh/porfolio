@@ -2,26 +2,30 @@ import type { MetadataRoute } from "next"
 
 import { SITE_ROUTES } from "@/data/site"
 import { routing } from "@/i18n/routing"
-import {
-  getAbsoluteUrl,
-  getLanguageAlternates,
-  getLocalizedPath,
-} from "@/lib/seo"
+import { LLMS_FULL_TXT_PATH, LLMS_TXT_PATH } from "@/lib/llms-txt"
+import { getAbsoluteUrl, getLocalizedPath } from "@/lib/seo"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return SITE_ROUTES.flatMap((route) =>
-    routing.locales.map((locale) => ({
-      url: getAbsoluteUrl(getLocalizedPath(locale, route.path)),
-      lastModified: new Date(),
+  const now = new Date()
+
+  return [
+    ...SITE_ROUTES.map((route) => ({
+      url: getAbsoluteUrl(getLocalizedPath(routing.defaultLocale, route.path)),
+      lastModified: now,
       changeFrequency: route.changeFrequency,
       priority: route.priority,
-      alternates: {
-        languages: Object.fromEntries(
-          Object.entries(getLanguageAlternates(route.path)).map(
-            ([language, pathname]) => [language, getAbsoluteUrl(pathname)]
-          )
-        ),
-      },
-    }))
-  )
+    })),
+    {
+      url: getAbsoluteUrl(LLMS_TXT_PATH),
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.4,
+    },
+    {
+      url: getAbsoluteUrl(LLMS_FULL_TXT_PATH),
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.3,
+    },
+  ]
 }

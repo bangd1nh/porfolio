@@ -7,6 +7,7 @@ const DAILY_DRIVERS = [
   "TypeScript",
   "Next.js",
   "NestJS",
+  "FastAPI",
   "PostgreSQL",
   "Redis",
   "Docker",
@@ -28,7 +29,11 @@ export async function FeaturedStackSection() {
     .map((group) => ({
       id: group.id,
       title: tProfile(`skills.${group.id}`),
-      items: group.items.filter((item) => !featuredItems.has(item)),
+      items:
+        // TypeScript is featured in daily prod and still belongs in languages.
+        group.id === "languages"
+          ? group.items
+          : group.items.filter((item) => !featuredItems.has(item)),
     }))
     .filter((group) => group.items.length > 0)
 

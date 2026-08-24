@@ -72,6 +72,7 @@ export function ProjectsShowcase({
               className={cn(
                 "cursor-pointer border px-3 py-2.5 text-left transition-[background-color,border-color,color,box-shadow] duration-200",
                 "focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+                "[@media(min-width:1024px)_and_(max-height:50rem)]:py-1.5",
                 selected
                   ? "border-foreground bg-card text-foreground shadow-[3px_3px_0_0_oklch(0_0_0_/_0.12)] dark:shadow-[3px_3px_0_0_oklch(0_0_0_/_0.45)]"
                   : "border-border bg-muted/40 text-muted-foreground hover:border-foreground/25 hover:bg-muted hover:text-foreground"
@@ -104,12 +105,12 @@ export function ProjectsShowcase({
           className="col-span-10 h-full min-h-[14rem] lg:col-span-6 lg:min-h-0"
         />
 
-        <div className="relative col-span-10 grid h-fit min-h-0 w-full content-start gap-2.5 self-start border border-border bg-card p-3 lg:col-span-4 lg:h-full lg:max-h-full lg:grid-rows-[auto_auto_auto_minmax(3.5rem,1fr)] lg:gap-2 lg:overflow-hidden lg:p-3.5">
-          <header className="grid gap-1 lg:pr-28">
+        <div className="relative col-span-10 grid h-fit min-h-0 w-full content-start gap-2.5 self-start border border-border bg-card p-3 lg:col-span-4 lg:h-full lg:max-h-full lg:grid-rows-[auto_auto_minmax(0,1fr)_minmax(5.5rem,9.5rem)] lg:gap-2 lg:overflow-hidden lg:p-3.5 [@media(min-width:1024px)_and_(max-height:50rem)]:grid-rows-[auto_auto_minmax(0,1fr)_6.5rem] [@media(min-width:1024px)_and_(max-height:50rem)]:gap-1.5 [@media(min-width:1024px)_and_(max-height:50rem)]:p-3">
+          <header className="grid gap-1 lg:pr-28 [@media(min-width:1024px)_and_(max-height:50rem)]:gap-0.5">
             <p className="text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
               {active.period}
             </p>
-            <h3 className="font-heading text-lg tracking-tight sm:text-xl">
+            <h3 className="font-heading text-lg tracking-tight sm:text-xl [@media(min-width:1024px)_and_(max-height:50rem)]:text-base">
               {active.title}
             </h3>
             <p className="text-xs font-medium text-foreground">
@@ -119,10 +120,10 @@ export function ProjectsShowcase({
               />
               {active.role}
             </p>
-            <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
+            <p className="line-clamp-2 text-xs leading-snug text-muted-foreground [@media(min-width:1024px)_and_(max-height:50rem)]:hidden">
               {active.summary}
             </p>
-            <p className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-muted-foreground">
+            <p className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-muted-foreground [@media(min-width:1024px)_and_(max-height:50rem)]:hidden">
               <Users className="size-3 shrink-0" aria-hidden />
               {active.teamSizeLabel}
             </p>
@@ -139,7 +140,7 @@ export function ProjectsShowcase({
             ))}
           </ul>
 
-          <div className="grid gap-1.5">
+          <div className="grid min-h-0 gap-1.5 lg:h-full lg:min-h-0 lg:grid-rows-[auto_minmax(0,1fr)]">
             <h4 className="font-heading text-xs tracking-tight text-foreground">
               {shippedLabel}
             </h4>

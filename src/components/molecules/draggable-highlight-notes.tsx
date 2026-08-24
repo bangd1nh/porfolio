@@ -8,20 +8,21 @@ import { useMediaQuery } from "@/hooks/use-media-query"
 import { cn } from "@/lib/utils"
 
 const NOTE_SLOTS = [
-  { x: 1, y: 1, layer: 3 },
-  { x: 24, y: 4, layer: 6 },
-  { x: 48, y: 0, layer: 2 },
-  { x: 72, y: 10, layer: 5 },
-  { x: 3, y: 48, layer: 7 },
-  { x: 27, y: 43, layer: 4 },
-  { x: 52, y: 50, layer: 8 },
-  { x: 75, y: 40, layer: 1 },
+  { x: 2, y: 4, layer: 3 },
+  { x: 26, y: 7, layer: 6 },
+  { x: 50, y: 3, layer: 2 },
+  { x: 74, y: 9, layer: 5 },
+  { x: 4, y: 50, layer: 7 },
+  { x: 28, y: 46, layer: 4 },
+  { x: 52, y: 52, layer: 8 },
+  { x: 76, y: 44, layer: 1 },
 ] as const
 
 const NOTE_TILTS = [-3, 2, -1.5, 3, 1, -2.5, 2.5, -1] as const
 const COPRIME_STEPS = [3, 5, 7] as const
 
 type NotePositionStyle = CSSProperties & {
+  "--note-size": string
   "--note-left": string
   "--note-top": string
   "--note-layer": number
@@ -63,7 +64,8 @@ function getNoteLayout(projectId: string, index: number) {
 }
 
 /**
- * Two-note-high board: horizontal two-row strip on mobile/tablet, seeded collage on desktop.
+ * Two-row strip on mobile/tablet; desktop collage sizes notes from the board
+ * (container query) so 150% OS scale / short laptops do not clip the stack.
  */
 export function DraggableHighlightNotes({
   projectId,
@@ -80,42 +82,42 @@ export function DraggableHighlightNotes({
       aria-label={label}
       className={cn(
         "relative grid h-[calc(var(--note-mobile-size)*2+0.75rem)] grid-flow-col grid-rows-2 content-start gap-3 overflow-x-auto overflow-y-hidden p-1.5",
-        "[--note-mobile-size:8.5rem] [--note-size:clamp(7rem,14svh,9.5rem)] [grid-auto-columns:var(--note-mobile-size)]",
+        "[--note-mobile-size:8.5rem] [grid-auto-columns:var(--note-mobile-size)]",
         "overscroll-x-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
-        "lg:block lg:h-[calc(var(--note-size)*2)] lg:overflow-hidden lg:p-0"
+        "lg:block lg:h-full lg:min-h-0 lg:overflow-hidden lg:p-0 lg:[container-type:size]"
       )}
     >
       {highlights.map((text, index) => {
-        const noteNumber = String(index + 1).padStart(2, "0")
         const layout = getNoteLayout(projectId, index)
         const positionStyle: NotePositionStyle = {
-          "--note-left": `clamp(0px, ${layout.x}%, calc(100% - var(--note-size)))`,
-          "--note-top": `clamp(0px, ${layout.y}%, calc(100% - var(--note-size)))`,
+          "--note-size": "min(23cqw, 45cqh, 9.5rem)",
+          "--note-left": `clamp(0.25rem, ${layout.x}%, calc(100% - var(--note-size) - 0.25rem))`,
+          "--note-top": `clamp(0.25rem, ${layout.y}%, calc(100% - var(--note-size) - 0.25rem))`,
           "--note-layer": layout.layer,
         }
 
         return (
           <DraggableSticker
             key={text}
-            aria-label={`${noteNumber}. ${text}`}
+            aria-label={text}
             dragConstraints={constraintsRef}
             dragEnabled={isDesktop}
             initialRotate={layout.tilt}
             layout="relative"
             className={cn(
               "size-[var(--note-mobile-size)] shrink-0",
-              "lg:absolute lg:top-[var(--note-top)] lg:left-[var(--note-left)] lg:z-[var(--note-layer)] lg:size-[var(--note-size)]"
+              "lg:absolute lg:top-[var(--note-top)] lg:left-[var(--note-left)] lg:z-[var(--note-layer)] lg:size-[var(--note-size)] lg:@container"
             )}
             style={positionStyle}
           >
             <BentoStatCard
               variant="primary"
-              title={noteNumber}
-              className="content-start gap-2 p-3"
+              className="content-start p-2 sm:p-2.5 lg:p-[clamp(0.35rem,6%,0.65rem)]"
             >
               <p
                 className={cn(
-                  "font-handwriting font-medium tracking-wide text-primary-foreground",
+                  "line-clamp-6 font-handwriting font-medium tracking-wide break-words text-primary-foreground",
+                  "lg:text-[clamp(0.625rem,7.5cqh,0.8125rem)] lg:leading-[1.15] lg:@max-[7.5rem]:line-clamp-4",
                   text.length > 110
                     ? "text-[10px] leading-[1.08] sm:text-[11px]"
                     : text.length > 80

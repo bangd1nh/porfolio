@@ -10,6 +10,8 @@ import { cn } from "@/lib/utils"
 const EMBED_PROBE_MS = 3000
 /** Render all live previews at a consistent desktop width, then fit the frame. */
 const PREVIEW_VIEWPORT_WIDTH = 1280
+/** Crop the iframe’s native scrollbar; overflow-hidden cannot hide a nested document’s bar. */
+const PREVIEW_SCROLLBAR_CROP = 24
 
 /** Hosts with X-Frame-Options: SAMEORIGIN and no CSP frame-ancestors override. */
 const FRAME_BLOCKED_HOSTS = new Set(["uctalent.io"])
@@ -57,7 +59,8 @@ export function ProjectLiveEmbed({
   const [probing, setProbing] = useState(true)
   const previewRef = useRef<HTMLDivElement>(null)
   const [previewSize, setPreviewSize] = useState({ width: 0, height: 0 })
-  const previewScale = previewSize.width / PREVIEW_VIEWPORT_WIDTH
+  const previewScale =
+    previewSize.width / (PREVIEW_VIEWPORT_WIDTH - PREVIEW_SCROLLBAR_CROP)
 
   useEffect(() => {
     const preview = previewRef.current
@@ -122,8 +125,10 @@ export function ProjectLiveEmbed({
             src={url}
             title={title}
             loading="lazy"
+            scrolling="no"
+            tabIndex={-1}
             referrerPolicy="strict-origin-when-cross-origin"
-            className="pointer-events-none absolute top-0 left-0 border-0 bg-background"
+            className="pointer-events-none absolute top-0 left-0 overflow-hidden border-0 bg-background"
             style={{
               width: PREVIEW_VIEWPORT_WIDTH,
               height: previewSize.height / previewScale,

@@ -25,16 +25,6 @@ export function getLocalizedPath(locale: Locale, href: SiteRoutePath): string {
   return getPathname({ locale, href })
 }
 
-export function getLanguageAlternates(
-  href: SiteRoutePath
-): Record<string, string> {
-  const languages: Record<string, string> = Object.fromEntries(
-    routing.locales.map((locale) => [locale, getLocalizedPath(locale, href)])
-  )
-  languages["x-default"] = getLocalizedPath(routing.defaultLocale, href)
-  return languages
-}
-
 export function getAbsoluteUrl(pathname: string): string {
   return new URL(pathname, getSiteUrl()).toString()
 }
@@ -77,7 +67,6 @@ export function buildPageMetadata({
     description,
     alternates: {
       canonical: pagePath,
-      languages: getLanguageAlternates(path),
     },
     openGraph: {
       type: path === "/cv" ? "profile" : "website",

@@ -50,6 +50,7 @@ export const projectsContent: readonly ProjectItem[] = [
       "Next.js",
       "React",
       "NestJS",
+      "FastAPI",
       "GraphQL",
       "PostgreSQL",
       "Redis",

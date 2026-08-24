@@ -24,12 +24,13 @@ type ErrorExperienceProps = {
   syncDocument?: boolean
 }
 
-function localeFromPathname(): Locale {
-  if (typeof window === "undefined") return "vi"
-  return /^\/en(?:\/|$)/.test(window.location.pathname) ? "en" : "vi"
+function localeFromCookie(): Locale {
+  if (typeof document === "undefined") return "vi"
+  const match = document.cookie.match(/(?:^|; )NEXT_LOCALE=(en|vi)(?:;|$)/)
+  return match?.[1] === "en" ? "en" : "vi"
 }
 
-function subscribeToPathname(onStoreChange: () => void) {
+function subscribeToLocaleCookie(onStoreChange: () => void) {
   window.addEventListener("popstate", onStoreChange)
   return () => window.removeEventListener("popstate", onStoreChange)
 }
@@ -53,13 +54,13 @@ export function ErrorExperience({
 }: ErrorExperienceProps) {
   const rootRef = useRef<HTMLElement>(null)
   const pathLocale = useSyncExternalStore<Locale>(
-    subscribeToPathname,
-    localeFromPathname,
+    subscribeToLocaleCookie,
+    localeFromCookie,
     () => "vi"
   )
   const activeLocale = locale ?? pathLocale
   const copy = errorPageCopy[activeLocale][code]
-  const homeHref = `/${activeLocale}`
+  const homeHref = "/"
 
   useEffect(() => {
     if (!syncDocument) return

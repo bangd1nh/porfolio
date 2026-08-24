@@ -33,13 +33,15 @@ export async function ProjectsSection() {
   return (
     <section
       id="projects"
-      className={`page-section box-border gap-y-4 border-t border-border pt-10 pb-10 sm:pt-12 sm:pb-12 lg:grid-rows-[auto_minmax(0,1fr)] lg:content-stretch lg:gap-y-3 lg:pb-6 ${VIEWPORT_SECTION}`}
+      className={`page-section box-border gap-y-4 border-t border-border pt-10 pb-10 sm:pt-12 sm:pb-12 lg:grid-rows-[auto_minmax(0,1fr)] lg:content-stretch lg:gap-y-3 lg:pb-6 [@media(min-width:1024px)_and_(max-height:50rem)]:gap-y-2 [@media(min-width:1024px)_and_(max-height:50rem)]:pt-6 [@media(min-width:1024px)_and_(max-height:50rem)]:pb-4 ${VIEWPORT_SECTION}`}
     >
-      <header className="col-span-10 grid h-fit shrink-0 gap-y-2 self-start lg:gap-y-1.5">
+      <header className="col-span-10 grid h-fit shrink-0 gap-y-2 self-start lg:gap-y-1.5 [@media(min-width:1024px)_and_(max-height:50rem)]:gap-y-1">
         <p className="system-label text-foreground">SYSTEM / {t("badge")}</p>
         <div className="grid gap-1 lg:gap-0.5">
-          <h2 className="section-title lg:text-4xl">{t("title")}</h2>
-          <p className="section-description lg:text-sm">
+          <h2 className="section-title lg:text-4xl [@media(min-width:1024px)_and_(max-height:50rem)]:text-3xl">
+            {t("title")}
+          </h2>
+          <p className="section-description lg:text-sm [@media(min-width:1024px)_and_(max-height:50rem)]:hidden">
             {t("description")}
           </p>
         </div>

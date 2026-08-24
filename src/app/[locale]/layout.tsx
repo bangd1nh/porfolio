@@ -16,7 +16,9 @@ import { GlobalLoaderProvider } from "@/components/providers/global-loader"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { profileContent } from "@/data/profile"
 import { routing, type Locale } from "@/i18n/routing"
+import { LLMS_TXT_PATH } from "@/lib/llms-txt"
 import {
+  getAbsoluteUrl,
   getAlternateOpenGraphLocale,
   getOgImageUrl,
   getOpenGraphLocale,
@@ -149,6 +151,14 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         caveatHandwriting.variable
       )}
     >
+      <head>
+        <link rel="describedby" href={getAbsoluteUrl(LLMS_TXT_PATH)} />
+        <link
+          rel="alternate"
+          type="text/markdown"
+          href={getAbsoluteUrl(LLMS_TXT_PATH)}
+        />
+      </head>
       <body className="min-h-full">
         <ThemeProvider
           attribute="class"
