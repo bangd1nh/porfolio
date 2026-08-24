@@ -1,41 +1,41 @@
 import { ScrollReveal } from "@/components/atoms/scroll-reveal"
 import { SkillStackExplorer } from "@/components/molecules/skill-stack-explorer"
-import { profileContent } from "@/data/profile"
 import { getTranslations } from "next-intl/server"
 
-const DAILY_DRIVERS = [
+const PRIMARY = [
   "TypeScript",
   "Next.js",
+  "React",
   "NestJS",
-  "FastAPI",
   "PostgreSQL",
+] as const
+
+const PRODUCTION_EXPERIENCE = [
   "Redis",
+  "Elasticsearch",
+  "GraphQL",
+  "FastAPI",
   "Docker",
 ] as const
 
 const AI_SYSTEMS = [
-  "Agentic AI",
   "RAG",
   "Embeddings",
-  "Semantic search",
+  "Vector Search",
+  "LLM tooling",
 ] as const
 
-/** Strongest capabilities first; the complete source inventory remains expandable. */
+const ADDITIONAL = [
+  "Java",
+  "Spring Boot",
+  "React Native",
+  "Android",
+  "C",
+] as const
+
+/** Recruiter-first skill hierarchy; the complete inventory remains in the CV. */
 export async function FeaturedStackSection() {
   const t = await getTranslations("stack")
-  const tProfile = await getTranslations("profile")
-  const featuredItems = new Set<string>([...DAILY_DRIVERS, ...AI_SYSTEMS])
-  const remainingGroups = profileContent.skills
-    .map((group) => ({
-      id: group.id,
-      title: tProfile(`skills.${group.id}`),
-      items:
-        // TypeScript is featured in daily prod and still belongs in languages.
-        group.id === "languages"
-          ? group.items
-          : group.items.filter((item) => !featuredItems.has(item)),
-    }))
-    .filter((group) => group.items.length > 0)
 
   return (
     <section
@@ -52,16 +52,19 @@ export async function FeaturedStackSection() {
 
       <ScrollReveal className="col-span-10">
         <SkillStackExplorer
-          dailyDrivers={DAILY_DRIVERS}
+          primary={PRIMARY}
+          productionExperience={PRODUCTION_EXPERIENCE}
           aiSystems={AI_SYSTEMS}
-          groups={remainingGroups}
+          additional={ADDITIONAL}
           labels={{
-            dailyDrivers: t("dailyDrivers"),
+            primary: t("primary"),
+            productionExperience: t("productionExperience"),
             aiSystems: t("aiSystems"),
-            dailyStatus: t("dailyStatus"),
+            additional: t("additional"),
+            primaryStatus: t("primaryStatus"),
+            productionStatus: t("productionStatus"),
             aiStatus: t("aiStatus"),
-            viewFull: t("viewFull"),
-            hideFull: t("hideFull"),
+            additionalStatus: t("additionalStatus"),
           }}
         />
       </ScrollReveal>

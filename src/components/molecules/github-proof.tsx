@@ -3,7 +3,6 @@ import { getLocale, getTranslations } from "next-intl/server"
 import { GithubActivity } from "@/components/molecules/github-activity"
 import { contactLinks } from "@/data/contact"
 import { getGithubStats } from "@/lib/github-stats"
-import { formatCompact } from "@/lib/utils"
 
 export function GithubProofSkeleton({ label }: { label: string }) {
   return (
@@ -78,10 +77,10 @@ export async function GithubProof() {
   const metrics = [
     { label: t("collage.repos"), value: stats.repos.toLocaleString(locale) },
     {
-      label: t("collage.openPrs"),
-      value: stats.openPullRequests.toLocaleString(locale),
+      label: t("collage.organizations"),
+      value: stats.organizations.length.toLocaleString(locale),
     },
-    { label: t("collage.stars"), value: formatCompact(stats.stars) },
+    { label: t("collage.shippingSince"), value: "2024" },
   ]
 
   return (

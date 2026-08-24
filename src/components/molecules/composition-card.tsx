@@ -18,9 +18,8 @@ import { cn, formatCompact } from "@/lib/utils"
 
 type GithubStatsView = {
   repos: number
-  stars: number
-  openPullRequests?: number
   contributions: number
+  organizations?: readonly unknown[]
   avatarUrl?: string
 }
 
@@ -69,9 +68,8 @@ export function CompositionCard({
   const aiHasMore = ai.items.length > ai.visibleCount
 
   const repos = githubStats?.repos ?? github.repos
-  const stars = githubStats?.stars ?? github.stars
-  const openPullRequests =
-    githubStats?.openPullRequests ?? github.openPullRequests
+  const organizations =
+    githubStats?.organizations?.length ?? github.organizations
   const contributions = githubStats?.contributions ?? github.contributions
   const avatarSrc =
     githubStats?.avatarUrl ?? avatar.src ?? githubAvatarFallback
@@ -214,15 +212,15 @@ export function CompositionCard({
               <div className="grid grid-cols-2 gap-2">
                 <div>
                   <dt className="text-[10px] font-medium uppercase opacity-70">
-                    {t("collage.stars")}
+                    {t("collage.organizations")}
                   </dt>
-                  <dd className="text-sm font-bold">{formatCompact(stars)}</dd>
+                  <dd className="text-sm font-bold">{organizations}</dd>
                 </div>
                 <div>
                   <dt className="text-[10px] font-medium uppercase opacity-70">
-                    {t("collage.openPrs")}
+                    {t("collage.shippingSince")}
                   </dt>
-                  <dd className="text-sm font-bold">{openPullRequests}</dd>
+                  <dd className="text-sm font-bold">{github.shippingSince}</dd>
                 </div>
               </div>
               <div>

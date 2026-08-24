@@ -1,28 +1,20 @@
-"use client"
-
-import { useState } from "react"
-import { ChevronDown } from "lucide-react"
-
 import { SkillIcon } from "@/components/atoms/skill-icon"
 import { cn } from "@/lib/utils"
 
-type SkillGroup = {
-  id: string
-  title: string
-  items: readonly string[]
-}
-
 type SkillStackExplorerProps = {
-  dailyDrivers: readonly string[]
+  primary: readonly string[]
+  productionExperience: readonly string[]
   aiSystems: readonly string[]
-  groups: readonly SkillGroup[]
+  additional: readonly string[]
   labels: {
-    dailyDrivers: string
+    primary: string
+    productionExperience: string
     aiSystems: string
-    dailyStatus: string
+    additional: string
+    primaryStatus: string
+    productionStatus: string
     aiStatus: string
-    viewFull: string
-    hideFull: string
+    additionalStatus: string
   }
 }
 
@@ -62,78 +54,46 @@ function FeaturedSkillColumn({
 }
 
 export function SkillStackExplorer({
-  dailyDrivers,
+  primary,
+  productionExperience,
   aiSystems,
-  groups,
+  additional,
   labels,
 }: SkillStackExplorerProps) {
-  const [expanded, setExpanded] = useState(false)
-
   return (
-    <div className="grid gap-7">
-      <div className="grid gap-7 border-y border-border py-6 lg:grid-cols-2 lg:gap-0 lg:py-8">
+    <div className="grid border-y border-border">
+      <div className="grid gap-7 py-6 lg:grid-cols-2 lg:gap-0 lg:py-8">
         <FeaturedSkillColumn
           index="01"
-          title={labels.dailyDrivers}
-          status={labels.dailyStatus}
-          items={dailyDrivers}
+          title={labels.primary}
+          status={labels.primaryStatus}
+          items={primary}
           className="lg:pr-8"
         />
         <FeaturedSkillColumn
           index="02"
-          title={labels.aiSystems}
-          status={labels.aiStatus}
-          items={aiSystems}
+          title={labels.productionExperience}
+          status={labels.productionStatus}
+          items={productionExperience}
           className="border-t border-border pt-7 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8"
         />
       </div>
 
-      <div className="grid gap-5">
-        <button
-          type="button"
-          aria-expanded={expanded}
-          aria-controls="full-stack-inventory"
-          onClick={() => setExpanded((value) => !value)}
-          className="system-link group flex w-fit cursor-pointer items-center gap-2 text-left"
-        >
-          {expanded ? labels.hideFull : labels.viewFull}
-          <ChevronDown
-            className={cn(
-              "size-4 transition-transform duration-300 motion-reduce:transition-none",
-              expanded && "rotate-180"
-            )}
-            aria-hidden
-          />
-        </button>
-
-        {expanded ? (
-          <div
-            id="full-stack-inventory"
-            className="grid animate-in gap-0 border-t border-border fade-in slide-in-from-top-2 duration-300 motion-reduce:animate-none"
-          >
-            {groups.map((group, index) => (
-              <article
-                key={group.id}
-                className="grid gap-3 border-b border-border py-4 sm:grid-cols-[minmax(10rem,0.7fr)_2fr] sm:gap-6"
-              >
-                <h3 className="system-label pt-1">
-                  {String(index + 3).padStart(2, "0")} / {group.title}
-                </h3>
-                <ul className="flex flex-wrap gap-x-4 gap-y-2">
-                  {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
-                    >
-                      <SkillIcon name={item} className="size-3.5 shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        ) : null}
+      <div className="grid border-t border-border lg:grid-cols-2">
+        <FeaturedSkillColumn
+          index="03"
+          title={labels.aiSystems}
+          status={labels.aiStatus}
+          items={aiSystems}
+          className="py-6 lg:pr-8"
+        />
+        <FeaturedSkillColumn
+          index="04"
+          title={labels.additional}
+          status={labels.additionalStatus}
+          items={additional}
+          className="border-t border-border py-6 lg:border-t-0 lg:border-l lg:pl-8"
+        />
       </div>
     </div>
   )

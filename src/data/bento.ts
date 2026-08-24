@@ -77,9 +77,9 @@ export type BentoContent = {
     title: string
     /** Fallback when `GITHUB_TOKEN` is missing / API fails. */
     repos: number
-    stars: number
-    openPullRequests: number
     contributions: number
+    organizations: number
+    shippingSince: string
   }
 }
 
@@ -201,9 +201,9 @@ export const bentoContent = {
   github: {
     title: "GitHub",
     repos: 20,
-    stars: 4,
-    openPullRequests: 0,
     contributions: 45,
+    organizations: 2,
+    shippingSince: "2024",
   },
 } as const satisfies BentoContent
 

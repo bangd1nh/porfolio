@@ -30,7 +30,7 @@ type NotePositionStyle = CSSProperties & {
 
 type DraggableHighlightNotesProps = {
   projectId: string
-  highlights: readonly string[]
+  highlights: readonly { label: string; text: string }[]
   label: string
 }
 
@@ -82,15 +82,15 @@ export function DraggableHighlightNotes({
       aria-label={label}
       className={cn(
         "relative grid h-[calc(var(--note-mobile-size)*2+0.75rem)] grid-flow-col grid-rows-2 content-start gap-3 overflow-x-auto overflow-y-hidden p-1.5",
-        "[--note-mobile-size:8.5rem] [grid-auto-columns:var(--note-mobile-size)]",
+        "[--note-mobile-size:13.5rem] [grid-auto-columns:var(--note-mobile-size)]",
         "overscroll-x-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
         "lg:block lg:h-full lg:min-h-0 lg:overflow-hidden lg:p-0 lg:[container-type:size]"
       )}
     >
-      {highlights.map((text, index) => {
+      {highlights.map(({ label: noteLabel, text }, index) => {
         const layout = getNoteLayout(projectId, index)
         const positionStyle: NotePositionStyle = {
-          "--note-size": "min(23cqw, 45cqh, 9.5rem)",
+          "--note-size": "min(40.5cqw, 78cqh, 15.75rem)",
           "--note-left": `clamp(0.25rem, ${layout.x}%, calc(100% - var(--note-size) - 0.25rem))`,
           "--note-top": `clamp(0.25rem, ${layout.y}%, calc(100% - var(--note-size) - 0.25rem))`,
           "--note-layer": layout.layer,
@@ -98,8 +98,8 @@ export function DraggableHighlightNotes({
 
         return (
           <DraggableSticker
-            key={text}
-            aria-label={text}
+            key={noteLabel}
+            aria-label={`${noteLabel}: ${text}`}
             dragConstraints={constraintsRef}
             dragEnabled={isDesktop}
             initialRotate={layout.tilt}
@@ -112,17 +112,20 @@ export function DraggableHighlightNotes({
           >
             <BentoStatCard
               variant="primary"
-              className="content-start p-2 sm:p-2.5 lg:p-[clamp(0.35rem,6%,0.65rem)]"
+              className="content-start p-3 sm:p-3.5 lg:p-[clamp(0.6rem,6%,0.9rem)]"
             >
+              <span className="mb-1.5 block font-mono text-[10px] font-bold tracking-[0.08em] text-primary-foreground/70 uppercase sm:text-[11px]">
+                {noteLabel}
+              </span>
               <p
                 className={cn(
                   "line-clamp-6 font-handwriting font-medium tracking-wide break-words text-primary-foreground",
-                  "lg:text-[clamp(0.625rem,7.5cqh,0.8125rem)] lg:leading-[1.15] lg:@max-[7.5rem]:line-clamp-4",
+                  "lg:text-[clamp(0.8125rem,9cqh,1rem)] lg:leading-[1.2] lg:@max-[8.5rem]:line-clamp-5",
                   text.length > 110
-                    ? "text-[10px] leading-[1.08] sm:text-[11px]"
+                    ? "text-xs leading-[1.15] sm:text-[13px]"
                     : text.length > 80
-                      ? "text-[11px] leading-[1.1] sm:text-xs"
-                      : "text-xs leading-[1.12] sm:text-sm"
+                      ? "text-[13px] leading-[1.18] sm:text-sm"
+                      : "text-sm leading-[1.2] sm:text-[15px]"
                 )}
               >
                 {text}

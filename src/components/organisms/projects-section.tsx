@@ -13,6 +13,7 @@ export async function ProjectsSection() {
   const projects = projectsContent.map((project) => ({
     id: project.id,
     title: t(`items.${project.id}.title`),
+    descriptor: t(`items.${project.id}.descriptor`),
     role: t(`items.${project.id}.role`),
     summary: t(`items.${project.id}.summary`),
     period: project.period,
@@ -21,11 +22,12 @@ export async function ProjectsSection() {
         ? t("solo")
         : t("teamSize", { count: project.teamSize }),
     stack: project.stack,
-    highlights: project.highlightKeys.map((key) =>
-      t(
+    highlights: project.highlightKeys.map((key) => ({
+      label: t(`caseStudy.${key}` as Parameters<typeof t>[0]),
+      text: t(
         `items.${project.id}.highlights.${key}` as Parameters<typeof t>[0]
-      )
-    ),
+      ),
+    })),
     liveUrl: project.liveUrl,
     liveLabel: t("live"),
   }))
@@ -52,6 +54,9 @@ export async function ProjectsSection() {
           projects={projects}
           tabsLabel={t("tabsLabel")}
           shippedLabel={t("shipped")}
+          contextLabel={t("caseStudy.context")}
+          roleLabel={t("caseStudy.role")}
+          stackLabel={t("caseStudy.stack")}
           notesHint={t("notesHint")}
           shippingPressLabels={{
             ticket: t("shippingPress.ticket"),

@@ -32,9 +32,10 @@
     "role": "Fullstack Developer",
     "identityLabel": "Danh tính",
     "headline": "Tôi xây hệ thống web production và sản phẩm ứng dụng AI.",
+    "positioning": "Fullstack developer đưa ứng dụng web, tìm kiếm ứng dụng AI và hệ thống realtime vào production.",
     "specialization": "Kỹ sư Full-stack",
     "technologies": "Next.js · NestJS · Agentic AI",
-    "availability": "Sẵn sàng cho remote / freelance",
+    "availability": "Sẵn sàng cho full-time · remote · freelance",
     "location": "Đà Nẵng, Việt Nam",
     "description": "Fullstack developer xây ứng dụng web scalable với Next.js, NestJS, GraphQL, PostgreSQL và Redis — đang mở rộng sang kiến trúc phần mềm và AI.",
     "cta": "Xem dự án tiêu biểu",
@@ -67,13 +68,18 @@
     "currently": {
       "label": "Hiện tại",
       "note": "Bối cảnh đang hoạt động / 2026",
-      "buildingLabel": "Đang xây",
-      "buildingValue": "Sản phẩm HRTech @ UC Talent Labs",
-      "exploringLabel": "Đang khám phá",
+      "roleLabel": "Vai trò",
+      "roleValue": "Fullstack Developer @ UC Talent Labs",
+      "mission": "Xây sản phẩm HRTech cùng hệ thống matching/search ứng dụng AI.",
+      "stackLabel": "Stack hiện tại",
+      "stackValue": "Next.js · NestJS · FastAPI",
+      "githubLabel": "Hoạt động GitHub",
+      "githubValue": "Repo cá nhân + tổ chức",
+      "aiLabel": "Trọng tâm AI",
       "exploringItems": [
-        "Agentic workflows",
-        "Kiến trúc RAG",
-        "Công cụ developer AI-native"
+        "RAG",
+        "Embeddings",
+        "Vector search"
       ],
       "basedLabel": "Đang ở",
       "basedValue": "Đà Nẵng, Việt Nam"
@@ -83,8 +89,8 @@
       "moreAi": "Xem tất cả kỹ năng AI ở Hồ sơ",
       "location": "Địa điểm",
       "repos": "Repos",
-      "stars": "Stars",
-      "openPrs": "Open PRs",
+      "organizations": "Tổ chức",
+      "shippingSince": "Ship từ",
       "contrib": "Contrib",
       "experienceLabel": "năm xây ứng dụng web"
     }
@@ -117,12 +123,14 @@
     "description": "Ngôn ngữ, framework, data, API và tooling AI tôi dùng để ship hệ thống production.",
     "featured": "Công cụ chính",
     "more": "Thêm trong toolkit",
-    "dailyDrivers": "Công cụ hằng ngày",
+    "primary": "Chính",
+    "productionExperience": "Kinh nghiệm production",
     "aiSystems": "Hệ thống AI",
-    "dailyStatus": "Hằng ngày / production",
+    "additional": "Đã dùng trước đây / bổ sung",
+    "primaryStatus": "Thế mạnh cốt lõi",
+    "productionStatus": "Đã ship ở production",
     "aiStatus": "Trọng tâm hiện tại",
-    "viewFull": "Xem toàn bộ stack +",
-    "hideFull": "Thu gọn stack −"
+    "additionalStatus": "Kinh nghiệm từ dự án trước"
   },
   "experience": {
     "badge": "Kinh nghiệm",
@@ -132,13 +140,13 @@
       "uctalent": {
         "company": "UC Talent Labs",
         "role": "Fullstack Developer",
-        "summary": "Studio product + outsourcing xây nền tảng HRTech và giải pháp cho khách hàng.",
+        "summary": "Team sản phẩm HRTech xây talent marketplace, recruiter workspace và workflow tìm kiếm/matching hỗ trợ AI.",
         "bullets": {
-          "production": "Xây và duy trì ứng dụng web production cho nền tảng HRTech và dự án khách.",
-          "performance": "Triển khai tính năng scalable và tối ưu hiệu năng frontend/backend.",
-          "reliability": "Điều tra, debug và xử lý sự cố production để tăng độ tin cậy.",
-          "endToEnd": "Giao giải pháp end-to-end cho sản phẩm nội bộ và outsourcing.",
-          "agile": "Phối hợp với developer, designer và stakeholder theo Agile sprint."
+          "production": "Phụ trách full-stack cho marketplace và workflow recruiter: source ứng viên, pipeline và referral.",
+          "performance": "Xây screening/matching hỗ trợ AI và semantic search với LLM tooling, embeddings và Elasticsearch.",
+          "reliability": "Ship trải nghiệm Next.js cùng service NestJS/FastAPI trên GraphQL, PostgreSQL, Redis và Elasticsearch.",
+          "endToEnd": "Kết nối search, matching, background job và notification giữa các service với phương án fallback production.",
+          "agile": "Đưa tính năng từ bàn giao product/design qua implement, review, release đến debug production."
         }
       },
       "fsoft": {
@@ -164,7 +172,15 @@
     "teamSize": "Nhóm {count} người",
     "solo": "Cá nhân · Capstone",
     "tabsLabel": "Chọn dự án",
-    "shipped": "Những gì tôi ship",
+    "shipped": "Ghi chú case study",
+    "caseStudy": {
+      "context": "Bài toán / Bối cảnh",
+      "role": "Vai trò của tôi",
+      "stack": "Stack kỹ thuật",
+      "shipped": "Những gì tôi ship",
+      "decisions": "Quyết định / Thách thức kỹ thuật",
+      "impact": "Kết quả"
+    },
     "notesHint": "Kéo, chồng, nhấp đúp để đặt lại",
     "shippingPress": {
       "ticket": "Phiếu dự án",
@@ -177,60 +193,46 @@
     "items": {
       "guscent": {
         "title": "Guscent",
+        "descriptor": "E-commerce · Frontend",
         "role": "Frontend developer · Freelance",
-        "summary": "Storefront nước hoa giàu tính thẩm mỹ, giúp khách hàng khám phá sản phẩm qua storytelling theo cảm xúc, trắc nghiệm mùi hương, nội dung editorial và hành trình mua sắm chỉn chu.",
+        "summary": "Storefront nước hoa giàu tính thẩm mỹ, biến storytelling theo cảm xúc và trắc nghiệm mùi hương thành hành trình khám phá/mua sắm rõ ràng.",
         "highlights": {
-          "storefront": "Xây storefront Next.js production theo định hướng của designer, với các section tái sử dụng cho khám phá sản phẩm và kể câu chuyện thương hiệu.",
-          "quiz": "Triển khai trắc nghiệm mùi hương tương tác, chuyển trạng thái và sở thích của khách thành hành trình khám phá nước hoa có hướng dẫn.",
-          "commerce": "Hoàn thiện điều hướng danh mục, trình bày sản phẩm và tương tác giỏ hàng xuyên suốt hành trình khách hàng.",
-          "api": "Tích hợp backend API cùng media/nội dung từ CMS, xử lý ổn định các trạng thái loading, empty và error.",
-          "responsive": "Chuyển thiết kế giàu hình ảnh thành trải nghiệm responsive, accessible trên desktop, tablet và mobile.",
-          "collaboration": "Phụ trách frontend trong team freelance 3 người, phối hợp chặt chẽ với 1 backend developer và 1 designer."
+          "shipped": "Storefront Next.js production, scent quiz, luồng catalog/cart cùng section editorial và sản phẩm tái sử dụng.",
+          "decisions": "Chuyển art direction thành component responsive, accessible; xử lý bền vững trạng thái loading, empty và error khi tích hợp API/CMS.",
+          "impact": "Ra mắt production với giao diện responsive, UI tái sử dụng và tích hợp backend/CMS."
         }
       },
       "uctalent": {
         "title": "uctalent.io",
+        "descriptor": "HRTech · Fullstack · AI",
         "role": "Fullstack developer",
-        "summary": "Nền tảng HRTech: marketplace talent trên uctalent.io và workspace React cho head hunter trên business.uctalent.io — matching AI, semantic search, thưởng referral blockchain.",
+        "summary": "Talent marketplace và recruiter workspace cho sourcing, pipeline, matching hỗ trợ AI, semantic search và referral flow.",
         "highlights": {
-          "hunterPortal": "Xây business.uctalent.io — web React cho head hunter: source ứng viên, chạy pipeline và chốt placement.",
-          "fullstack": "Ship tính năng full-stack production trên uctalent.io và workspace hunter với Next.js, NestJS, GraphQL, PostgreSQL và Redis.",
-          "hrAi": "Ứng dụng LLM vào workflow HR — screening CV, matching job–ứng viên và draft outreach, giảm việc thủ công cho recruiter.",
-          "elasticsearch": "Index job và hồ sơ talent trên Elasticsearch để search nhanh, faceted ở quy mô platform.",
-          "semantic": "Kết hợp Elasticsearch với vector embeddings cho semantic search và recommendation, vượt keyword matching.",
-          "microservices": "Thiết kế tích hợp GraphQL + Redis + background jobs giữa các microservice — matching, search và notification bền vững.",
-          "ddd": "Thiết kế backend theo Clean Architecture và Domain-Driven Design để dễ bảo trì lâu dài.",
-          "performance": "Cải thiện hiệu năng qua tối ưu API, query, Redis cache và code review."
+          "shipped": "Workflow marketplace và recruiter cho sourcing, pipeline ứng viên, screening, matching, outreach và referral.",
+          "decisions": "Kết hợp Elasticsearch với vector embeddings cho semantic search; nối Next.js với service NestJS/FastAPI qua GraphQL, PostgreSQL, Redis và background job.",
+          "impact": "Sản phẩm HRTech production với kiến trúc search/matching dùng chung và trách nhiệm kỹ thuật full-stack."
         }
       },
       "unchainlabs": {
         "title": "Unchain Labs",
+        "descriptor": "CMS · Fullstack",
         "role": "Fullstack developer",
-        "summary": "Website marketing và headless CMS cho Unchain Labs — trang quản lý nội dung, SEO đầy đủ và luồng contact cho khách hàng doanh nghiệp.",
+        "summary": "Website marketing production và headless CMS giúp team publish nội dung doanh nghiệp có cấu trúc mà không phải sửa frontend.",
         "highlights": {
-          "cms": "Xây Strapi headless CMS với content type có cấu trúc, media library và phân quyền admin cho team marketing.",
-          "seo": "Triển khai SEO end-to-end — metadata, Open Graph, sitemap, robots và HTML semantic cho trang doanh nghiệp.",
-          "contact": "Ship form contact và thu lead với validation, gửi tin cậy cho yêu cầu tư vấn từ khách hàng.",
-          "content": "Thiết kế section linh hoạt và component tái sử dụng để team không dev tự publish case study, dịch vụ và blog.",
-          "fullstack": "Frontend Next.js consume Strapi REST API với SSR — hiệu năng tốt và nội dung marketing index được.",
-          "delivery": "Deploy production với config theo môi trường, tối ưu ảnh và workflow quản lý nội dung bền vững.",
-          "responsive": "Xây giao diện Tailwind CSS responsive, giữ trải nghiệm marketing chỉn chu trên desktop, tablet và mobile.",
-          "architecture": "Tách lớp hiển thị khỏi dữ liệu CMS để thêm trang và campaign mới mà không phải làm lại frontend."
+          "shipped": "Frontend Next.js, Strapi CMS, section tái sử dụng, workflow media/nội dung và form contact có validation.",
+          "decisions": "Dùng SSR và REST integration với HTML semantic, metadata, Open Graph, sitemap, robots và config theo môi trường.",
+          "impact": "Ra mắt production với kiến trúc sẵn sàng cho SEO, component responsive và quyền quản lý nội dung cho team không dev."
         }
       },
       "matchtutors": {
         "title": "Match Tutors",
+        "descriptor": "Marketplace · Realtime · AI",
         "role": "Fullstack developer · Capstone",
-        "summary": "Đồ án cá nhân (capstone) kết nối gia sư và học viên — lịch học, matching bằng AI, chat realtime và thanh toán.",
+        "summary": "Marketplace gia sư–học viên gom hồ sơ, đặt lịch, matching hỗ trợ AI, chat realtime và thanh toán vào một workflow.",
         "highlights": {
-          "platform": "Xây end-to-end nền tảng tutor–student: hồ sơ, đặt lịch và quản lý buổi học.",
-          "matching": "Matching hỗ trợ AI với OpenAI embeddings và worker match trên Redis/BullMQ.",
-          "realtime": "Chat và cập nhật realtime bằng Socket.io trong luồng đặt lịch.",
-          "workers": "Thiết kế job worker bất đồng bộ cho embedding, email, notification và matching.",
-          "payments": "Tích hợp thanh toán PayOS, auth JWT/Google OAuth và upload file (S3/Cloudinary).",
-          "fullstack": "Ship frontend React + Vite và API Express + MongoDB (hai repo) — build production deploy trên AWS, lưu ảnh và file trên Cloudinary.",
-          "scheduling": "Hoàn thiện luồng đặt lịch để gia sư và học viên phối hợp buổi học, đồng thời quản lý hành trình học tập tại một nơi.",
-          "auth": "Triển khai JWT và Google OAuth để mỗi người dùng quản lý an toàn hồ sơ, lịch đặt và thanh toán của mình."
+          "shipped": "Hồ sơ, đặt lịch, quản lý buổi học, PayOS checkout, JWT/Google OAuth, upload file và nhắn tin realtime.",
+          "decisions": "Dùng OpenAI embeddings với worker Redis/BullMQ cho matching và Socket.io cho cập nhật booking/chat trên hai repo React và Express.",
+          "impact": "Deploy build production trên AWS với chức năng realtime và kiến trúc matching bất đồng bộ."
         }
       }
     }
@@ -333,8 +335,10 @@
     "skills": "Kỹ năng"
   },
   "contact": {
-    "eyebrow": "Sẵn sàng nhận việc",
-    "title": "Hãy nói về dự án của bạn",
+    "eyebrow": "Sẵn sàng cho full-time · remote · freelance",
+    "title": "Sẵn sàng cho cơ hội mới",
+    "description": "Vai trò fullstack, dự án freelance hoặc cơ hội hợp tác sản phẩm thú vị.",
+    "startConversation": "Bắt đầu trò chuyện",
     "email": "Email",
     "phone": "Điện thoại",
     "github": "GitHub",

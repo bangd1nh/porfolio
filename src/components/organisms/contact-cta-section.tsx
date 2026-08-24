@@ -32,15 +32,18 @@ export async function ContactCtaSection() {
           <h2 className="section-title max-w-4xl text-foreground underline decoration-primary decoration-4 underline-offset-8">
             {t("title")}
           </h2>
+          <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+            {t("description")}
+          </p>
 
-          <div className="mt-1 flex w-full max-w-lg flex-wrap items-center justify-center gap-2 sm:max-w-none sm:gap-3">
+          <div className="flex w-full max-w-lg flex-wrap items-center justify-center gap-2 sm:max-w-none sm:gap-3">
             <Button
               className="min-h-10 rounded-none"
               nativeButton={false}
               render={<a href={`mailto:${contactLinks.email}`} />}
             >
-              <Mail className="size-4" aria-hidden />
-              {t("email")}
+              <Mail data-icon="inline-start" aria-hidden />
+              {t("startConversation")}
             </Button>
             <Button
               variant="outline"
@@ -48,7 +51,7 @@ export async function ContactCtaSection() {
               nativeButton={false}
               render={<a href={`tel:${contactLinks.phone}`} />}
             >
-              <Phone className="size-4" aria-hidden />
+              <Phone data-icon="inline-start" aria-hidden />
               {t("phone")}
             </Button>
             <Button
@@ -63,7 +66,7 @@ export async function ContactCtaSection() {
                 />
               }
             >
-              <GitBranch className="size-4" aria-hidden />
+              <GitBranch data-icon="inline-start" aria-hidden />
               {t("github")}
             </Button>
             <Button
@@ -72,7 +75,7 @@ export async function ContactCtaSection() {
               nativeButton={false}
               render={<TransitionLink href={resumeLinks.pagePath} />}
             >
-              <FileDown className="size-4" aria-hidden />
+              <FileDown data-icon="inline-start" aria-hidden />
               {t("resume")}
             </Button>
           </div>

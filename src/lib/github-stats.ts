@@ -1,3 +1,5 @@
+import { unstable_cache } from "next/cache"
+
 export type GithubContributionDay = {
   date: string
   count: number
@@ -17,9 +19,6 @@ export type GithubOrganization = {
 
 export type GithubStats = {
   repos: number
-  stars: number
-  /** Open pull requests authored by the authenticated user (read-only count). */
-  openPullRequests: number
   /** Total contributions in the selected window (default: last 6 months). */
   contributions: number
   /** Profile avatar from GitHub GraphQL. */
@@ -64,16 +63,11 @@ type GithubGraphqlResponse = {
       login: string
       avatarUrl: string
       contributionsCollection: ContributionsCollection
-      pullRequests: {
-        totalCount: number
-      }
     }
     user?: {
       avatarUrl: string
       repositories: {
         totalCount: number
-        nodes: Array<{ stargazerCount: number }>
-        pageInfo: { hasNextPage: boolean; endCursor: string | null }
       }
       organizations: {
         nodes: Array<{
@@ -119,13 +113,10 @@ export const githubOrgFallback: readonly GithubOrganization[] = [
  * PAT with `read:user` can include private/internal activity in the calendar.
  */
 const PROFILE_QUERY = `
-  query($login: String!, $from: DateTime!, $to: DateTime!, $after: String) {
+  query($login: String!, $from: DateTime!, $to: DateTime!) {
     viewer {
       login
       avatarUrl
-      pullRequests(states: OPEN) {
-        totalCount
-      }
       contributionsCollection(from: $from, to: $to) {
         hasAnyRestrictedContributions
         restrictedContributionsCount
@@ -146,12 +137,9 @@ const PROFILE_QUERY = `
       repositories(
         ownerAffiliations: OWNER
         isFork: false
-        first: 100
-        after: $after
+        first: 1
       ) {
         totalCount
-        nodes { stargazerCount }
-        pageInfo { hasNextPage endCursor }
       }
       organizations(first: 20) {
         nodes {
@@ -195,12 +183,11 @@ function mergeOrganizations(
   return Array.from(byLogin.values())
 }
 
-async function fetchGithubPage(args: {
+async function fetchGithubProfile(args: {
   login: string
   token: string
   from: string
   to: string
-  after: string | null
 }): Promise<GithubGraphqlResponse> {
   const res = await fetch("https://api.github.com/graphql", {
     method: "POST",
@@ -215,7 +202,6 @@ async function fetchGithubPage(args: {
         login: args.login,
         from: args.from,
         to: args.to,
-        after: args.after,
       },
     }),
     next: { revalidate: 3600 },
@@ -248,85 +234,53 @@ async function fetchGithubStats(): Promise<GithubStats | null> {
   const to = new Date().toISOString()
 
   try {
-    let after: string | null = null
-    let repos = 0
-    let stars = 0
-    let openPullRequests = 0
-    let contributions = 0
-    let weeks: GithubContributionWeek[] = []
-    let organizations: GithubOrganization[] = []
-    let avatarUrl = githubAvatarFallback
-    let privateHidden = false
-    let pages = 0
+    const json = await fetchGithubProfile({ login, token, from, to })
 
-    do {
-      const json = await fetchGithubPage({ login, token, from, to, after })
+    if (json.errors?.length) {
+      throw new Error(json.errors.map((e) => e.message).join("; "))
+    }
 
-      if (json.errors?.length) {
-        throw new Error(json.errors.map((e) => e.message).join("; "))
-      }
+    const viewer = json.data?.viewer
+    const user = json.data?.user
+    if (!viewer) {
+      throw new Error("GitHub viewer unavailable for this token")
+    }
+    if (!user) {
+      throw new Error(`GitHub user not found: ${login}`)
+    }
 
-      const viewer = json.data?.viewer
-      const user = json.data?.user
-      if (!user) {
-        throw new Error(`GitHub user not found: ${login}`)
-      }
-
-      if (pages === 0) {
-        if (!viewer) {
-          throw new Error("GitHub viewer unavailable for this token")
-        }
-
-        if (viewer.login.toLowerCase() !== login.toLowerCase()) {
-          console.warn(
-            `[github-stats] Token viewer (${viewer.login}) ≠ GITHUB_USERNAME (${login}). Private contributions will not appear.`
-          )
-        }
-
-        const collection = viewer.contributionsCollection
-        const calendar = collection.contributionCalendar
-        contributions = calendar.totalContributions
-        weeks = mapWeeks(calendar.weeks)
-        openPullRequests = viewer.pullRequests.totalCount
-        avatarUrl = viewer.avatarUrl || user.avatarUrl || githubAvatarFallback
-        privateHidden =
-          collection.hasAnyRestrictedContributions ||
-          collection.restrictedContributionsCount > 0
-
-        if (privateHidden) {
-          console.warn(
-            `[github-stats] Restricted/private contributions detected (${collection.restrictedContributionsCount}). Use a Classic PAT with read:user so day cells include private activity.`
-          )
-        }
-
-        repos = user.repositories.totalCount
-        organizations = user.organizations.nodes
-          .filter((node): node is NonNullable<typeof node> => Boolean(node))
-          .map((node) => ({
-            login: node.login,
-            name: node.name ?? node.login,
-            avatarUrl: node.avatarUrl,
-            url: node.url,
-          }))
-      }
-
-      stars += user.repositories.nodes.reduce(
-        (sum, node) => sum + node.stargazerCount,
-        0
+    if (viewer.login.toLowerCase() !== login.toLowerCase()) {
+      console.warn(
+        `[github-stats] Token viewer (${viewer.login}) ≠ GITHUB_USERNAME (${login}). Private contributions will not appear.`
       )
+    }
 
-      const { hasNextPage, endCursor } = user.repositories.pageInfo
-      after = hasNextPage ? endCursor : null
-      pages += 1
-    } while (after && pages < 10)
+    const collection = viewer.contributionsCollection
+    const calendar = collection.contributionCalendar
+    const privateHidden =
+      collection.hasAnyRestrictedContributions ||
+      collection.restrictedContributionsCount > 0
+
+    if (privateHidden) {
+      console.warn(
+        `[github-stats] Restricted/private contributions detected (${collection.restrictedContributionsCount}). Use a Classic PAT with read:user so day cells include private activity.`
+      )
+    }
+
+    const organizations = user.organizations.nodes
+      .filter((node): node is NonNullable<typeof node> => Boolean(node))
+      .map((node) => ({
+        login: node.login,
+        name: node.name ?? node.login,
+        avatarUrl: node.avatarUrl,
+        url: node.url,
+      }))
 
     return {
-      repos,
-      stars,
-      openPullRequests,
-      contributions,
-      avatarUrl,
-      weeks,
+      repos: user.repositories.totalCount,
+      contributions: calendar.totalContributions,
+      avatarUrl: viewer.avatarUrl || user.avatarUrl || githubAvatarFallback,
+      weeks: mapWeeks(calendar.weeks),
       organizations: mergeOrganizations(organizations, githubOrgFallback),
       privateHidden,
     }
@@ -342,4 +296,3 @@ export const getGithubStats = unstable_cache(
   ["portfolio-github-stats-v2"],
   { revalidate: 3600, tags: ["github-stats"] }
 )
-import { unstable_cache } from "next/cache"

@@ -15,12 +15,13 @@ import { cn } from "@/lib/utils"
 export type ProjectShowcaseItem = {
   id: string
   title: string
+  descriptor: string
   role: string
   summary: string
   period: string
   teamSizeLabel: string
   stack: readonly string[]
-  highlights: readonly string[]
+  highlights: readonly { label: string; text: string }[]
   liveUrl: string
   liveLabel: string
 }
@@ -29,6 +30,9 @@ type ProjectsShowcaseProps = {
   projects: readonly ProjectShowcaseItem[]
   tabsLabel: string
   shippedLabel: string
+  contextLabel: string
+  roleLabel: string
+  stackLabel: string
   notesHint: string
   shippingPressLabels: ShippingPressLabels
   embedFallback: string
@@ -41,6 +45,9 @@ export function ProjectsShowcase({
   projects,
   tabsLabel,
   shippedLabel,
+  contextLabel,
+  roleLabel,
+  stackLabel,
   notesHint,
   shippingPressLabels,
   embedFallback,
@@ -79,11 +86,11 @@ export function ProjectsShowcase({
               )}
               onClick={() => setActiveIndex(index)}
             >
-              <span className="block text-[10px] font-semibold tracking-widest uppercase">
-                {project.period}
-              </span>
-              <span className="font-heading mt-0.5 block truncate text-sm font-semibold tracking-tight sm:text-base">
+              <span className="font-heading block truncate text-sm font-semibold tracking-tight sm:text-base">
                 {project.title}
+              </span>
+              <span className="mt-0.5 block truncate text-[9px] font-semibold tracking-[0.08em] text-muted-foreground uppercase">
+                {project.descriptor}
               </span>
             </button>
           )
@@ -113,12 +120,18 @@ export function ProjectsShowcase({
             <h3 className="font-heading text-lg tracking-tight sm:text-xl [@media(min-width:1024px)_and_(max-height:50rem)]:text-base">
               {active.title}
             </h3>
+            <p className="text-[9px] font-semibold tracking-widest text-muted-foreground uppercase">
+              {roleLabel}
+            </p>
             <p className="text-xs font-medium text-foreground">
               <span
                 className="mr-2 inline-block size-1.5 bg-primary align-middle"
                 aria-hidden
               />
               {active.role}
+            </p>
+            <p className="mt-0.5 text-[9px] font-semibold tracking-widest text-muted-foreground uppercase [@media(min-width:1024px)_and_(max-height:50rem)]:hidden">
+              {contextLabel}
             </p>
             <p className="line-clamp-2 text-xs leading-snug text-muted-foreground [@media(min-width:1024px)_and_(max-height:50rem)]:hidden">
               {active.summary}
@@ -129,16 +142,21 @@ export function ProjectsShowcase({
             </p>
           </header>
 
-          <ul className="flex flex-wrap gap-1">
-            {active.stack.map((tech) => (
-              <li
-                key={tech}
-                className="border border-border bg-muted px-1.5 py-px text-[10px] font-semibold text-foreground"
-              >
-                {tech}
-              </li>
-            ))}
-          </ul>
+          <div className="grid gap-1">
+            <p className="text-[9px] font-semibold tracking-widest text-muted-foreground uppercase">
+              {stackLabel}
+            </p>
+            <ul className="flex flex-wrap gap-1">
+              {active.stack.map((tech) => (
+                <li
+                  key={tech}
+                  className="border border-border bg-muted px-1.5 py-px text-[10px] font-semibold text-foreground"
+                >
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          </div>
 
           <div className="grid min-h-0 gap-1.5 lg:h-full lg:min-h-0 lg:grid-rows-[auto_minmax(0,1fr)]">
             <h4 className="font-heading text-xs tracking-tight text-foreground">

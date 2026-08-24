@@ -22,7 +22,7 @@ export async function HeroSection() {
     >
       <HeroReveal className="col-span-10 grid grid-cols-10 gap-x-[var(--page-col-gap)]">
         <div className="col-span-10 grid min-h-[calc(100svh-8rem)] content-center gap-y-10 py-20 sm:min-h-[calc(100svh-10rem)] sm:py-24 lg:col-span-6 lg:min-h-[calc(100svh-12rem)] lg:py-16 lg:pr-4 xl:col-span-7 xl:pr-10">
-          <div className="grid gap-5 sm:gap-6">
+          <div className="grid gap-4 sm:gap-5">
             <div
               data-hero-reveal
               className="flex flex-wrap items-center gap-x-4 gap-y-2"
@@ -39,6 +39,13 @@ export async function HeroSection() {
             <h1 data-hero-reveal className="hero-headline max-w-[13ch]">
               {t("headline")}
             </h1>
+
+            <p
+              data-hero-reveal
+              className="max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base"
+            >
+              {t("positioning")}
+            </p>
 
             <div
               data-hero-reveal
@@ -113,38 +120,60 @@ export async function HeroSection() {
             </p>
           </header>
 
-          <div className="col-span-10 grid gap-6 sm:grid-cols-3 lg:col-span-8 lg:gap-0">
-            <div data-hero-reveal className="currently-column sm:pr-5">
-              <p className="system-label">
-                01 / {t("currently.buildingLabel")}
-              </p>
-              <p className="currently-value">
-                {t("currently.buildingValue")}
-              </p>
-            </div>
+          <div className="col-span-10 grid overflow-hidden border border-border bg-card lg:col-span-8 lg:grid-cols-[minmax(18rem,1.25fr)_minmax(0,2fr)]">
             <div
               data-hero-reveal
-              className="currently-column sm:border-l sm:border-border sm:px-5"
+              className="relative grid content-center gap-3 border-b border-border p-5 sm:p-6 lg:border-r lg:border-b-0"
             >
+              <span
+                className="absolute inset-y-0 left-0 w-1 bg-primary"
+                aria-hidden
+              />
               <p className="system-label">
-                02 / {t("currently.exploringLabel")}
+                01 / {t("currently.roleLabel")}
               </p>
-              <ul className="grid gap-1.5">
-                {currentFocus.map((item) => (
-                  <li key={item} className="currently-value">
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <p className="font-heading text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
+                {t("currently.roleValue")}
+              </p>
+              <p className="max-w-lg text-sm leading-relaxed text-muted-foreground">
+                {t("currently.mission")}
+              </p>
             </div>
-            <div
-              data-hero-reveal
-              className="currently-column sm:border-l sm:border-border sm:pl-5"
-            >
-              <p className="system-label">
-                03 / {t("currently.basedLabel")}
-              </p>
-              <p className="currently-value">{t("currently.basedValue")}</p>
+
+            <div className="grid sm:grid-cols-2 xl:grid-cols-4">
+              <div data-hero-reveal className="grid content-start gap-3 p-4 sm:p-5">
+                <p className="system-label">
+                  02 / {t("currently.stackLabel")}
+                </p>
+                <p className="currently-value">{t("currently.stackValue")}</p>
+              </div>
+              <div
+                data-hero-reveal
+                className="grid content-start gap-3 border-t border-border p-4 sm:border-t-0 sm:border-l sm:p-5"
+              >
+                <p className="system-label">
+                  03 / {t("currently.githubLabel")}
+                </p>
+                <p className="currently-value">{t("currently.githubValue")}</p>
+              </div>
+              <div
+                data-hero-reveal
+                className="grid content-start gap-3 border-t border-border p-4 sm:p-5 xl:border-t-0 xl:border-l"
+              >
+                <p className="system-label">
+                  04 / {t("currently.aiLabel")}
+                </p>
+                <p className="currently-value">{currentFocus.join(" · ")}</p>
+              </div>
+              <div
+                data-hero-reveal
+                className="grid content-start gap-3 border-t border-border p-4 sm:border-l sm:p-5 xl:border-t-0"
+              >
+                <p className="system-label">
+                  05 / {t("currently.basedLabel")}
+                </p>
+                <p className="currently-value">{t("currently.basedValue")}</p>
+              </div>
             </div>
           </div>
         </section>

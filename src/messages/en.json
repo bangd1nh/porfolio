@@ -32,9 +32,10 @@
     "role": "Fullstack Developer",
     "identityLabel": "Identity",
     "headline": "I build production-grade web systems & AI-powered products.",
+    "positioning": "Fullstack developer shipping production web apps, AI-powered search, and real-time systems.",
     "specialization": "Full-stack Engineer",
     "technologies": "Next.js · NestJS · Agentic AI",
-    "availability": "Available for remote / freelance",
+    "availability": "Open to full-time · remote · freelance",
     "location": "Da Nang, Vietnam",
     "description": "Full-stack developer building scalable web apps with Next.js, NestJS, GraphQL, PostgreSQL, and Redis — expanding into software architecture and AI.",
     "cta": "Explore selected work",
@@ -67,13 +68,18 @@
     "currently": {
       "label": "Currently",
       "note": "Active context / 2026",
-      "buildingLabel": "Building",
-      "buildingValue": "HRTech products @ UC Talent Labs",
-      "exploringLabel": "Exploring",
+      "roleLabel": "Role",
+      "roleValue": "Fullstack Developer @ UC Talent Labs",
+      "mission": "Building HRTech products and AI-powered matching/search systems.",
+      "stackLabel": "Current stack",
+      "stackValue": "Next.js · NestJS · FastAPI",
+      "githubLabel": "GitHub activity",
+      "githubValue": "Personal + organization repos",
+      "aiLabel": "AI focus",
       "exploringItems": [
-        "Agentic workflows",
-        "RAG architectures",
-        "AI-native developer tooling"
+        "RAG",
+        "Embeddings",
+        "Vector search"
       ],
       "basedLabel": "Based in",
       "basedValue": "Da Nang, Vietnam"
@@ -83,8 +89,8 @@
       "moreAi": "See all AI skills in Profile",
       "location": "Location",
       "repos": "Repos",
-      "stars": "Stars",
-      "openPrs": "Open PRs",
+      "organizations": "Organizations",
+      "shippingSince": "Shipping since",
       "contrib": "Contrib",
       "experienceLabel": "years building web apps"
     }
@@ -117,12 +123,14 @@
     "description": "Languages, frameworks, data, APIs, and AI tooling I use to ship production systems.",
     "featured": "Core tools",
     "more": "Also in the kit",
-    "dailyDrivers": "Daily drivers",
+    "primary": "Primary",
+    "productionExperience": "Production experience",
     "aiSystems": "AI systems",
-    "dailyStatus": "Daily / production",
+    "additional": "Previously used / additional",
+    "primaryStatus": "Strongest tools",
+    "productionStatus": "Shipped in production",
     "aiStatus": "Active focus",
-    "viewFull": "View full stack +",
-    "hideFull": "Hide full stack −"
+    "additionalStatus": "Prior project experience"
   },
   "experience": {
     "badge": "Experience",
@@ -132,13 +140,13 @@
       "uctalent": {
         "company": "UC Talent Labs",
         "role": "Fullstack Developer",
-        "summary": "Product + outsourcing studio building an HRTech platform and client solutions.",
+        "summary": "HRTech product team building a talent marketplace, recruiter workspace, and AI-assisted search and matching workflows.",
         "bullets": {
-          "production": "Built and maintained production web apps for the HRTech platform and client projects.",
-          "performance": "Implemented scalable features and optimized performance across frontend and backend.",
-          "reliability": "Debugged and resolved production issues to improve reliability and maintainability.",
-          "endToEnd": "Delivered end-to-end solutions for internal products and outsourcing engagements.",
-          "agile": "Collaborated with developers, designers, and stakeholders in Agile sprints."
+          "production": "Owned full-stack delivery for marketplace and recruiter workflows, including candidate sourcing, pipelines, and referral flows.",
+          "performance": "Built AI-assisted screening and matching plus semantic search with LLM tooling, embeddings, and Elasticsearch.",
+          "reliability": "Shipped Next.js experiences and NestJS/FastAPI services over GraphQL, PostgreSQL, Redis, and Elasticsearch.",
+          "endToEnd": "Connected search, matching, background jobs, and notifications across service boundaries with production fallbacks.",
+          "agile": "Took features from product/design handoff through implementation, review, release, and production debugging."
         }
       },
       "fsoft": {
@@ -164,7 +172,15 @@
     "teamSize": "Team of {count}",
     "solo": "Solo · Capstone",
     "tabsLabel": "Select a project",
-    "shipped": "What I shipped",
+    "shipped": "Case study notes",
+    "caseStudy": {
+      "context": "Problem / Context",
+      "role": "My Role",
+      "stack": "Technical stack",
+      "shipped": "What I Shipped",
+      "decisions": "Technical Decisions / Challenges",
+      "impact": "Impact"
+    },
     "notesHint": "Drag, stack, double-click to reset",
     "shippingPress": {
       "ticket": "Project ticket",
@@ -177,60 +193,46 @@
     "items": {
       "guscent": {
         "title": "Guscent",
+        "descriptor": "E-commerce · Frontend",
         "role": "Frontend developer · Freelance",
-        "summary": "A design-led perfume storefront that helps customers discover products through mood-based storytelling, a scent quiz, editorial content, and a polished commerce journey.",
+        "summary": "A design-led perfume storefront that turns mood-based storytelling and a scent quiz into a clear product-discovery and commerce journey.",
         "highlights": {
-          "storefront": "Built the production Next.js storefront from the designer's direction, with reusable sections for product discovery and brand storytelling.",
-          "quiz": "Implemented an interactive scent quiz that turns customer moods and preferences into a guided fragrance-discovery journey.",
-          "commerce": "Delivered catalog navigation, product presentation, and shopping-cart interactions across the customer journey.",
-          "api": "Integrated backend APIs and CMS-driven media/content with resilient loading, empty, and error states.",
-          "responsive": "Translated a highly visual design into a responsive, accessible experience across desktop, tablet, and mobile.",
-          "collaboration": "Owned the frontend in a three-person freelance team, working closely with one backend developer and one designer."
+          "shipped": "Production Next.js storefront, scent quiz, catalog/cart journeys, and reusable editorial and product sections.",
+          "decisions": "Translated visual art direction into responsive, accessible components and resilient API/CMS loading, empty, and error states.",
+          "impact": "Production launch with a responsive implementation, reusable UI, and backend/CMS integration."
         }
       },
       "uctalent": {
         "title": "uctalent.io",
+        "descriptor": "HRTech · Fullstack · AI",
         "role": "Fullstack developer",
-        "summary": "HRTech platform: talent marketplace on uctalent.io and a React workspace for head hunters on business.uctalent.io — AI matching, semantic search, blockchain referrals.",
+        "summary": "HRTech talent marketplace and recruiter workspace for sourcing, pipelines, AI-assisted matching, semantic search, and referral flows.",
         "highlights": {
-          "hunterPortal": "Built business.uctalent.io — a React app for head hunters to source candidates, run pipelines, and close placements.",
-          "fullstack": "Shipped production full-stack features across uctalent.io and the hunter workspace with Next.js, NestJS, GraphQL, PostgreSQL, and Redis.",
-          "hrAi": "Applied LLMs to HR workflows — resume screening, job–candidate matching, and outreach drafts that cut recruiter busywork.",
-          "elasticsearch": "Indexed jobs and talent profiles on Elasticsearch for fast, faceted search at platform scale.",
-          "semantic": "Combined Elasticsearch with vector embeddings for semantic search and recommendations beyond keyword matching.",
-          "microservices": "Designed GraphQL + Redis + async job integrations across microservices so matching, search, and notifications stay resilient.",
-          "ddd": "Designed backend services with Clean Architecture and Domain-Driven Design for long-term maintainability.",
-          "performance": "Improved performance via API, query, and Redis caching optimization plus code reviews."
+          "shipped": "Marketplace and recruiter workflows for sourcing, candidate pipelines, screening, matching, outreach, and referrals.",
+          "decisions": "Combined Elasticsearch and vector embeddings for semantic search; integrated Next.js with NestJS/FastAPI services through GraphQL, PostgreSQL, Redis, and background jobs.",
+          "impact": "Production HRTech products with shared search/matching architecture and full-stack technical ownership."
         }
       },
       "unchainlabs": {
         "title": "Unchain Labs",
+        "descriptor": "CMS · Fullstack",
         "role": "Fullstack developer",
-        "summary": "Enterprise marketing site and headless CMS for Unchain Labs — content-managed pages, full SEO, and contact flows for business leads.",
+        "summary": "A production marketing site and headless CMS that lets the team publish structured business content without frontend rework.",
         "highlights": {
-          "cms": "Built a Strapi headless CMS with structured content types, media library, and role-based admin for marketing teams.",
-          "seo": "Implemented end-to-end SEO — metadata, Open Graph, sitemap, robots, and semantic HTML for crawlable business pages.",
-          "contact": "Shipped contact and lead-capture flows with validated forms and reliable delivery for inbound business inquiries.",
-          "content": "Modeled flexible page sections and reusable components so non-developers can publish case studies, services, and blog posts.",
-          "fullstack": "Delivered a Next.js frontend consuming Strapi REST APIs with SSR for performance and indexable marketing content.",
-          "delivery": "Deployed production builds with environment-based config, image optimization, and maintainable content workflows.",
-          "responsive": "Built a responsive Tailwind CSS interface that keeps the marketing experience polished across desktop, tablet, and mobile.",
-          "architecture": "Separated the presentation layer from CMS-driven data so new pages and campaigns can be assembled without reworking the frontend."
+          "shipped": "Next.js frontend, Strapi CMS, reusable page sections, media/content workflows, and validated contact flows.",
+          "decisions": "Used SSR and REST integration with semantic HTML, metadata, Open Graph, sitemap, robots, and environment-based configuration.",
+          "impact": "Production launch with SEO-ready architecture, responsive components, and CMS ownership for non-developers."
         }
       },
       "matchtutors": {
         "title": "Match Tutors",
+        "descriptor": "Marketplace · Realtime · AI",
         "role": "Fullstack developer · Capstone",
-        "summary": "Personal capstone platform that connects tutors and students — scheduling, AI-assisted matching, realtime chat, and payments.",
+        "summary": "A tutor–student marketplace that brings profiles, scheduling, AI-assisted matching, realtime chat, and payments into one workflow.",
         "highlights": {
-          "platform": "Built a tutor–student connection product end-to-end: profiles, scheduling, and learning management flows.",
-          "matching": "Implemented AI-assisted matching with OpenAI embeddings and background match workers on Redis/BullMQ.",
-          "realtime": "Added realtime messaging and live updates with Socket.io across the booking experience.",
-          "workers": "Designed async job workers for embeddings, email, notifications, and match processing.",
-          "payments": "Integrated PayOS checkout plus auth (JWT / Google OAuth) and file uploads (S3 / Cloudinary).",
-          "fullstack": "Shipped React + Vite frontend and Express + MongoDB API as separate repos — production builds deployed on AWS, with Cloudinary for image and file storage.",
-          "scheduling": "Delivered scheduling flows that let tutors and students coordinate lessons and manage the learning journey in one place.",
-          "auth": "Implemented secure access with JWT and Google OAuth so each user can safely manage their profile, bookings, and payments."
+          "shipped": "Profiles, scheduling, learning workflows, PayOS checkout, JWT/Google OAuth, file uploads, and realtime messaging.",
+          "decisions": "Used OpenAI embeddings with Redis/BullMQ workers for matching and Socket.io for live booking and chat updates across separate React and Express repos.",
+          "impact": "Deployed production builds on AWS with real-time functionality and an asynchronous matching architecture."
         }
       }
     }
@@ -333,8 +335,10 @@
     "skills": "Skills"
   },
   "contact": {
-    "eyebrow": "Available for work",
-    "title": "Let's talk about your project",
+    "eyebrow": "Open to full-time · remote · freelance",
+    "title": "Available for opportunities",
+    "description": "Fullstack roles, freelance builds, or interesting product collaborations.",
+    "startConversation": "Start a conversation",
     "email": "Email",
     "phone": "Phone",
     "github": "GitHub",
