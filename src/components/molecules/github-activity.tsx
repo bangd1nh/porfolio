@@ -262,7 +262,7 @@ export function GithubActivity({
 
       {organizations.length > 0 ? (
         <details className="grid gap-2">
-          <summary className="cursor-pointer text-[10px] font-semibold tracking-widest text-muted-foreground uppercase transition-colors duration-200 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none">
+          <summary className="flex min-h-11 cursor-pointer items-center text-[10px] font-semibold tracking-widest text-muted-foreground uppercase transition-colors duration-150 hover:text-foreground motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:min-h-0">
             {organizationsLabel}
           </summary>
           <ul className="flex flex-wrap gap-2">
@@ -275,7 +275,7 @@ export function GithubActivity({
                         href={org.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex cursor-pointer items-center gap-2 border border-border bg-card px-2.5 py-1.5 text-xs font-semibold text-foreground transition-colors duration-200 hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                        className="inline-flex min-h-11 cursor-pointer items-center gap-2 border border-border bg-card px-2.5 py-1.5 text-xs font-semibold text-foreground transition-colors duration-150 hover:bg-muted motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:min-h-0"
                       />
                     }
                   >

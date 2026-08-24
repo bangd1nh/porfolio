@@ -46,7 +46,7 @@ export async function SiteFooter({
       >
         <a
           href={`mailto:${contactLinks.email}`}
-          className="inline-flex min-h-10 cursor-pointer items-center gap-1.5 text-sm font-medium break-all text-foreground transition-colors duration-200 hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:min-h-0 sm:break-normal"
+          className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 text-sm font-medium break-all text-foreground transition-colors duration-150 hover:text-muted-foreground motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:min-h-0 sm:break-normal"
         >
           <Mail className="size-3.5 shrink-0" aria-hidden />
           {contactLinks.email}
@@ -55,7 +55,7 @@ export async function SiteFooter({
           href={contactLinks.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex min-h-10 cursor-pointer items-center gap-1.5 text-sm font-medium text-foreground transition-colors duration-200 hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:min-h-0"
+          className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 text-sm font-medium text-foreground transition-colors duration-150 hover:text-muted-foreground motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:min-h-0"
         >
           <GitBranch className="size-3.5 shrink-0" aria-hidden />
           GitHub

@@ -29,8 +29,8 @@ export function LocaleSwitcher() {
           onClick={() => switchLocale(loc)}
           aria-current={locale === loc ? "true" : undefined}
           className={cn(
-            "cursor-pointer rounded-none px-3 py-1.5 text-xs font-semibold tracking-wider uppercase",
-            "transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+            "min-h-11 cursor-pointer rounded-none px-3 py-1.5 text-xs font-semibold tracking-wider uppercase lg:min-h-8",
+            "transition-colors duration-150 motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
             locale === loc
               ? "bg-primary text-primary-foreground"
               : "text-muted-foreground hover:bg-muted hover:text-foreground"

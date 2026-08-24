@@ -20,7 +20,7 @@ export function ThemeToggle() {
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   if (!mounted) {
-    return <div aria-hidden className="size-8 rounded-none" />
+    return <div aria-hidden className="size-11 rounded-none lg:size-8" />
   }
 
   const isDark = resolvedTheme === "dark"
@@ -35,8 +35,8 @@ export function ThemeToggle() {
       }}
       aria-label={t("toggle")}
       className={cn(
-        "grid size-8 cursor-pointer place-items-center rounded-none",
-        "text-muted-foreground transition-colors duration-200",
+        "grid size-11 cursor-pointer place-items-center rounded-none lg:size-8",
+        "text-muted-foreground transition-colors duration-150 motion-reduce:transition-none",
         "hover:bg-muted hover:text-foreground",
         "focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
         "disabled:pointer-events-none disabled:opacity-60"

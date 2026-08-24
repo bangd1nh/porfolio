@@ -80,7 +80,7 @@ export function CareerTimeline({ entries, className }: CareerTimelineProps) {
                   href={entry.linkHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex w-fit cursor-pointer items-center gap-1.5 border border-border bg-muted px-2.5 py-1.5 text-xs font-semibold text-foreground transition-colors duration-200 hover:bg-card focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                  className="inline-flex min-h-11 w-fit cursor-pointer items-center gap-1.5 border border-border bg-muted px-2.5 py-1.5 text-xs font-semibold text-foreground transition-colors duration-150 hover:bg-card motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:min-h-0"
                 >
                   <GitBranch className="size-3.5" aria-hidden />
                   {entry.linkLabel}

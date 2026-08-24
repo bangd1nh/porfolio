@@ -45,8 +45,8 @@ export function NavLink({
       href={href}
       aria-current={isActive ? "location" : undefined}
       className={cn(
-        "group relative flex cursor-pointer items-baseline gap-1.5 rounded-none px-2.5 py-2 font-mono text-[11px] font-semibold tracking-[0.08em] uppercase xl:px-3",
-        "transition-colors duration-200 after:absolute after:right-2.5 after:bottom-0.5 after:left-2.5 after:h-px after:origin-left after:bg-primary after:transition-transform after:duration-300",
+        "group relative flex min-h-11 cursor-pointer items-center gap-1.5 rounded-none px-2.5 py-2 font-mono text-[11px] font-semibold tracking-[0.08em] uppercase lg:min-h-0 xl:px-3",
+        "transition-colors duration-150 motion-reduce:transition-none after:absolute after:right-2.5 after:bottom-0.5 after:left-2.5 after:h-px after:origin-left after:bg-primary after:transition-transform after:duration-150 motion-reduce:after:transition-none",
         "hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
         isActive
           ? "text-foreground after:scale-x-100"

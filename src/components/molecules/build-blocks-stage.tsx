@@ -10,6 +10,8 @@ import { cn } from "@/lib/utils"
 
 type BuildBlocksStageProps = {
   className?: string
+  selectedId: string | null
+  onSelectedIdChange: (id: string | null) => void
 }
 
 type BlockPose = {
@@ -38,7 +40,11 @@ const WALL_INSET = 10
 /**
  * Physics stage — gravity pile + corner-grab swing via Matter constraints.
  */
-export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
+export function BuildBlocksStage({
+  className,
+  selectedId,
+  onSelectedIdChange,
+}: BuildBlocksStageProps) {
   const t = useTranslations("contact.blocks")
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
   const compactLayout = useMediaQuery("(max-width: 1023px)")
@@ -49,7 +55,10 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
   const [poses, setPoses] = useState<Record<string, BlockPose>>({})
   const [ready, setReady] = useState(false)
   const [draggingId, setDraggingId] = useState<string | null>(null)
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+
+  const toggleSelection = (id: string) => {
+    onSelectedIdChange(selectedId === id ? null : id)
+  }
 
   useEffect(() => {
     if (reducedMotion || compactLayout) return
@@ -272,15 +281,11 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
             type="button"
             key={block.id}
             aria-pressed={selectedId === block.id}
-            onClick={() =>
-              setSelectedId((current) =>
-                current === block.id ? null : block.id
-              )
-            }
+            onClick={() => toggleSelection(block.id)}
             className={cn(
-              "inline-flex max-w-full cursor-pointer items-center justify-center border px-3.5 py-2.5",
+              "inline-flex min-h-11 max-w-full cursor-pointer items-center justify-center border px-3.5 py-2.5",
               "font-sans text-[0.65rem] font-bold tracking-[0.12em] text-foreground uppercase whitespace-nowrap sm:px-4 sm:text-xs",
-              "transition-[background-color,border-color,transform] duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
+              "transition-[background-color,border-color,color,transform] duration-150 motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none",
               selectedId === block.id
                 ? "border-primary bg-primary text-primary-foreground -translate-y-0.5"
                 : "border-border bg-card hover:border-foreground/40 hover:bg-muted"
@@ -437,7 +442,7 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
     dragRef.current = null
     setDraggingId(null)
     if (!drag.moved) {
-      setSelectedId((current) => (current === drag.id ? null : drag.id))
+      toggleSelection(drag.id)
     }
   }
 
@@ -507,15 +512,13 @@ export function BuildBlocksStage({ className }: BuildBlocksStageProps) {
                 onPointerCancel={endDrag}
                 onClick={(event) => {
                   if (event.detail === 0) {
-                    setSelectedId((current) =>
-                      current === block.id ? null : block.id
-                    )
+                    toggleSelection(block.id)
                   }
                 }}
                 className={cn(
                   chipClassName,
                   "absolute top-0 left-0 touch-none select-none will-change-transform",
-                  "transition-shadow duration-200",
+                  "transition-[background-color,border-color,color,box-shadow] duration-150 motion-reduce:transition-none",
                   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
                   isDragging ? "cursor-grabbing" : "cursor-grab",
                   selectedId === block.id &&

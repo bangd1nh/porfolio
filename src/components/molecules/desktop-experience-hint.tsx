@@ -67,6 +67,7 @@ export function DesktopExperienceHint() {
           type="button"
           variant="ghost"
           size="icon-xs"
+          className="size-11"
           aria-label={t("dismiss")}
           onClick={dismiss}
         >

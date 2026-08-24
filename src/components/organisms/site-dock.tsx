@@ -80,12 +80,7 @@ export function SiteDock() {
   }, [])
 
   return (
-    <header
-      className={cn(
-        "site-dock",
-        visible && "site-dock-visible"
-      )}
-    >
+    <header className={cn("site-dock", visible && "site-dock-visible")}>
       <span className="page-progress" aria-hidden>
         <span ref={progressRef} />
       </span>
@@ -112,7 +107,7 @@ export function SiteDock() {
       <div className="grid grid-flow-col items-center gap-2 border border-border bg-card px-3 py-2 sm:gap-3 sm:px-4">
         <TransitionLink
           href="/"
-          className="font-heading shrink-0 text-sm tracking-tight transition-opacity hover:opacity-80 sm:text-base"
+          className="font-heading inline-flex min-h-11 shrink-0 items-center text-sm tracking-tight transition-opacity duration-150 hover:opacity-80 motion-reduce:transition-none sm:text-base lg:min-h-8"
           onClick={() => setMenuOpen(false)}
         >
           {t("name")}
@@ -142,8 +137,8 @@ export function SiteDock() {
           <Button
             type="button"
             variant="outline"
-            size="icon-sm"
-            className="min-h-9 min-w-9 rounded-none lg:hidden"
+            size="icon-lg"
+            className="rounded-none lg:hidden"
             aria-expanded={menuOpen}
             aria-controls={menuId}
             aria-label={menuOpen ? t("menuClose") : t("menuOpen")}

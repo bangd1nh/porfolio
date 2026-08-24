@@ -501,7 +501,7 @@ html[data-portfolio-boot="reduced"] .portfolio-loader {
     isolation: isolate;
     pointer-events: none;
     transform: translate(-50%, calc(100% + var(--site-dock-offset)));
-    transition: transform 300ms ease-out;
+    transition: transform 220ms ease-out;
   }
 
   .site-dock.site-dock-visible,

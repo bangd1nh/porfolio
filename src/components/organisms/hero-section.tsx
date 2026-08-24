@@ -68,7 +68,7 @@ export async function HeroSection() {
             >
               {t("cta")}
               <ArrowDownRight
-                className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:translate-y-0.5"
+                className="size-4 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:translate-y-0.5 motion-reduce:transition-none"
                 aria-hidden
               />
             </Button>
@@ -80,7 +80,7 @@ export async function HeroSection() {
             >
               {t("ctaResume")}
               <ArrowUpRight
-                className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                className="size-4 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
                 aria-hidden
               />
             </Button>
