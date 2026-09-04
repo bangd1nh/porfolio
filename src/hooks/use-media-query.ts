@@ -1,20 +1,24 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useSyncExternalStore } from "react"
+
+function subscribe(query: string, onChange: () => void) {
+  const media = window.matchMedia(query)
+  media.addEventListener("change", onChange)
+  return () => media.removeEventListener("change", onChange)
+}
+
+function getSnapshot(query: string) {
+  return window.matchMedia(query).matches
+}
 
 /**
- * Subscribe to a CSS media query. Returns false until mounted (SSR-safe).
+ * Subscribe to a CSS media query. SSR snapshot is always false.
  */
 export function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(false)
-
-  useEffect(() => {
-    const media = window.matchMedia(query)
-    const update = () => setMatches(media.matches)
-    update()
-    media.addEventListener("change", update)
-    return () => media.removeEventListener("change", update)
-  }, [query])
-
-  return matches
+  return useSyncExternalStore(
+    (onChange) => subscribe(query, onChange),
+    () => getSnapshot(query),
+    () => false,
+  )
 }

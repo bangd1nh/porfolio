@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 
 import { useMediaQuery } from "@/hooks/use-media-query"
 
-const DOCK_HOTZONE_PX = 64
+const HEADER_HOTZONE_PX = 64
 const SCROLL_DELTA_THRESHOLD = 8
 const HIDE_DEBOUNCE_MS = 200
 
@@ -14,15 +14,15 @@ type UseDockVisibilityOptions = {
 }
 
 /**
- * macOS-style dock reveal — desktop only.
- * Shows on scroll down, bottom-edge hover, or dock focus; hides on scroll up.
+ * Compact sticky-header reveal — desktop only.
+ * Shows on scroll up or top-edge hover; hides after deliberate downward scroll.
  */
 export function useDockVisibility({ menuOpen = false }: UseDockVisibilityOptions = {}) {
   const isDesktop = useMediaQuery("(min-width: 1024px)")
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
   const [visible, setVisible] = useState(true)
   const lastScrollY = useRef(0)
-  const nearBottomRef = useRef(false)
+  const nearTopRef = useRef(false)
   const menuOpenRef = useRef(menuOpen)
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -45,7 +45,7 @@ export function useDockVisibility({ menuOpen = false }: UseDockVisibilityOptions
     const scheduleHide = () => {
       clearHideTimer()
       hideTimerRef.current = setTimeout(() => {
-        if (!nearBottomRef.current && !menuOpenRef.current) {
+        if (!nearTopRef.current && !menuOpenRef.current) {
           setVisible(false)
         }
       }, HIDE_DEBOUNCE_MS)
@@ -56,10 +56,10 @@ export function useDockVisibility({ menuOpen = false }: UseDockVisibilityOptions
       const delta = scrollY - lastScrollY.current
 
       if (Math.abs(delta) >= SCROLL_DELTA_THRESHOLD) {
-        if (delta > 0) {
+        if (scrollY <= 1 || delta < 0) {
           setVisible(true)
           clearHideTimer()
-        } else if (!nearBottomRef.current && !menuOpenRef.current) {
+        } else if (!nearTopRef.current && !menuOpenRef.current) {
           scheduleHide()
         }
         lastScrollY.current = scrollY
@@ -67,8 +67,8 @@ export function useDockVisibility({ menuOpen = false }: UseDockVisibilityOptions
     }
 
     const onMouseMove = (event: MouseEvent) => {
-      const isNear = event.clientY >= window.innerHeight - DOCK_HOTZONE_PX
-      nearBottomRef.current = isNear
+      const isNear = event.clientY <= HEADER_HOTZONE_PX
+      nearTopRef.current = isNear
       if (isNear) {
         setVisible(true)
         clearHideTimer()

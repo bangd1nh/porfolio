@@ -1,5 +1,6 @@
 import { ScrollReveal } from "@/components/atoms/scroll-reveal"
 import { SkillStackExplorer } from "@/components/molecules/skill-stack-explorer"
+import { VIEWPORT_SECTION } from "@/data/site"
 import { getTranslations } from "next-intl/server"
 
 const PRIMARY = [
@@ -40,7 +41,7 @@ export async function FeaturedStackSection() {
   return (
     <section
       id="stack"
-      className="page-section box-border min-h-svh content-start gap-y-7 border-t border-border py-12 sm:gap-y-9 sm:py-16 lg:py-20"
+      className={`page-section box-border content-start gap-y-7 border-t border-border py-8 sm:gap-y-9 sm:py-10 lg:gap-y-5 lg:py-8 ${VIEWPORT_SECTION}`}
     >
       <header className="col-span-10 grid h-fit gap-y-3 self-start">
         <p className="system-label text-foreground">SYSTEM / {t("badge")}</p>

@@ -250,7 +250,7 @@ export function ProjectNotesDeskDecor({
       ref={scopeRef}
       data-project-id={projectId}
       aria-label={`${labels.ticket}: ${projectTitle} — ${labels.shipped}`}
-      className="pointer-events-none relative hidden min-h-14 overflow-hidden border border-border bg-muted/20 lg:block lg:h-full lg:min-h-0"
+      className="pointer-events-none relative hidden h-full min-h-0 overflow-hidden border border-border bg-muted/20 lg:block"
     >
       <svg
         viewBox="0 0 560 145"

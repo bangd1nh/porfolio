@@ -428,7 +428,7 @@ html[data-portfolio-boot="reduced"] .portfolio-loader {
     font-family: var(--font-heading), Georgia, serif;
     font-size: clamp(2.65rem, 6.2vw, 5rem);
     font-weight: 550;
-    line-height: 0.98;
+    line-height: 1.08;
     letter-spacing: -0.055em;
     text-wrap: balance;
   }
@@ -479,6 +479,11 @@ html[data-portfolio-boot="reduced"] .portfolio-loader {
     column-gap: inherit;
   }
 
+  #projects {
+    --project-rail-width: 3.25rem;
+    --project-drawer-width: 39.25rem;
+  }
+
   /* Tall section — full viewport from md up; content-sized on small screens */
   .page-section-screen {
     align-content: center;
@@ -490,7 +495,7 @@ html[data-portfolio-boot="reduced"] .portfolio-loader {
     }
   }
 
-  /* macOS-style bottom dock — auto-hide, centered above page content */
+  /* Compact navigation — bottom dock on mobile, top auto-hide header on desktop. */
   .site-dock {
     position: fixed;
     bottom: var(--site-dock-offset);
@@ -513,6 +518,19 @@ html[data-portfolio-boot="reduced"] .portfolio-loader {
     pointer-events: auto;
   }
 
+  @media (min-width: 1024px) {
+    .site-dock {
+      top: var(--site-dock-offset);
+      bottom: auto;
+      transform: translate(-50%, calc(-100% - var(--site-dock-offset)));
+    }
+
+    .site-dock.site-dock-visible,
+    .site-dock:focus-within {
+      transform: translate(-50%, 0);
+    }
+  }
+
   .page-progress {
     position: absolute;
     top: -3px;
@@ -521,6 +539,13 @@ html[data-portfolio-boot="reduced"] .portfolio-loader {
     height: 1px;
     overflow: hidden;
     background: var(--border);
+  }
+
+  @media (min-width: 1024px) {
+    .page-progress {
+      top: auto;
+      bottom: -3px;
+    }
   }
 
   .page-progress > span {

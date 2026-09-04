@@ -1,9 +1,42 @@
 export type ProjectId = "guscent" | "uctalent" | "unchainlabs" | "matchtutors"
 
+export const PROJECT_SELECTION_EVENT = "portfolio-project-select"
+
+export type ProjectProofKey =
+  | "production"
+  | "responsive"
+  | "cmsIntegration"
+  | "semanticSearch"
+  | "aiWorkflows"
+  | "seoReady"
+  | "realtime"
+  | "awsDeployment"
+  | "saasModel"
+  | "rbac"
+  | "ats"
+  | "dbMigrations"
+
+export type ProjectLiveLink = {
+  url: string
+  /** Key under `projects.*` in messages — e.g. liveAts */
+  labelKey: string
+}
+
+export type ProjectPreviewType = "iframe" | "image" | "auto"
+
 export type ProjectItem = {
   id: ProjectId
   /** Message key under `projects.items.<id>` for title/summary/highlights */
   liveUrl: string
+  /** How to render the showcase preview — iframe on desktop or static image. */
+  previewType: ProjectPreviewType
+  /**
+   * Screenshot fallback in `public/projects/` — e.g. `/projects/guscent.webp`.
+   * Shown for `image` previews, on mobile, and while iframe loads / on timeout.
+   */
+  previewImage: string
+  /** Additional production URLs (e.g. ATS workspace beside marketing site). */
+  liveLinks?: readonly ProjectLiveLink[]
   /** Primary repo (often frontend). */
   githubUrl?: string | undefined
   /** Optional backend / second repo. */
@@ -11,6 +44,8 @@ export type ProjectItem = {
   period: string
   teamSize: number
   stack: readonly string[]
+  /** Existing, verifiable outcomes rendered as compact proof chips. */
+  proofKeys: readonly ProjectProofKey[]
   /** Keys under `projects.items.<id>.highlights.*` */
   highlightKeys: readonly string[]
 }
@@ -20,6 +55,8 @@ export const projectsContent: readonly ProjectItem[] = [
   {
     id: "guscent",
     liveUrl: "https://guscent.vn",
+    previewType: "iframe",
+    previewImage: "/projects/guscent.webp",
     period: "06/2026 – 08/2026",
     teamSize: 3,
     stack: [
@@ -31,11 +68,17 @@ export const projectsContent: readonly ProjectItem[] = [
       "SEO",
       "Responsive UI",
     ],
+    proofKeys: ["production", "responsive", "cmsIntegration"],
     highlightKeys: ["shipped", "decisions", "impact"],
   },
   {
     id: "uctalent",
     liveUrl: "https://uctalent.io",
+    previewType: "image",
+    previewImage: "/projects/uctalent.webp",
+    liveLinks: [
+      { url: "https://business.uctalent.io", labelKey: "liveAts" },
+    ],
     githubUrl: "https://github.com/UCTalent",
     period: "03/2026 – Present",
     teamSize: 6,
@@ -51,11 +94,20 @@ export const projectsContent: readonly ProjectItem[] = [
       "LLM",
       "Vector search",
     ],
+    proofKeys: [
+      "production",
+      "saasModel",
+      "ats",
+      "semanticSearch",
+      "aiWorkflows",
+    ],
     highlightKeys: ["shipped", "decisions", "impact"],
   },
   {
     id: "unchainlabs",
     liveUrl: "https://unchain-labs.com",
+    previewType: "auto",
+    previewImage: "/projects/unchainlabs.webp",
     githubUrl: "https://github.com/UCTalent/ucl-web",
     githubBackendUrl: "https://github.com/UCTalent/ucl-web-cms",
     period: "03/2026 – Present",
@@ -69,11 +121,14 @@ export const projectsContent: readonly ProjectItem[] = [
       "SEO",
       "Tailwind CSS",
     ],
+    proofKeys: ["production", "cmsIntegration", "seoReady"],
     highlightKeys: ["shipped", "decisions", "impact"],
   },
   {
     id: "matchtutors",
     liveUrl: "https://match-tutors.vercel.app",
+    previewType: "iframe",
+    previewImage: "/projects/matchtutors.webp",
     githubUrl: "https://github.com/bangd1nh/MatchTutors",
     githubBackendUrl: "https://github.com/bangd1nh/match_Tutor_BE",
     period: "09/2025 – 12/2025",
@@ -89,6 +144,7 @@ export const projectsContent: readonly ProjectItem[] = [
       "Socket.io",
       "OpenAI",
     ],
+    proofKeys: ["realtime", "aiWorkflows", "awsDeployment"],
     highlightKeys: ["shipped", "decisions", "impact"],
   },
 ]

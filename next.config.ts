@@ -18,10 +18,6 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "github.com",
       },
-      {
-        protocol: "https",
-        hostname: "image.thum.io",
-      },
     ],
   },
 };

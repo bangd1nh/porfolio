@@ -21,6 +21,8 @@
     },
     "menuOpen": "Mở menu",
     "menuClose": "Đóng menu",
+    "mainNavigation": "Điều hướng chính",
+    "mobileNavigation": "Điều hướng trên điện thoại",
     "desktopHint": {
       "title": "Trải nghiệm tốt nhất trên máy tính",
       "description": "Mở portfolio trên máy tính để thử các chi tiết kéo thả và đầy đủ tương tác.",
@@ -75,6 +77,7 @@
       "stackValue": "Next.js · NestJS · FastAPI",
       "githubLabel": "Hoạt động GitHub",
       "githubValue": "Repo cá nhân + tổ chức",
+      "githubOpen": "Xem toàn bộ hoạt động",
       "aiLabel": "Trọng tâm AI",
       "exploringItems": [
         "RAG",
@@ -136,6 +139,8 @@
     "badge": "Kinh nghiệm",
     "title": "Kinh nghiệm làm việc",
     "repo": "Repository dự án",
+    "viewDetails": "Xem thêm 2 thành tựu",
+    "hideDetails": "Ẩn thành tựu bổ sung",
     "items": {
       "uctalent": {
         "company": "UC Talent Labs",
@@ -166,13 +171,32 @@
     "title": "Dự án tiêu biểu",
     "description": "Công việc production tôi đang ship — tập trung hệ thống full-stack scalable và workflow AI.",
     "live": "Xem live",
+    "liveAts": "ATS · business",
     "repo": "Repository",
     "repoFrontend": "Frontend",
     "repoBackend": "Backend",
     "teamSize": "Nhóm {count} người",
     "solo": "Cá nhân · Capstone",
     "tabsLabel": "Chọn dự án",
+    "detailsCard": "Chi tiết dự án",
+    "expandHint": "Chạm để mở · Esc để đóng",
+    "notesCount": "{count} ghi chú",
     "shipped": "Ghi chú case study",
+    "proofLabel": "Kết quả / Bằng chứng",
+    "proof": {
+      "production": "Production",
+      "responsive": "Responsive",
+      "cmsIntegration": "Tích hợp CMS",
+      "semanticSearch": "Semantic search",
+      "aiWorkflows": "Workflow AI",
+      "seoReady": "Sẵn sàng SEO",
+      "realtime": "Realtime",
+      "awsDeployment": "Deploy AWS",
+      "saasModel": "Mô hình SaaS",
+      "rbac": "RBAC",
+      "ats": "Nền tảng ATS",
+      "dbMigrations": "Migrate DB"
+    },
     "caseStudy": {
       "context": "Bài toán / Bối cảnh",
       "role": "Vai trò của tôi",
@@ -197,20 +221,20 @@
         "role": "Frontend developer · Freelance",
         "summary": "Storefront nước hoa giàu tính thẩm mỹ, biến storytelling theo cảm xúc và trắc nghiệm mùi hương thành hành trình khám phá/mua sắm rõ ràng.",
         "highlights": {
-          "shipped": "Storefront Next.js production, scent quiz, luồng catalog/cart cùng section editorial và sản phẩm tái sử dụng.",
-          "decisions": "Chuyển art direction thành component responsive, accessible; xử lý bền vững trạng thái loading, empty và error khi tích hợp API/CMS.",
-          "impact": "Ra mắt production với giao diện responsive, UI tái sử dụng và tích hợp backend/CMS."
+          "shipped": "Storefront Next.js App Router: scent quiz, catalog/cart động, hook checkout và section editorial/sản phẩm từ CMS với layout primitive tái sử dụng.",
+          "decisions": "Server Components + fetch theo route; REST có Zod validation; state machine quiz accessible; xử lý loading/empty/error bền vững cho payload headless CMS.",
+          "impact": "Ra mắt production với UI kit responsive, media tối ưu và kiến trúc component team mở rộng mà không phải thiết kế lại trang."
         }
       },
       "uctalent": {
-        "title": "uctalent.io",
+        "title": "uctalent.io & business.uctalent.io",
         "descriptor": "HRTech · Fullstack · AI",
-        "role": "Fullstack developer",
-        "summary": "Talent marketplace và recruiter workspace cho sourcing, pipeline, matching hỗ trợ AI, semantic search và referral flow.",
+        "role": "Fullstack developer · PIC ATS platform",
+        "summary": "Nền tảng SaaS HRTech: talent marketplace và recruiter workspace cho sourcing, pipeline, matching AI, semantic search và referral flow; thiết kế RBAC phân quyền các role trên ATS UC Talent.",
         "highlights": {
-          "shipped": "Workflow marketplace và recruiter cho sourcing, pipeline ứng viên, screening, matching, outreach và referral.",
-          "decisions": "Kết hợp Elasticsearch với vector embeddings cho semantic search; nối Next.js với service NestJS/FastAPI qua GraphQL, PostgreSQL, Redis và background job.",
-          "impact": "Sản phẩm HRTech production với kiến trúc search/matching dùng chung và trách nhiệm kỹ thuật full-stack."
+          "shipped": "Module SaaS marketplace và ATS: recruiter workspace, pipeline ứng viên, screening, matching AI, outreach, referral và tooling admin theo tenant.",
+          "decisions": "Thiết kế RBAC và ma trận phân quyền recruiter/admin/candidate; migrate schema PostgreSQL và chiến lược seed; Elasticsearch + vector embeddings cho semantic search; GraphQL qua NestJS, FastAPI, Redis queue và background worker.",
+          "impact": "Nền tảng HRTech production với luồng ATS theo role, data model có thể tiến hóa và dịch vụ search/matching dùng chung dưới trách nhiệm full-stack."
         }
       },
       "unchainlabs": {
@@ -219,9 +243,9 @@
         "role": "Fullstack developer",
         "summary": "Website marketing production và headless CMS giúp team publish nội dung doanh nghiệp có cấu trúc mà không phải sửa frontend.",
         "highlights": {
-          "shipped": "Frontend Next.js, Strapi CMS, section tái sử dụng, workflow media/nội dung và form contact có validation.",
-          "decisions": "Dùng SSR và REST integration với HTML semantic, metadata, Open Graph, sitemap, robots và config theo môi trường.",
-          "impact": "Ra mắt production với kiến trúc sẵn sàng cho SEO, component responsive và quyền quản lý nội dung cho team không dev."
+          "shipped": "Site marketing Next.js, content type Strapi, section dynamic zone, workflow media library, API contact có validation và luồng preview cho editor.",
+          "decisions": "SSR/SSG hybrid với HTML semantic; RBAC Strapi cho role editor; CMS trên PostgreSQL với content model an toàn khi migrate; sitemap, robots, Open Graph và config theo môi trường.",
+          "impact": "Site production sẵn sàng SEO — team không dev publish trang có cấu trúc mà không cần redeploy frontend."
         }
       },
       "matchtutors": {
@@ -230,9 +254,9 @@
         "role": "Fullstack developer · Capstone",
         "summary": "Marketplace gia sư–học viên gom hồ sơ, đặt lịch, matching hỗ trợ AI, chat realtime và thanh toán vào một workflow.",
         "highlights": {
-          "shipped": "Hồ sơ, đặt lịch, quản lý buổi học, PayOS checkout, JWT/Google OAuth, upload file và nhắn tin realtime.",
-          "decisions": "Dùng OpenAI embeddings với worker Redis/BullMQ cho matching và Socket.io cho cập nhật booking/chat trên hai repo React và Express.",
-          "impact": "Deploy build production trên AWS với chức năng realtime và kiến trúc matching bất đồng bộ."
+          "shipped": "Hồ sơ gia sư/học viên, đặt lịch, quản lý buổi học, PayOS checkout, JWT + Google OAuth, upload file S3 và nhắn tin Socket.io với cập nhật booking realtime.",
+          "decisions": "Collection MongoDB có index query; OpenAI embeddings + worker BullMQ trên Redis cho matching bất đồng bộ; middleware auth Express; deploy Docker lên AWS với secret theo môi trường.",
+          "impact": "Capstone ship lên AWS với chat/booking realtime, matching AI qua queue và codebase React + Express tách repo sẵn sàng iterate."
         }
       }
     }
@@ -338,7 +362,7 @@
     "eyebrow": "Sẵn sàng cho full-time · remote · freelance",
     "title": "Sẵn sàng cho cơ hội mới",
     "description": "Vai trò fullstack, dự án freelance hoặc cơ hội hợp tác sản phẩm thú vị.",
-    "startConversation": "Bắt đầu trò chuyện",
+    "startConversation": "Cùng xây một sản phẩm",
     "selectedCapability": "Đã chọn / {capability}",
     "talkAbout": "Trao đổi về {capability}",
     "mailSubject": "Trao đổi từ portfolio",
@@ -350,6 +374,8 @@
     "buildCaption": "Tôi có thể xây",
     "buildHintDesktop": "Kéo hoặc chọn một capability",
     "buildHintMobile": "Chạm để chọn",
+    "relatedWork": "Dự án liên quan",
+    "openProject": "Mở {project}",
     "blocks": {
       "agents": "AI Agents",
       "backend": "Backend",

@@ -1,4 +1,5 @@
 import { getLocale, getTranslations } from "next-intl/server"
+import { ArrowUpRight } from "lucide-react"
 
 import { GithubActivity } from "@/components/molecules/github-activity"
 import { contactLinks } from "@/data/contact"
@@ -7,6 +8,7 @@ import { getGithubStats } from "@/lib/github-stats"
 export function GithubProofSkeleton({ label }: { label: string }) {
   return (
     <aside
+      id="github-activity"
       className="grid min-h-[22rem] content-between gap-6 border border-border bg-card p-4 sm:p-5 lg:min-h-[25rem] lg:p-6"
       aria-label={label}
       aria-busy="true"
@@ -47,7 +49,10 @@ export async function GithubProof() {
 
   if (!stats) {
     return (
-      <aside className="grid min-h-[22rem] content-between gap-8 border border-border bg-card p-5 lg:min-h-[25rem] lg:p-6">
+      <aside
+        id="github-activity"
+        className="scroll-mt-20 grid min-h-[22rem] content-between gap-8 border border-border bg-card p-5 lg:min-h-[25rem] lg:p-6"
+      >
         <header className="flex items-center justify-between gap-4">
           <p className="system-label">{t("github.proofLabel")}</p>
           <span className="font-mono text-[11px] text-muted-foreground">
@@ -84,7 +89,10 @@ export async function GithubProof() {
   ]
 
   return (
-    <aside className="grid min-h-[22rem] content-between gap-5 border border-border bg-card p-4 sm:p-5 lg:min-h-[25rem] lg:p-6">
+    <aside
+      id="github-activity"
+      className="scroll-mt-20 grid min-h-[22rem] content-between gap-5 border border-border bg-card p-4 sm:p-5 lg:min-h-[25rem] lg:p-6"
+    >
       <header className="flex items-center justify-between gap-4">
         <p className="system-label">{t("github.proofLabel")}</p>
         <span className="flex items-center gap-2 font-mono text-[11px] text-muted-foreground uppercase">
@@ -125,5 +133,84 @@ export async function GithubProof() {
         ))}
       </dl>
     </aside>
+  )
+}
+
+export function CurrentGithubPreviewSkeleton({
+  label,
+  value,
+}: {
+  label: string
+  value: string
+}) {
+  return (
+    <div className="grid content-start gap-3 p-4 sm:p-5">
+      <p className="system-label">03 / {label}</p>
+      <p className="currently-value">{value}</p>
+    </div>
+  )
+}
+
+/** Compact current-context link backed by the same hourly GitHub cache as the heatmap. */
+export async function CurrentGithubPreview() {
+  const t = await getTranslations("hero")
+  const locale = await getLocale()
+  const stats = await getGithubStats()
+
+  if (!stats) {
+    return (
+      <a
+        href="#github-activity"
+        className="group grid h-full content-start gap-3 p-4 transition-colors duration-150 hover:bg-muted/60 motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:p-5"
+      >
+        <p className="system-label">03 / {t("currently.githubLabel")}</p>
+        <p className="currently-value">{t("currently.githubValue")}</p>
+        <span className="system-link inline-flex items-center gap-1.5">
+          {t("currently.githubOpen")}
+          <ArrowUpRight className="size-3.5" aria-hidden />
+        </span>
+      </a>
+    )
+  }
+
+  const metrics = [
+    {
+      label: t("collage.contrib"),
+      value: stats.contributions.toLocaleString(locale),
+    },
+    { label: t("collage.repos"), value: stats.repos.toLocaleString(locale) },
+    {
+      label: t("collage.organizations"),
+      value: stats.organizations.length.toLocaleString(locale),
+    },
+  ]
+
+  return (
+    <a
+      href="#github-activity"
+      aria-label={t("currently.githubOpen")}
+      className="group grid h-full content-start gap-3 p-4 transition-colors duration-150 hover:bg-muted/60 motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:p-5"
+    >
+      <div className="flex items-center justify-between gap-3">
+        <p className="system-label">03 / {t("currently.githubLabel")}</p>
+        <ArrowUpRight
+          className="size-3.5 text-muted-foreground transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
+          aria-hidden
+        />
+      </div>
+      <dl className="grid grid-cols-3 gap-2">
+        {metrics.map((metric) => (
+          <div key={metric.label} className="grid gap-0.5">
+            <dd className="font-heading text-lg font-semibold tracking-tight text-foreground">
+              {metric.value}
+            </dd>
+            <dt className="font-mono text-[8px] leading-tight tracking-[0.08em] text-muted-foreground uppercase">
+              {metric.label}
+            </dt>
+          </div>
+        ))}
+      </dl>
+      <span className="system-link">{t("currently.githubOpen")}</span>
+    </a>
   )
 }

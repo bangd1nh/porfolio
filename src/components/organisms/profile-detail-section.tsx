@@ -123,7 +123,11 @@ export async function ProfileDetailSection() {
           className="col-span-10 grid gap-3 md:col-span-6 md:min-h-0 md:overflow-y-auto md:pl-1 md:[scrollbar-width:none] md:[-ms-overflow-style:none] md:[&::-webkit-scrollbar]:hidden"
           delayMs={40}
         >
-          <CareerTimeline entries={timelineEntries} />
+          <CareerTimeline
+            entries={timelineEntries}
+            viewDetailsLabel={tExperience("viewDetails")}
+            hideDetailsLabel={tExperience("hideDetails")}
+          />
         </ScrollReveal>
       </div>
     </section>

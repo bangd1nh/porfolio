@@ -16,13 +16,20 @@ type TimelineEntry = {
 
 type CareerTimelineProps = {
   entries: readonly TimelineEntry[]
+  viewDetailsLabel: string
+  hideDetailsLabel: string
   className?: string
 }
 
 /**
  * Vertical career rail — marker icons sit on a continuous line beside cards.
  */
-export function CareerTimeline({ entries, className }: CareerTimelineProps) {
+export function CareerTimeline({
+  entries,
+  viewDetailsLabel,
+  hideDetailsLabel,
+  className,
+}: CareerTimelineProps) {
   return (
     <ol className={cn("relative grid gap-0", className)}>
       {/* Center of the 1.5rem marker track (0.75rem) */}
@@ -32,6 +39,8 @@ export function CareerTimeline({ entries, className }: CareerTimelineProps) {
       />
       {entries.map((entry) => {
         const Icon = entry.kind === "education" ? GraduationCap : Briefcase
+        const visibleBullets = entry.bullets?.slice(0, 3) ?? []
+        const additionalBullets = entry.bullets?.slice(3) ?? []
         return (
           <li
             key={entry.id}
@@ -63,17 +72,42 @@ export function CareerTimeline({ entries, className }: CareerTimelineProps) {
                   <p className="text-sm text-muted-foreground">{entry.summary}</p>
                 ) : null}
               </header>
-              {entry.bullets && entry.bullets.length > 0 ? (
-                <ul className="grid gap-2 border-t border-border pt-3">
-                  {entry.bullets.map((bullet) => (
-                    <li
-                      key={bullet}
-                      className="border-l-2 border-primary pl-3 text-sm leading-relaxed text-foreground"
-                    >
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
+              {visibleBullets.length > 0 ? (
+                <div className="grid gap-2 border-t border-border pt-3">
+                  <ul className="grid gap-2">
+                    {visibleBullets.map((bullet) => (
+                      <li
+                        key={bullet}
+                        className="border-l-2 border-primary pl-3 text-sm leading-relaxed text-foreground"
+                      >
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {additionalBullets.length > 0 ? (
+                    <details className="group/details grid gap-2">
+                      <summary className="inline-flex min-h-11 w-fit cursor-pointer items-center font-mono text-[11px] font-semibold tracking-[0.08em] text-muted-foreground uppercase transition-colors duration-150 hover:text-foreground motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:min-h-0">
+                        <span className="group-open/details:hidden">
+                          + {viewDetailsLabel}
+                        </span>
+                        <span className="hidden group-open/details:inline">
+                          − {hideDetailsLabel}
+                        </span>
+                      </summary>
+                      <ul className="grid gap-2 pt-1">
+                        {additionalBullets.map((bullet) => (
+                          <li
+                            key={bullet}
+                            className="border-l-2 border-border pl-3 text-sm leading-relaxed text-muted-foreground"
+                          >
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  ) : null}
+                </div>
               ) : null}
               {entry.linkHref && entry.linkLabel ? (
                 <a

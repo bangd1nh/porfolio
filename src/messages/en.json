@@ -21,6 +21,8 @@
     },
     "menuOpen": "Open menu",
     "menuClose": "Close menu",
+    "mainNavigation": "Main navigation",
+    "mobileNavigation": "Mobile navigation",
     "desktopHint": {
       "title": "Best explored on desktop",
       "description": "Open this portfolio on a computer to try the draggable details and full interactions.",
@@ -75,6 +77,7 @@
       "stackValue": "Next.js · NestJS · FastAPI",
       "githubLabel": "GitHub activity",
       "githubValue": "Personal + organization repos",
+      "githubOpen": "View full activity",
       "aiLabel": "AI focus",
       "exploringItems": [
         "RAG",
@@ -136,6 +139,8 @@
     "badge": "Experience",
     "title": "Work experience",
     "repo": "Project repository",
+    "viewDetails": "View 2 more achievements",
+    "hideDetails": "Hide additional achievements",
     "items": {
       "uctalent": {
         "company": "UC Talent Labs",
@@ -166,13 +171,32 @@
     "title": "Selected work",
     "description": "Production work I ship — focused on scalable full-stack systems and AI-assisted workflows.",
     "live": "Live site",
+    "liveAts": "ATS · business",
     "repo": "Repository",
     "repoFrontend": "Frontend",
     "repoBackend": "Backend",
     "teamSize": "Team of {count}",
     "solo": "Solo · Capstone",
     "tabsLabel": "Select a project",
+    "detailsCard": "Project details",
+    "expandHint": "Tap to expand · Esc to close",
+    "notesCount": "{count} notes",
     "shipped": "Case study notes",
+    "proofLabel": "Result / Proof",
+    "proof": {
+      "production": "Production",
+      "responsive": "Responsive",
+      "cmsIntegration": "CMS integration",
+      "semanticSearch": "Semantic search",
+      "aiWorkflows": "AI workflows",
+      "seoReady": "SEO-ready",
+      "realtime": "Realtime",
+      "awsDeployment": "AWS deployment",
+      "saasModel": "SaaS model",
+      "rbac": "RBAC",
+      "ats": "ATS platform",
+      "dbMigrations": "DB migrations"
+    },
     "caseStudy": {
       "context": "Problem / Context",
       "role": "My Role",
@@ -197,20 +221,20 @@
         "role": "Frontend developer · Freelance",
         "summary": "A design-led perfume storefront that turns mood-based storytelling and a scent quiz into a clear product-discovery and commerce journey.",
         "highlights": {
-          "shipped": "Production Next.js storefront, scent quiz, catalog/cart journeys, and reusable editorial and product sections.",
-          "decisions": "Translated visual art direction into responsive, accessible components and resilient API/CMS loading, empty, and error states.",
-          "impact": "Production launch with a responsive implementation, reusable UI, and backend/CMS integration."
+          "shipped": "Next.js App Router storefront: scent quiz, dynamic catalog/cart, checkout hooks, and CMS-driven editorial/product sections with reusable layout primitives.",
+          "decisions": "Server Components + route-level data fetching; Zod-validated REST integration; accessible quiz state machine; resilient loading, empty, and error boundaries for headless CMS payloads.",
+          "impact": "Production launch with responsive UI kit, optimized media, and a component architecture the team can extend without redesigning pages."
         }
       },
       "uctalent": {
-        "title": "uctalent.io",
+        "title": "uctalent.io & business.uctalent.io",
         "descriptor": "HRTech · Fullstack · AI",
-        "role": "Fullstack developer",
-        "summary": "HRTech talent marketplace and recruiter workspace for sourcing, pipelines, AI-assisted matching, semantic search, and referral flows.",
+        "role": "Fullstack developer · PIC ATS platform",
+        "summary": "SaaS HRTech platform — talent marketplace and recruiter workspace for sourcing, pipelines, AI-assisted matching, semantic search, and referral flows; designed RBAC and role-based permissions across the UC Talent ATS.",
         "highlights": {
-          "shipped": "Marketplace and recruiter workflows for sourcing, candidate pipelines, screening, matching, outreach, and referrals.",
-          "decisions": "Combined Elasticsearch and vector embeddings for semantic search; integrated Next.js with NestJS/FastAPI services through GraphQL, PostgreSQL, Redis, and background jobs.",
-          "impact": "Production HRTech products with shared search/matching architecture and full-stack technical ownership."
+          "shipped": "SaaS marketplace and ATS modules: recruiter workspace, candidate pipelines, screening, AI matching, outreach, referrals, and tenant-scoped admin tooling.",
+          "decisions": "Designed RBAC and permission matrices for recruiter/admin/candidate roles; PostgreSQL schema migrations and seed strategies; Elasticsearch + vector embeddings for semantic search; GraphQL across NestJS, FastAPI, Redis queues, and background workers.",
+          "impact": "Production HRTech platform with role-gated ATS flows, evolvable data model, and shared search/matching services under full-stack ownership."
         }
       },
       "unchainlabs": {
@@ -219,9 +243,9 @@
         "role": "Fullstack developer",
         "summary": "A production marketing site and headless CMS that lets the team publish structured business content without frontend rework.",
         "highlights": {
-          "shipped": "Next.js frontend, Strapi CMS, reusable page sections, media/content workflows, and validated contact flows.",
-          "decisions": "Used SSR and REST integration with semantic HTML, metadata, Open Graph, sitemap, robots, and environment-based configuration.",
-          "impact": "Production launch with SEO-ready architecture, responsive components, and CMS ownership for non-developers."
+          "shipped": "Next.js marketing site, Strapi content types, dynamic zone sections, media library workflows, validated contact API, and editor-friendly preview flows.",
+          "decisions": "SSR/SSG hybrid with semantic HTML; Strapi RBAC for editor roles; PostgreSQL-backed CMS with migration-safe content models; sitemap, robots, Open Graph, and per-environment config.",
+          "impact": "SEO-ready production site where non-developers publish structured pages without frontend redeploys."
         }
       },
       "matchtutors": {
@@ -230,9 +254,9 @@
         "role": "Fullstack developer · Capstone",
         "summary": "A tutor–student marketplace that brings profiles, scheduling, AI-assisted matching, realtime chat, and payments into one workflow.",
         "highlights": {
-          "shipped": "Profiles, scheduling, learning workflows, PayOS checkout, JWT/Google OAuth, file uploads, and realtime messaging.",
-          "decisions": "Used OpenAI embeddings with Redis/BullMQ workers for matching and Socket.io for live booking and chat updates across separate React and Express repos.",
-          "impact": "Deployed production builds on AWS with real-time functionality and an asynchronous matching architecture."
+          "shipped": "Tutor/student profiles, scheduling, session management, PayOS checkout, JWT + Google OAuth, S3 file uploads, and Socket.io messaging with live booking updates.",
+          "decisions": "MongoDB collections with indexed query paths; OpenAI embeddings + BullMQ workers on Redis for async matching; Express middleware auth; Dockerized AWS deploy with env-specific secrets.",
+          "impact": "Capstone shipped to AWS with realtime chat/booking, queued AI matching, and a split React + Express codebase ready for iteration."
         }
       }
     }
@@ -338,7 +362,7 @@
     "eyebrow": "Open to full-time · remote · freelance",
     "title": "Available for opportunities",
     "description": "Fullstack roles, freelance builds, or interesting product collaborations.",
-    "startConversation": "Start a conversation",
+    "startConversation": "Let's build something",
     "selectedCapability": "Selected / {capability}",
     "talkAbout": "Let's talk about {capability}",
     "mailSubject": "Portfolio conversation",
@@ -350,6 +374,8 @@
     "buildCaption": "What I can build",
     "buildHintDesktop": "Drag or select a capability",
     "buildHintMobile": "Tap to select",
+    "relatedWork": "Related work",
+    "openProject": "Open {project}",
     "blocks": {
       "agents": "AI Agents",
       "backend": "Backend",

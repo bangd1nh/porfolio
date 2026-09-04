@@ -13,6 +13,10 @@ import { HOME_SECTIONS, NAV_ITEMS } from "@/data/site"
 import { useDockVisibility } from "@/hooks/use-dock-visibility"
 import { cn } from "@/lib/utils"
 
+function getNavHref(sectionId: string) {
+  return `#${sectionId}`
+}
+
 export function SiteDock() {
   const t = useTranslations("site")
   const [menuOpen, setMenuOpen] = useState(false)
@@ -44,7 +48,7 @@ export function SiteDock() {
           visibility.set(entry.target.id, entry.intersectionRatio)
         })
         const active = [...visibility.entries()].sort((a, b) => b[1] - a[1])[0]
-        if (active?.[1]) setActiveHref(`#${active[0]}`)
+        if (active?.[1]) setActiveHref(getNavHref(active[0]))
       },
       { rootMargin: "-20% 0px -55% 0px", threshold: [0, 0.05, 0.2, 0.5] }
     )
@@ -87,7 +91,7 @@ export function SiteDock() {
       {menuOpen ? (
         <nav
           id={menuId}
-          aria-label="Mobile navigation"
+          aria-label={t("mobileNavigation")}
           className="mb-2 grid gap-1 border border-border bg-card p-2 lg:hidden"
         >
           {NAV_ITEMS.map((item, index) => (
@@ -119,7 +123,7 @@ export function SiteDock() {
         />
 
         <nav
-          aria-label="Main navigation"
+          aria-label={t("mainNavigation")}
           className="hidden grid-flow-col items-center gap-0.5 lg:grid"
         >
           {NAV_ITEMS.map((item, index) => (
@@ -145,9 +149,9 @@ export function SiteDock() {
             onClick={() => setMenuOpen((open) => !open)}
           >
             {menuOpen ? (
-              <X className="size-4" aria-hidden />
+              <X aria-hidden />
             ) : (
-              <Menu className="size-4" aria-hidden />
+              <Menu aria-hidden />
             )}
           </Button>
 
