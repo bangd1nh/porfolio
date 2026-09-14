@@ -282,7 +282,7 @@
   "uiToolkit": {
     "badge": "Design System",
     "title": "UI Toolkit",
-    "description": "A flat minimalism component library — solid surfaces, sharp corners, yellow accents, and Lucide icons.",
+    "description": "A neobrutal component library — white surfaces, ink borders, hard shadows, yellow accents, and Lucide icons.",
     "icons": {
       "title": "Icons",
       "description": "All UI icons come from lucide-react. Import by name; size with Tailwind.",

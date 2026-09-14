@@ -282,7 +282,7 @@
   "uiToolkit": {
     "badge": "Design System",
     "title": "UI Toolkit",
-    "description": "Bộ component minimalism — bề mặt đặc, góc vuông, accent vàng và icon Lucide.",
+    "description": "Bộ component neobrutal — nền trắng, viền đen, shadow cứng, accent vàng và icon Lucide.",
     "icons": {
       "title": "Icons",
       "description": "Mọi icon UI dùng lucide-react. Import theo tên; chỉnh size bằng Tailwind.",

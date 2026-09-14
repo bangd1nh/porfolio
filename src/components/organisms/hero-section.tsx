@@ -125,7 +125,7 @@ export async function HeroSection() {
             </p>
           </header>
 
-          <div className="col-span-10 grid overflow-hidden border border-border bg-card lg:col-span-8 lg:grid-cols-[minmax(18rem,1.25fr)_minmax(0,2fr)]">
+          <div className="col-span-10 grid overflow-hidden border-3 border-border-brutal bg-card shadow-brutal lg:col-span-8 lg:grid-cols-[minmax(18rem,1.25fr)_minmax(0,2fr)]">
             <div
               data-hero-reveal
               className="relative grid content-center gap-3 border-b border-border p-4 sm:p-5 lg:border-r lg:border-b-0"

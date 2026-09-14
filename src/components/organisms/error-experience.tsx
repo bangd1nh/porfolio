@@ -37,11 +37,12 @@ function subscribeToLocaleCookie(onStoreChange: () => void) {
 
 function syncGlobalTheme() {
   const storedTheme = window.localStorage.getItem("theme")
-  const dark =
-    storedTheme === "dark" ||
-    (storedTheme !== "light" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches)
-
+  let dark = false
+  if (storedTheme === "dark") {
+    dark = true
+  } else if (storedTheme === "system") {
+    dark = window.matchMedia("(prefers-color-scheme: dark)").matches
+  }
   document.documentElement.classList.toggle("dark", dark)
 }
 
@@ -269,7 +270,7 @@ export function ErrorExperience({
 
           <div
             data-error-float
-            className="relative col-span-10 min-w-0 border border-border bg-card p-3 shadow-[8px_8px_0_color-mix(in_oklch,var(--foreground)_8%,transparent)] sm:p-5 lg:col-span-6 lg:p-6"
+            className="relative col-span-10 min-w-0 border-3 border-border-brutal bg-card p-3 shadow-brutal sm:p-5 lg:col-span-6 lg:p-6"
           >
             <span
               className="absolute -top-px -left-px size-3 border-t-2 border-l-2 border-primary"

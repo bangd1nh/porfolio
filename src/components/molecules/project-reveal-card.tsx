@@ -63,7 +63,7 @@ export function ProjectRevealCard({
           {label}
         </span>
         {badge ? (
-          <span className="shrink-0 border border-primary/60 bg-primary/10 px-1.5 py-0.5 font-mono text-[9px] font-semibold text-foreground uppercase">
+          <span className="shrink-0 border border-primary/60 bg-primary/10 dark:border-primary dark:bg-background px-1.5 py-0.5 font-mono text-[9px] font-semibold text-foreground uppercase">
             {badge}
           </span>
         ) : null}

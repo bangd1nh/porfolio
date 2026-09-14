@@ -32,12 +32,13 @@ type GithubActivityProps = {
   compact?: boolean
 }
 
+/** Hollow cells — contribution level = thicker inset stroke, never fill. */
 const LEVEL_CLASS: Record<0 | 1 | 2 | 3 | 4, string> = {
-  0: "bg-muted",
-  1: "bg-primary/35",
-  2: "bg-primary/55",
-  3: "bg-primary/75",
-  4: "bg-primary",
+  0: "bg-card shadow-[inset_0_0_0_1px_var(--border)]",
+  1: "bg-card shadow-[inset_0_0_0_2px_var(--primary)]",
+  2: "bg-card shadow-[inset_0_0_0_3px_var(--primary)]",
+  3: "bg-card shadow-[inset_0_0_0_4px_var(--primary)]",
+  4: "bg-card shadow-[inset_0_0_0_4px_var(--primary-hover)]",
 }
 
 function monthLabels(
@@ -293,7 +294,9 @@ export function GithubActivity({
                     className="max-w-56 flex-col items-start gap-0.5 text-left"
                   >
                     <span className="font-semibold">@{org.login}</span>
-                    <span className="text-background/80">{orgBlurb(org)}</span>
+                    <span className="text-background dark:text-muted-foreground">
+                      {orgBlurb(org)}
+                    </span>
                   </TooltipContent>
                 </Tooltip>
               </li>

@@ -92,7 +92,7 @@ export function SiteDock() {
         <nav
           id={menuId}
           aria-label={t("mobileNavigation")}
-          className="mb-2 grid gap-1 border border-border bg-card p-2 lg:hidden"
+          className="mb-2 grid gap-1 border-3 border-border-brutal bg-card p-2 shadow-brutal lg:hidden"
         >
           {NAV_ITEMS.map((item, index) => (
             <NavLink
@@ -108,7 +108,7 @@ export function SiteDock() {
         </nav>
       ) : null}
 
-      <div className="grid grid-flow-col items-center gap-2 border border-border bg-card px-3 py-2 sm:gap-3 sm:px-4">
+      <div className="grid grid-flow-col items-center gap-2 border-3 border-border-brutal bg-card px-3 py-2 shadow-brutal sm:gap-3 sm:px-4">
         <TransitionLink
           href="/"
           className="font-heading inline-flex min-h-11 shrink-0 items-center text-sm tracking-tight transition-opacity duration-150 hover:opacity-80 motion-reduce:transition-none sm:text-base lg:min-h-8"
@@ -155,7 +155,7 @@ export function SiteDock() {
             )}
           </Button>
 
-          <div className="grid grid-flow-col items-center gap-1.5 border border-border p-1">
+          <div className="grid grid-flow-col items-center gap-1.5 border-3 border-border-brutal p-1 shadow-brutal-sm">
             <ThemeToggle />
             <LocaleSwitcher />
           </div>

@@ -78,7 +78,7 @@ export function CompositionCard({
   return (
     <aside
       className={cn(
-        "composition-card relative aspect-square w-full max-h-full overflow-hidden rounded-none border border-border",
+        "composition-card relative aspect-square w-full max-h-full overflow-hidden rounded-none border-3 border-border-brutal shadow-brutal",
         "bg-secondary dark:bg-card",
         className
       )}

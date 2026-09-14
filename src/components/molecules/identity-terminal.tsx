@@ -171,7 +171,7 @@ export function IdentityTerminal({ className }: IdentityTerminalProps) {
       aria-hidden
       className={cn(
         "terminal-shell relative mt-1 hidden min-h-0 w-full grid-rows-[auto_minmax(0,1fr)] overflow-hidden border border-border bg-background font-mono text-xs text-foreground/90 transition-[border-color,box-shadow] duration-200 md:grid md:h-full md:min-h-0",
-        "hover:border-primary/40 hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--primary)_25%,transparent)]",
+        "hover:border-primary dark:hover:border-primary hover:shadow-[0_0_0_1px_var(--primary)]",
         flicker && "terminal-flicker",
         className
       )}

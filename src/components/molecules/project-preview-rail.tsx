@@ -65,7 +65,7 @@ function RailDrawerSlot({
         <div className="flex h-full w-[var(--project-rail-width,3.25rem)] shrink-0 flex-col items-center justify-center gap-2 border-r border-border bg-muted/30 px-1 py-3">
           <RailStackedLabel label={label} />
           {badge ? (
-            <span className="border border-primary/60 bg-primary/10 px-1 py-0.5 font-mono text-[8px] font-semibold text-foreground uppercase">
+            <span className="border border-primary/60 bg-primary/10 dark:border-primary dark:bg-background px-1 py-0.5 font-mono text-[8px] font-semibold text-foreground uppercase">
               {badge}
             </span>
           ) : null}

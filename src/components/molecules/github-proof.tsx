@@ -9,7 +9,7 @@ export function GithubProofSkeleton({ label }: { label: string }) {
   return (
     <aside
       id="github-activity"
-      className="grid min-h-[22rem] content-between gap-6 border border-border bg-card p-4 sm:p-5 lg:min-h-[25rem] lg:p-6"
+      className="grid min-h-[22rem] content-between gap-6 border-3 border-border-brutal bg-card p-4 shadow-brutal sm:p-5 lg:min-h-[25rem] lg:p-6"
       aria-label={label}
       aria-busy="true"
     >
@@ -51,7 +51,7 @@ export async function GithubProof() {
     return (
       <aside
         id="github-activity"
-        className="scroll-mt-20 grid min-h-[22rem] content-between gap-8 border border-border bg-card p-5 lg:min-h-[25rem] lg:p-6"
+        className="scroll-mt-20 grid min-h-[22rem] content-between gap-8 border-3 border-border-brutal bg-card p-5 shadow-brutal lg:min-h-[25rem] lg:p-6"
       >
         <header className="flex items-center justify-between gap-4">
           <p className="system-label">{t("github.proofLabel")}</p>
@@ -91,7 +91,7 @@ export async function GithubProof() {
   return (
     <aside
       id="github-activity"
-      className="scroll-mt-20 grid min-h-[22rem] content-between gap-5 border border-border bg-card p-4 sm:p-5 lg:min-h-[25rem] lg:p-6"
+      className="scroll-mt-20 grid min-h-[22rem] content-between gap-5 border-3 border-border-brutal bg-card p-4 shadow-brutal sm:p-5 lg:min-h-[25rem] lg:p-6"
     >
       <header className="flex items-center justify-between gap-4">
         <p className="system-label">{t("github.proofLabel")}</p>
@@ -161,7 +161,7 @@ export async function CurrentGithubPreview() {
     return (
       <a
         href="#github-activity"
-        className="group grid h-full content-start gap-3 p-4 transition-colors duration-150 hover:bg-muted/60 motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:p-5"
+        className="group grid h-full content-start gap-3 p-4 transition-colors duration-150 hover:bg-muted/60 dark:hover:bg-background dark:hover:ring-1 dark:hover:ring-inset dark:hover:ring-border motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:p-5"
       >
         <p className="system-label">03 / {t("currently.githubLabel")}</p>
         <p className="currently-value">{t("currently.githubValue")}</p>
@@ -189,7 +189,7 @@ export async function CurrentGithubPreview() {
     <a
       href="#github-activity"
       aria-label={t("currently.githubOpen")}
-      className="group grid h-full content-start gap-3 p-4 transition-colors duration-150 hover:bg-muted/60 motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:p-5"
+      className="group grid h-full content-start gap-3 p-4 transition-colors duration-150 hover:bg-muted/60 dark:hover:bg-background dark:hover:ring-1 dark:hover:ring-inset dark:hover:ring-border motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:p-5"
     >
       <div className="flex items-center justify-between gap-3">
         <p className="system-label">03 / {t("currently.githubLabel")}</p>

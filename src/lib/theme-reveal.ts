@@ -7,8 +7,8 @@ export type ResolvedThemeName = "light" | "dark"
 
 /** Destination surfaces — mirrors `:root` / `.dark` `--background` in globals.css. */
 export const THEME_BACKGROUNDS: Record<ResolvedThemeName, string> = {
-  light: "oklch(0.94 0.035 82)",
-  dark: "oklch(0.145 0.004 260)",
+  light: "oklch(1 0 0)",
+  dark: "oklch(0.141 0 0)",
 }
 
 export const THEME_REVEAL_MS = 600

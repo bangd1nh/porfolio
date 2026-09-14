@@ -67,7 +67,7 @@ function ProjectLiveLinks({
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-6 max-w-full items-center gap-1 border border-primary/70 bg-primary/10 px-2 font-mono text-[9px] font-semibold tracking-wide text-foreground uppercase transition-colors hover:bg-primary/20"
+              className="inline-flex h-6 max-w-full items-center gap-1 border border-primary/70 bg-primary/10 dark:border-primary dark:bg-background px-2 font-mono text-[9px] font-semibold tracking-wide text-foreground uppercase transition-colors hover:bg-primary/20 dark:hover:bg-primary dark:hover:text-primary-foreground"
             >
               <span className="truncate">{link.label}</span>
               <ArrowUpRight className="size-3 shrink-0" aria-hidden />
@@ -137,7 +137,7 @@ function ProjectTabButton({
         "group/tab after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-150 after:content-[''] motion-reduce:after:transition-none",
         "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none",
         selected
-          ? "border-primary bg-primary/10 text-foreground shadow-[3px_3px_0_0_var(--primary)] after:scale-x-100"
+          ? "border-primary bg-primary/10 dark:bg-background text-foreground shadow-[3px_3px_0_0_var(--primary)] after:scale-x-100"
           : "border-border bg-muted/40 text-muted-foreground hover:border-foreground/40 hover:bg-muted hover:text-foreground",
         className
       )}
@@ -243,7 +243,7 @@ function ProjectDetailsBody({
             {[active.teamSizeLabel, ...active.proof].map((proof) => (
               <li
                 key={proof}
-                className="inline-flex h-5 shrink-0 items-center whitespace-nowrap border border-primary/60 bg-primary/10 px-1.5 font-mono text-[9px] font-semibold leading-none text-foreground uppercase"
+                className="inline-flex h-5 shrink-0 items-center whitespace-nowrap border border-primary/60 bg-primary/10 dark:border-primary dark:bg-background px-1.5 font-mono text-[9px] font-semibold leading-none text-foreground uppercase"
               >
                 {proof}
               </li>
@@ -500,8 +500,8 @@ export function ProjectsShowcase({
               "after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-100 after:bg-primary after:content-['']",
               "transition-[background-color,border-color,color,box-shadow] duration-150 motion-reduce:transition-none",
               "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none",
-              "border-primary bg-primary/10 text-foreground shadow-[3px_3px_0_0_var(--primary)]",
-              pickerOpen && "bg-primary/15"
+              "border-primary bg-primary/10 dark:bg-background text-foreground shadow-[3px_3px_0_0_var(--primary)]",
+              pickerOpen && "bg-primary/15 dark:bg-primary dark:text-primary-foreground"
             )}
             onClick={() => !isDesktop && setPickerOpen((open) => !open)}
           >

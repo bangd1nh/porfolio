@@ -18,6 +18,12 @@
       "sourceType": "local",
       "skillPath": "skills/minimalism/SKILL.md",
       "computedHash": "db66086b6665fff95847e17f50eda5a207b7f43c068e1d295020c03d94281d36"
+    },
+    "neobrutalism": {
+      "source": "bagdnh/portfolio",
+      "sourceType": "local",
+      "skillPath": "skills/neobrutalism/SKILL.md",
+      "computedHash": "6f9b63b0fef96921f1901c9d57142ece92fb661df3e0811bcf3f0a4f38b452a1"
     }
   }
 }

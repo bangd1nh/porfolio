@@ -101,7 +101,7 @@ export function ContactInteraction() {
                   key={project.id}
                   type="button"
                   aria-label={t("openProject", { project: title })}
-                  className="group min-h-11 min-w-40 flex-1 cursor-pointer border border-border bg-muted/40 px-3 py-2 text-left transition-[background-color,border-color] duration-150 hover:border-primary hover:bg-primary/10 motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                  className="group min-h-11 min-w-40 flex-1 cursor-pointer border border-border bg-muted/40 dark:bg-background px-3 py-2 text-left transition-[background-color,border-color] duration-150 hover:border-primary hover:bg-primary/10 dark:hover:bg-primary dark:hover:text-primary-foreground motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
                   onClick={() => openProject(project.id)}
                 >
                   <span className="flex items-center justify-between gap-2">

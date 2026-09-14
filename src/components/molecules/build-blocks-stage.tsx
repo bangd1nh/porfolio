@@ -449,7 +449,7 @@ export function BuildBlocksStage({
   const chipClassName = cn(
     "inline-flex items-center justify-center border border-border bg-card px-3.5 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-3.5",
     "font-sans text-xs font-bold tracking-[0.12em] text-foreground uppercase whitespace-nowrap sm:text-sm sm:tracking-widest lg:text-base",
-    "shadow-[3px_4px_0_0_oklch(0_0_0_/_0.12)] dark:shadow-[3px_4px_0_0_oklch(0_0_0_/_0.32)]"
+    "shadow-[3px_4px_0_0_oklch(0_0_0_/_0.12)] dark:shadow-[3px_4px_0_0_var(--shadow-color)]"
   )
 
   return (

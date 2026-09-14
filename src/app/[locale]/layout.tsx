@@ -1,10 +1,9 @@
 import type { Metadata } from "next"
 import {
   Caveat,
-  Geist,
   Geist_Mono,
+  Lexend,
   Noto_Sans,
-  Playfair_Display,
 } from "next/font/google"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server"
@@ -27,19 +26,15 @@ import { getSiteUrl } from "@/lib/site-url"
 import { cn } from "@/lib/utils"
 import "../globals.css"
 
-const playfairDisplayHeading = Playfair_Display({
-  subsets: ["latin"],
+const lexendHeading = Lexend({
+  subsets: ["latin", "vietnamese"],
   variable: "--font-heading",
+  weight: ["600", "700", "800"],
 })
 
 const notoSans = Noto_Sans({
-  subsets: ["latin"],
+  subsets: ["latin", "vietnamese"],
   variable: "--font-sans",
-})
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
 })
 
 const geistMono = Geist_Mono({
@@ -143,11 +138,10 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
       className={cn(
         "h-full",
         "antialiased",
-        geistSans.variable,
         geistMono.variable,
         "font-sans",
         notoSans.variable,
-        playfairDisplayHeading.variable,
+        lexendHeading.variable,
         caveatHandwriting.variable
       )}
     >
@@ -162,7 +156,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
       <body className="min-h-full">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
