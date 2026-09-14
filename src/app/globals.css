@@ -566,15 +566,16 @@ html[data-portfolio-boot="reduced"] .portfolio-loader {
     top: -3px;
     right: 0;
     left: 0;
-    height: 1px;
+    height: 2px;
     overflow: hidden;
     background: var(--border);
   }
 
   @media (min-width: 1024px) {
     .page-progress {
-      top: auto;
-      bottom: -3px;
+      top: 100%;
+      bottom: auto;
+      margin-top: 0.5rem;
     }
   }
 
