@@ -514,6 +514,29 @@ html[data-portfolio-boot="reduced"] .portfolio-loader {
     --project-drawer-width: 39.25rem;
   }
 
+  @media (min-width: 1024px) {
+    #projects {
+      grid-template-rows: minmax(0, 1fr);
+      align-content: stretch;
+      height: 100svh;
+      max-height: 100svh;
+      overflow: hidden;
+    }
+
+    #projects > * {
+      min-height: 0;
+      height: 100%;
+    }
+
+    #projects [data-projects-showcase] {
+      min-height: 0;
+    }
+
+    #projects [data-projects-panel] {
+      min-height: 0;
+    }
+  }
+
   /* Tall section — full viewport from md up; content-sized on small screens */
   .page-section-screen {
     align-content: center;

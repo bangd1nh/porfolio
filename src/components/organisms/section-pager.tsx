@@ -63,6 +63,37 @@ function normalizeWheelDeltaY(event: WheelEvent): number {
   return event.deltaY
 }
 
+/** Let nested overflow containers consume wheel before section paging. */
+function scrollableAncestorCanConsume(
+  target: EventTarget | null,
+  direction: 1 | -1
+): boolean {
+  if (!(target instanceof Element)) return false
+
+  let node: Element | null = target
+  while (node instanceof HTMLElement) {
+    const { overflowY } = window.getComputedStyle(node)
+    const scrollable =
+      overflowY === "auto" ||
+      overflowY === "scroll" ||
+      overflowY === "overlay"
+
+    if (scrollable && node.scrollHeight > node.clientHeight + 1) {
+      const { scrollTop, scrollHeight, clientHeight } = node
+      if (direction > 0 && scrollTop + clientHeight < scrollHeight - 1) {
+        return true
+      }
+      if (direction < 0 && scrollTop > 1) {
+        return true
+      }
+    }
+
+    node = node.parentElement
+  }
+
+  return false
+}
+
 /**
  * Homepage wheel/trackpad pager — desktop (lg+) only.
  * Tall sections use native scroll; fixed-height sections page on wheel intent.
@@ -111,6 +142,12 @@ export function SectionPager({ children }: { children: React.ReactNode }) {
       if (dy === 0) return
 
       const direction: 1 | -1 = dy > 0 ? 1 : -1
+
+      if (scrollableAncestorCanConsume(event.target, direction)) {
+        accumRef.current = 0
+        return
+      }
+
       const sections = getSectionElements()
       const index = getActiveIndex(sections)
       const section = sections[index]

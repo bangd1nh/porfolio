@@ -183,6 +183,8 @@
     "notesCount": "{count} notes",
     "shipped": "Case study notes",
     "proofLabel": "Result / Proof",
+    "keyHighlights": "Key highlights",
+    "featuredProjectBadge": "Featured",
     "proof": {
       "production": "Production",
       "responsive": "Responsive",
@@ -220,6 +222,11 @@
         "descriptor": "E-commerce · Frontend",
         "role": "Frontend developer · Freelance",
         "summary": "A design-led perfume storefront that turns mood-based storytelling and a scent quiz into a clear product-discovery and commerce journey.",
+        "bullets": {
+          "highlight1": "Built a smooth e-commerce storefront with mood-based storytelling using Next.js and React.",
+          "highlight2": "Integrated headless CMS and REST APIs for flexible content and stable data flows.",
+          "highlight3": "Shipped responsive UI and SEO-ready pages to production with a team of three."
+        },
         "highlights": {
           "shipped": "Next.js App Router storefront: scent quiz, dynamic catalog/cart, checkout hooks, and CMS-driven editorial/product sections with reusable layout primitives.",
           "decisions": "Server Components + route-level data fetching; Zod-validated REST integration; accessible quiz state machine; resilient loading, empty, and error boundaries for headless CMS payloads.",
@@ -231,6 +238,12 @@
         "descriptor": "HRTech · Fullstack · AI",
         "role": "Fullstack developer · PIC ATS platform",
         "summary": "SaaS HRTech platform — talent marketplace and recruiter workspace for sourcing, pipelines, AI-assisted matching, semantic search, and referral flows; designed RBAC and role-based permissions across the UC Talent ATS.",
+        "bullets": {
+          "highlight1": "Owned full-stack ATS modules with Next.js, NestJS, GraphQL, and PostgreSQL in production.",
+          "highlight2": "Implemented semantic search with Elasticsearch, vector embeddings, and AI-assisted matching workflows.",
+          "highlight3": "Designed RBAC and tenant-scoped permissions for recruiter, admin, and candidate roles.",
+          "highlight4": "Shipped multi-tenant SaaS ATS model with isolated recruiter workspaces, tenant-scoped data, and production subscription flows."
+        },
         "highlights": {
           "shipped": "SaaS marketplace and ATS modules: recruiter workspace, candidate pipelines, screening, AI matching, outreach, referrals, and tenant-scoped admin tooling.",
           "decisions": "Designed RBAC and permission matrices for recruiter/admin/candidate roles; PostgreSQL schema migrations and seed strategies; Elasticsearch + vector embeddings for semantic search; GraphQL across NestJS, FastAPI, Redis queues, and background workers.",
@@ -242,6 +255,11 @@
         "descriptor": "CMS · Fullstack",
         "role": "Fullstack developer",
         "summary": "A production marketing site and headless CMS that lets the team publish structured business content without frontend rework.",
+        "bullets": {
+          "highlight1": "Delivered a Next.js marketing site with Strapi headless CMS and TypeScript end to end.",
+          "highlight2": "Modeled dynamic zones, editor RBAC, and PostgreSQL-backed content with safe migrations.",
+          "highlight3": "Launched SEO-ready production site so editors publish without frontend redeploys."
+        },
         "highlights": {
           "shipped": "Next.js marketing site, Strapi content types, dynamic zone sections, media library workflows, validated contact API, and editor-friendly preview flows.",
           "decisions": "SSR/SSG hybrid with semantic HTML; Strapi RBAC for editor roles; PostgreSQL-backed CMS with migration-safe content models; sitemap, robots, Open Graph, and per-environment config.",
@@ -253,6 +271,11 @@
         "descriptor": "Marketplace · Realtime · AI",
         "role": "Fullstack developer · Capstone",
         "summary": "A tutor–student marketplace that brings profiles, scheduling, AI-assisted matching, realtime chat, and payments into one workflow.",
+        "bullets": {
+          "highlight1": "Built a React + TypeScript marketplace with scheduling, chat, and PayOS checkout in production.",
+          "highlight2": "Implemented realtime Socket.io messaging and BullMQ workers on Redis for async AI matching.",
+          "highlight3": "Deployed capstone to AWS with Docker, JWT/OAuth auth, and split frontend/backend repos."
+        },
         "highlights": {
           "shipped": "Tutor/student profiles, scheduling, session management, PayOS checkout, JWT + Google OAuth, S3 file uploads, and Socket.io messaging with live booking updates.",
           "decisions": "MongoDB collections with indexed query paths; OpenAI embeddings + BullMQ workers on Redis for async matching; Express middleware auth; Dockerized AWS deploy with env-specific secrets.",

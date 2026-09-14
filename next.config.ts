@@ -18,6 +18,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "github.com",
       },
+      {
+        protocol: "https",
+        hostname: "uctalent.io",
+      },
+      {
+        protocol: "https",
+        hostname: "unchain-labs.com",
+      },
     ],
   },
 };

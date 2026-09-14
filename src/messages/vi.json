@@ -183,6 +183,8 @@
     "notesCount": "{count} ghi chú",
     "shipped": "Ghi chú case study",
     "proofLabel": "Kết quả / Bằng chứng",
+    "keyHighlights": "Điểm nhấn dự án",
+    "featuredProjectBadge": "Nổi bật",
     "proof": {
       "production": "Production",
       "responsive": "Responsive",
@@ -220,6 +222,11 @@
         "descriptor": "E-commerce · Frontend",
         "role": "Frontend developer · Freelance",
         "summary": "Storefront nước hoa giàu tính thẩm mỹ, biến storytelling theo cảm xúc và trắc nghiệm mùi hương thành hành trình khám phá/mua sắm rõ ràng.",
+        "bullets": {
+          "highlight1": "Phát triển storefront thương mại điện tử mượt với storytelling theo cảm xúc bằng Next.js và React.",
+          "highlight2": "Tích hợp headless CMS và REST API cho luồng nội dung linh hoạt, dữ liệu ổn định.",
+          "highlight3": "Ship responsive UI và SEO lên production cùng team 3 người."
+        },
         "highlights": {
           "shipped": "Storefront Next.js App Router: scent quiz, catalog/cart động, hook checkout và section editorial/sản phẩm từ CMS với layout primitive tái sử dụng.",
           "decisions": "Server Components + fetch theo route; REST có Zod validation; state machine quiz accessible; xử lý loading/empty/error bền vững cho payload headless CMS.",
@@ -231,6 +238,12 @@
         "descriptor": "HRTech · Fullstack · AI",
         "role": "Fullstack developer · PIC ATS platform",
         "summary": "Nền tảng SaaS HRTech: talent marketplace và recruiter workspace cho sourcing, pipeline, matching AI, semantic search và referral flow; thiết kế RBAC phân quyền các role trên ATS UC Talent.",
+        "bullets": {
+          "highlight1": "Phụ trách module ATS full-stack với Next.js, NestJS, GraphQL và PostgreSQL trên production.",
+          "highlight2": "Triển khai semantic search với Elasticsearch, vector embeddings và workflow matching AI.",
+          "highlight3": "Thiết kế RBAC và phân quyền theo tenant cho recruiter, admin và candidate.",
+          "highlight4": "Ship mô hình SaaS ATS đa tenant với workspace recruiter tách biệt, dữ liệu theo tenant và luồng subscription trên production."
+        },
         "highlights": {
           "shipped": "Module SaaS marketplace và ATS: recruiter workspace, pipeline ứng viên, screening, matching AI, outreach, referral và tooling admin theo tenant.",
           "decisions": "Thiết kế RBAC và ma trận phân quyền recruiter/admin/candidate; migrate schema PostgreSQL và chiến lược seed; Elasticsearch + vector embeddings cho semantic search; GraphQL qua NestJS, FastAPI, Redis queue và background worker.",
@@ -242,6 +255,11 @@
         "descriptor": "CMS · Fullstack",
         "role": "Fullstack developer",
         "summary": "Website marketing production và headless CMS giúp team publish nội dung doanh nghiệp có cấu trúc mà không phải sửa frontend.",
+        "bullets": {
+          "highlight1": "Xây site marketing Next.js với Strapi headless CMS và TypeScript end-to-end.",
+          "highlight2": "Thiết kế dynamic zone, RBAC editor và content PostgreSQL an toàn khi migrate.",
+          "highlight3": "Ra mắt production sẵn SEO — editor publish không cần redeploy frontend."
+        },
         "highlights": {
           "shipped": "Site marketing Next.js, content type Strapi, section dynamic zone, workflow media library, API contact có validation và luồng preview cho editor.",
           "decisions": "SSR/SSG hybrid với HTML semantic; RBAC Strapi cho role editor; CMS trên PostgreSQL với content model an toàn khi migrate; sitemap, robots, Open Graph và config theo môi trường.",
@@ -253,6 +271,11 @@
         "descriptor": "Marketplace · Realtime · AI",
         "role": "Fullstack developer · Capstone",
         "summary": "Marketplace gia sư–học viên gom hồ sơ, đặt lịch, matching hỗ trợ AI, chat realtime và thanh toán vào một workflow.",
+        "bullets": {
+          "highlight1": "Xây marketplace React + TypeScript với đặt lịch, chat và checkout PayOS.",
+          "highlight2": "Triển khai Socket.io realtime và worker BullMQ trên Redis cho matching AI bất đồng bộ.",
+          "highlight3": "Deploy capstone lên AWS với Docker, JWT/OAuth và repo frontend/backend tách biệt."
+        },
         "highlights": {
           "shipped": "Hồ sơ gia sư/học viên, đặt lịch, quản lý buổi học, PayOS checkout, JWT + Google OAuth, upload file S3 và nhắn tin Socket.io với cập nhật booking realtime.",
           "decisions": "Collection MongoDB có index query; OpenAI embeddings + worker BullMQ trên Redis cho matching bất đồng bộ; middleware auth Express; deploy Docker lên AWS với secret theo môi trường.",

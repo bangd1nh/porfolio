@@ -2,14 +2,14 @@
 
 import { ArrowUpRight } from "lucide-react"
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import type { ProjectPreviewType } from "@/data/projects"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { cn } from "@/lib/utils"
 
-const IFRAME_LOAD_TIMEOUT_MS = 4500
+const IFRAME_LOAD_TIMEOUT_MS = 8000
 const DESKTOP_VIEWPORT_WIDTH = 1280
 const SCROLLBAR_CROP = 24
 const DESKTOP_VIEWPORT_HEIGHT = Math.round(
@@ -20,10 +20,15 @@ export type WebsitePreviewProps = {
   url: string
   title: string
   fallbackImage: string
+  fallbackImageRemote?: string | undefined
   previewType: ProjectPreviewType
   /** Resolved server-side from headers when previewType is `auto`. */
   embedAllowed: boolean
   openLabel?: string | undefined
+  /** Live CTA href — defaults to preview `url`. */
+  openHref?: string | undefined
+  /** Active showcase preview — load iframe/screenshot immediately (no IO delay). */
+  eager?: boolean | undefined
   className?: string
 }
 
@@ -39,18 +44,22 @@ export function WebsitePreview({
   url,
   title,
   fallbackImage,
+  fallbackImageRemote,
   previewType,
   embedAllowed,
   openLabel,
+  openHref,
+  eager = false,
   className,
 }: WebsitePreviewProps) {
   const isCoarsePointer = useMediaQuery("(max-width: 1023px)")
   const canTryIframe =
     embedAllowed && previewType !== "image" && !isCoarsePointer
 
-  const [nearViewport, setNearViewport] = useState(false)
+  const [nearViewport, setNearViewport] = useState(eager)
   const [previewSize, setPreviewSize] = useState({ width: 0, height: 0 })
   const [imageReady, setImageReady] = useState(false)
+  const [imageSrc, setImageSrc] = useState(fallbackImage)
   const [iframeReady, setIframeReady] = useState(false)
   const [iframeAbandoned, setIframeAbandoned] = useState(false)
 
@@ -75,15 +84,39 @@ export function WebsitePreview({
   const showIframe = shouldMountIframe && iframeReady
   const showImageLayer = !showIframe
   const showIframeLoading =
-    shouldMountIframe && !iframeReady && !iframeAbandoned
+    shouldMountIframe &&
+    !iframeReady &&
+    !iframeAbandoned &&
+    !imageReady
+
+  const liveHref = openHref ?? url
 
   useEffect(() => {
+    setImageSrc(fallbackImage)
     setImageReady(false)
     setIframeReady(false)
     setIframeAbandoned(false)
-  }, [url, fallbackImage, previewType, embedAllowed])
+    if (eager) setNearViewport(true)
+  }, [url, fallbackImage, previewType, embedAllowed, eager])
+
+  useLayoutEffect(() => {
+    if (eager) return
+    const root = rootRef.current
+    if (!root) return
+
+    const inView = () => {
+      const rect = root.getBoundingClientRect()
+      const vh = window.innerHeight
+      return rect.top < vh * 0.98 && rect.bottom > vh * 0.02
+    }
+
+    if (inView()) {
+      setNearViewport(true)
+    }
+  }, [url, eager])
 
   useEffect(() => {
+    if (eager || nearViewport) return
     const root = rootRef.current
     if (!root) return
 
@@ -98,12 +131,37 @@ export function WebsitePreview({
         setNearViewport(true)
         observer.disconnect()
       },
-      { rootMargin: "320px 0px", threshold: 0.01 }
+      { rootMargin: "480px 0px", threshold: 0.01 }
     )
 
     observer.observe(root)
     return () => observer.disconnect()
-  }, [])
+  }, [eager, nearViewport, url])
+
+  useEffect(() => {
+    if (!canTryIframe) return
+    let origin: string
+    try {
+      origin = new URL(url).origin
+    } catch {
+      return
+    }
+
+    const preconnect = document.createElement("link")
+    preconnect.rel = "preconnect"
+    preconnect.href = origin
+    document.head.append(preconnect)
+
+    const dnsPrefetch = document.createElement("link")
+    dnsPrefetch.rel = "dns-prefetch"
+    dnsPrefetch.href = origin
+    document.head.append(dnsPrefetch)
+
+    return () => {
+      preconnect.remove()
+      dnsPrefetch.remove()
+    }
+  }, [canTryIframe, url])
 
   useEffect(() => {
     const preview = previewRef.current
@@ -132,7 +190,7 @@ export function WebsitePreview({
       ref={rootRef}
       aria-busy={showIframeLoading}
       className={cn(
-        "grid h-full min-h-[14rem] grid-rows-[auto_minmax(0,1fr)] border border-border bg-card",
+        "grid h-full min-h-0 grid-rows-[auto_minmax(0,1fr)] border border-border bg-card",
         className
       )}
     >
@@ -149,17 +207,29 @@ export function WebsitePreview({
       >
         {nearViewport ? (
           <Image
-            src={fallbackImage}
+            src={imageSrc}
             alt={title}
             fill
-            unoptimized={isRemoteSrc(fallbackImage)}
-            loading="lazy"
+            unoptimized={isRemoteSrc(imageSrc)}
+            loading={eager ? "eager" : "lazy"}
+            fetchPriority={eager ? "high" : "auto"}
             sizes="(min-width: 1024px) 60vw, 100vw"
             className={cn(
-              "object-cover object-top transition-opacity duration-300 motion-reduce:transition-none",
-              showImageLayer && imageReady ? "opacity-100" : "opacity-0"
+              "object-cover object-top transition-opacity duration-150 motion-reduce:transition-none",
+              imageReady && (showImageLayer || showIframeLoading)
+                ? "opacity-100"
+                : "opacity-0"
             )}
             onLoad={() => setImageReady(true)}
+            onError={() => {
+              if (
+                fallbackImageRemote &&
+                imageSrc !== fallbackImageRemote
+              ) {
+                setImageSrc(fallbackImageRemote)
+                setImageReady(false)
+              }
+            }}
           />
         ) : null}
 
@@ -167,11 +237,11 @@ export function WebsitePreview({
           <iframe
             src={url}
             title={title}
-            loading="lazy"
+            loading="eager"
             tabIndex={-1}
             referrerPolicy="strict-origin-when-cross-origin"
             className={cn(
-              "pointer-events-none absolute top-0 overflow-hidden border-0 bg-transparent transition-opacity duration-300 motion-reduce:transition-none",
+              "pointer-events-none absolute top-0 overflow-hidden border-0 bg-transparent transition-opacity duration-150 motion-reduce:transition-none",
               showIframe ? "opacity-100" : "opacity-0"
             )}
             style={{
@@ -213,7 +283,11 @@ export function WebsitePreview({
               className="pointer-events-auto min-h-11 cursor-pointer rounded-none lg:min-h-9"
               nativeButton={false}
               render={
-                <a href={url} target="_blank" rel="noopener noreferrer" />
+                <a
+                  href={liveHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
               }
             >
               {openLabel}

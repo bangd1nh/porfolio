@@ -8,7 +8,7 @@ export type EmbeddabilityResult = {
 
 const embeddabilityCache = new Map<string, EmbeddabilityResult>()
 
-const FETCH_TIMEOUT_MS = 8000
+const FETCH_TIMEOUT_MS = 5000
 
 function normalizeOrigin(origin: string): string {
   try {
