@@ -34,8 +34,8 @@ export const HOME_SECTIONS = [
 export type HomeSectionId = (typeof HOME_SECTIONS)[number]
 
 /**
- * One full viewport per section on desktop (box-border so height includes padding).
- * Phone/tablet: content-sized sections + native scroll.
+ * One screen per section: at least a full viewport everywhere, and exactly one
+ * snapped viewport on desktop (box-border so height includes padding).
  */
 export const VIEWPORT_SECTION =
-  "lg:box-border lg:h-svh lg:overflow-hidden"
+  "relative isolate min-h-svh overflow-x-clip lg:box-border lg:h-svh lg:min-h-0 lg:overflow-hidden"

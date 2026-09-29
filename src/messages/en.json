@@ -34,6 +34,7 @@
     "role": "Fullstack Developer",
     "identityLabel": "Identity",
     "headline": "I build production-grade web systems & AI-powered products.",
+    "headlineAccent": "AI-powered",
     "positioning": "Fullstack developer shipping production web apps, AI-powered search, and real-time systems.",
     "specialization": "Full-stack Engineer",
     "technologies": "Next.js · NestJS · Agentic AI",
@@ -96,7 +97,10 @@
       "shippingSince": "Shipping since",
       "contrib": "Contrib",
       "experienceLabel": "years building web apps"
-    }
+    },
+    "scrollCue": "Scroll",
+    "badgeCircle": "OPEN TO NEW WORK • LET'S TALK • ",
+    "badgeLabel": "Jump to contact"
   },
   "profile": {
     "badge": "Profile",
@@ -118,7 +122,20 @@
       "other": "Other skills",
       "ai": "AI & LLM"
     },
-    "githubTitle": "GitHub activity"
+    "githubTitle": "GitHub activity",
+    "statementAccent": "software architecture and AI",
+    "journey": "Journey",
+    "current": "Current",
+    "stats": {
+      "projects": "Production projects",
+      "workplaces": "Workplaces",
+      "since": "Shipping since"
+    },
+    "card": {
+      "label": "Developer ID",
+      "status": "Open to work",
+      "issued": "Issued in"
+    }
   },
   "stack": {
     "badge": "Stack",
@@ -133,7 +150,31 @@
     "primaryStatus": "Strongest tools",
     "productionStatus": "Shipped in production",
     "aiStatus": "Active focus",
-    "additionalStatus": "Prior project experience"
+    "additionalStatus": "Prior project experience",
+    "roles": {
+      "typescript": "Core language",
+      "nextjs": "Web framework",
+      "react": "UI library",
+      "nestjs": "Backend API",
+      "postgresql": "Database",
+      "redis": "Cache · queue",
+      "elasticsearch": "Search engine",
+      "graphql": "API layer",
+      "fastapi": "Python service",
+      "docker": "Containers",
+      "embeddings": "Encode",
+      "vectorsearch": "Retrieve",
+      "rag": "Augment",
+      "llmtooling": "Generate",
+      "java": "Language",
+      "springboot": "Backend",
+      "reactnative": "Mobile",
+      "android": "Mobile",
+      "c": "Fundamentals"
+    },
+    "pipelineIn": "Query",
+    "pipelineOut": "Answer",
+    "usedIn": "Shipped in"
   },
   "experience": {
     "badge": "Experience",
@@ -177,6 +218,8 @@
     "repoBackend": "Backend",
     "teamSize": "Team of {count}",
     "solo": "Solo · Capstone",
+    "viewDetails": "View details",
+    "backToWork": "Back to selected work",
     "tabsLabel": "Select a project",
     "detailsCard": "Project details",
     "expandHint": "Tap to expand · Esc to close",
@@ -219,6 +262,7 @@
     "items": {
       "guscent": {
         "title": "Guscent",
+        "outcome": "Headless CMS storefront — SEO-ready production launch.",
         "descriptor": "E-commerce · Frontend",
         "role": "Frontend developer · Freelance",
         "summary": "A design-led perfume storefront that turns mood-based storytelling and a scent quiz into a clear product-discovery and commerce journey.",
@@ -235,6 +279,7 @@
       },
       "uctalent": {
         "title": "uctalent.io & business.uctalent.io",
+        "outcome": "SaaS ATS on production — semantic search and AI-assisted matching.",
         "descriptor": "HRTech · Fullstack · AI",
         "role": "Fullstack developer · PIC ATS platform",
         "summary": "SaaS HRTech platform — talent marketplace and recruiter workspace for sourcing, pipelines, AI-assisted matching, semantic search, and referral flows; designed RBAC and role-based permissions across the UC Talent ATS.",
@@ -252,6 +297,7 @@
       },
       "unchainlabs": {
         "title": "Unchain Labs",
+        "outcome": "Marketing + Strapi — editors ship without frontend redeploys.",
         "descriptor": "CMS · Fullstack",
         "role": "Fullstack developer",
         "summary": "A production marketing site and headless CMS that lets the team publish structured business content without frontend rework.",
@@ -268,6 +314,7 @@
       },
       "matchtutors": {
         "title": "Match Tutors",
+        "outcome": "Realtime marketplace — queued AI matching deployed on AWS.",
         "descriptor": "Marketplace · Realtime · AI",
         "role": "Fullstack developer · Capstone",
         "summary": "A tutor–student marketplace that brings profiles, scheduling, AI-assisted matching, realtime chat, and payments into one workflow.",
@@ -282,7 +329,21 @@
           "impact": "Capstone shipped to AWS with realtime chat/booking, queued AI matching, and a split React + Express codebase ready for iteration."
         }
       }
-    }
+    },
+    "cursorView": "View",
+    "cursorLive": "Live ↗",
+    "caseStudyLabel": "Case study",
+    "contents": "Contents",
+    "factRole": "Role",
+    "factPeriod": "Timeline",
+    "factTeam": "Team",
+    "factDomain": "Domain",
+    "overview": "Overview",
+    "nextProject": "Next project",
+    "prevProject": "Previous project",
+    "cursorNext": "Next",
+    "deliverables": "deliverables",
+    "scrollHint": "Scroll to read the case study"
   },
   "localeSwitcher": {
     "label": "Language",
@@ -374,7 +435,8 @@
   },
   "footer": {
     "rights": "All rights reserved.",
-    "builtWith": "Built with Next.js"
+    "builtWith": "Built with Next.js",
+    "designedBy": "Designed by Claude"
   },
   "cv": {
     "back": "Back to portfolio",
@@ -408,6 +470,35 @@
       "frontend": "Frontend",
       "mobile": "Mobile",
       "apis": "APIs"
-    }
+    },
+    "badge": "Contact",
+    "status": "Open to new work",
+    "localTime": "Local time in Da Nang",
+    "composerHint": "Pick a few — the email writes itself",
+    "stepIntent": "What are you looking for?",
+    "stepCaps": "Which areas?",
+    "intents": {
+      "fulltime": "Full-time",
+      "freelance": "Freelance",
+      "collab": "Collaboration"
+    },
+    "newMessage": "New message",
+    "to": "To",
+    "subject": "Subject",
+    "greeting": "Hi Bang,",
+    "bodyIntent": {
+      "fulltime": "We're hiring for a full-time fullstack role and think you could be a great fit.",
+      "freelance": "I have a freelance project and I'm looking for someone to build it with.",
+      "collab": "I'd love to collaborate with you on a product idea."
+    },
+    "bodyCaps": "Areas: {list}.",
+    "bodyClose": "Let me know when you're free to chat!",
+    "signoff": "Best,",
+    "signName": "[Your name]",
+    "send": "Send email",
+    "copyEmail": "Copy email",
+    "copied": "Copied!",
+    "viewResume": "View & download",
+    "timeZone": "Time zone"
   }
 }

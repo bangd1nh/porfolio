@@ -34,6 +34,7 @@
     "role": "Fullstack Developer",
     "identityLabel": "Danh tính",
     "headline": "Tôi xây hệ thống web production và sản phẩm ứng dụng AI.",
+    "headlineAccent": "AI",
     "positioning": "Fullstack developer đưa ứng dụng web, tìm kiếm ứng dụng AI và hệ thống realtime vào production.",
     "specialization": "Kỹ sư Full-stack",
     "technologies": "Next.js · NestJS · Agentic AI",
@@ -96,7 +97,10 @@
       "shippingSince": "Ship từ",
       "contrib": "Contrib",
       "experienceLabel": "năm xây ứng dụng web"
-    }
+    },
+    "scrollCue": "Cuộn xuống",
+    "badgeCircle": "SẴN SÀNG CHO CƠ HỘI MỚI • LIÊN HỆ NGAY • ",
+    "badgeLabel": "Đi tới phần liên hệ"
   },
   "profile": {
     "badge": "Hồ sơ",
@@ -118,7 +122,20 @@
       "other": "Kỹ năng khác",
       "ai": "AI & LLM"
     },
-    "githubTitle": "Hoạt động GitHub"
+    "githubTitle": "Hoạt động GitHub",
+    "statementAccent": "kiến trúc phần mềm và AI",
+    "journey": "Hành trình",
+    "current": "Hiện tại",
+    "stats": {
+      "projects": "Dự án production",
+      "workplaces": "Nơi đã làm việc",
+      "since": "Ship từ"
+    },
+    "card": {
+      "label": "Developer ID",
+      "status": "Đang mở cơ hội",
+      "issued": "Cấp tại"
+    }
   },
   "stack": {
     "badge": "Stack",
@@ -133,7 +150,31 @@
     "primaryStatus": "Thế mạnh cốt lõi",
     "productionStatus": "Đã ship ở production",
     "aiStatus": "Trọng tâm hiện tại",
-    "additionalStatus": "Kinh nghiệm từ dự án trước"
+    "additionalStatus": "Kinh nghiệm từ dự án trước",
+    "roles": {
+      "typescript": "Ngôn ngữ chính",
+      "nextjs": "Web framework",
+      "react": "UI library",
+      "nestjs": "Backend API",
+      "postgresql": "Cơ sở dữ liệu",
+      "redis": "Cache · queue",
+      "elasticsearch": "Search engine",
+      "graphql": "API layer",
+      "fastapi": "Python service",
+      "docker": "Container",
+      "embeddings": "Mã hoá",
+      "vectorsearch": "Truy xuất",
+      "rag": "Bổ sung ngữ cảnh",
+      "llmtooling": "Sinh câu trả lời",
+      "java": "Ngôn ngữ",
+      "springboot": "Backend",
+      "reactnative": "Mobile",
+      "android": "Mobile",
+      "c": "Nền tảng"
+    },
+    "pipelineIn": "Câu hỏi",
+    "pipelineOut": "Câu trả lời",
+    "usedIn": "Đã dùng trong"
   },
   "experience": {
     "badge": "Kinh nghiệm",
@@ -177,6 +218,8 @@
     "repoBackend": "Backend",
     "teamSize": "Nhóm {count} người",
     "solo": "Cá nhân · Capstone",
+    "viewDetails": "Xem chi tiết",
+    "backToWork": "Quay lại dự án tiêu biểu",
     "tabsLabel": "Chọn dự án",
     "detailsCard": "Chi tiết dự án",
     "expandHint": "Chạm để mở · Esc để đóng",
@@ -219,6 +262,7 @@
     "items": {
       "guscent": {
         "title": "Guscent",
+        "outcome": "Storefront headless CMS — ra mắt production sẵn SEO.",
         "descriptor": "E-commerce · Frontend",
         "role": "Frontend developer · Freelance",
         "summary": "Storefront nước hoa giàu tính thẩm mỹ, biến storytelling theo cảm xúc và trắc nghiệm mùi hương thành hành trình khám phá/mua sắm rõ ràng.",
@@ -235,6 +279,7 @@
       },
       "uctalent": {
         "title": "uctalent.io & business.uctalent.io",
+        "outcome": "SaaS ATS production — semantic search và matching AI.",
         "descriptor": "HRTech · Fullstack · AI",
         "role": "Fullstack developer · PIC ATS platform",
         "summary": "Nền tảng SaaS HRTech: talent marketplace và recruiter workspace cho sourcing, pipeline, matching AI, semantic search và referral flow; thiết kế RBAC phân quyền các role trên ATS UC Talent.",
@@ -252,6 +297,7 @@
       },
       "unchainlabs": {
         "title": "Unchain Labs",
+        "outcome": "Marketing + Strapi — editor publish không cần redeploy frontend.",
         "descriptor": "CMS · Fullstack",
         "role": "Fullstack developer",
         "summary": "Website marketing production và headless CMS giúp team publish nội dung doanh nghiệp có cấu trúc mà không phải sửa frontend.",
@@ -268,6 +314,7 @@
       },
       "matchtutors": {
         "title": "Match Tutors",
+        "outcome": "Marketplace realtime — matching AI qua queue, deploy AWS.",
         "descriptor": "Marketplace · Realtime · AI",
         "role": "Fullstack developer · Capstone",
         "summary": "Marketplace gia sư–học viên gom hồ sơ, đặt lịch, matching hỗ trợ AI, chat realtime và thanh toán vào một workflow.",
@@ -282,7 +329,21 @@
           "impact": "Capstone ship lên AWS với chat/booking realtime, matching AI qua queue và codebase React + Express tách repo sẵn sàng iterate."
         }
       }
-    }
+    },
+    "cursorView": "Xem",
+    "cursorLive": "Live ↗",
+    "caseStudyLabel": "Case study",
+    "contents": "Mục lục",
+    "factRole": "Vai trò",
+    "factPeriod": "Thời gian",
+    "factTeam": "Quy mô",
+    "factDomain": "Lĩnh vực",
+    "overview": "Tổng quan",
+    "nextProject": "Dự án tiếp theo",
+    "prevProject": "Dự án trước",
+    "cursorNext": "Tiếp",
+    "deliverables": "hạng mục",
+    "scrollHint": "Cuộn để đọc case study"
   },
   "localeSwitcher": {
     "label": "Ngôn ngữ",
@@ -374,7 +435,8 @@
   },
   "footer": {
     "rights": "Đã đăng ký bản quyền.",
-    "builtWith": "Xây bằng Next.js"
+    "builtWith": "Xây bằng Next.js",
+    "designedBy": "Thiết kế bởi Claude"
   },
   "cv": {
     "back": "Về portfolio",
@@ -408,6 +470,35 @@
       "frontend": "Frontend",
       "mobile": "Mobile",
       "apis": "APIs"
-    }
+    },
+    "badge": "Liên hệ",
+    "status": "Đang mở cơ hội mới",
+    "localTime": "Giờ ở Đà Nẵng",
+    "composerHint": "Chọn vài mục — email sẽ tự soạn",
+    "stepIntent": "Bạn đang tìm gì?",
+    "stepCaps": "Mảng cần hỗ trợ",
+    "intents": {
+      "fulltime": "Full-time",
+      "freelance": "Freelance",
+      "collab": "Hợp tác"
+    },
+    "newMessage": "Thư mới",
+    "to": "Tới",
+    "subject": "Tiêu đề",
+    "greeting": "Chào Bảng,",
+    "bodyIntent": {
+      "fulltime": "Mình đang tuyển một vị trí fullstack full-time và nghĩ bạn có thể phù hợp.",
+      "freelance": "Mình có một dự án freelance và đang tìm người cùng xây.",
+      "collab": "Mình muốn rủ bạn cùng hợp tác trên một ý tưởng sản phẩm."
+    },
+    "bodyCaps": "Mảng cần hỗ trợ: {list}.",
+    "bodyClose": "Khi nào tiện mình trao đổi thêm nhé!",
+    "signoff": "Thân,",
+    "signName": "[Tên của bạn]",
+    "send": "Gửi email",
+    "copyEmail": "Copy email",
+    "copied": "Đã copy!",
+    "viewResume": "Xem & tải CV",
+    "timeZone": "Múi giờ"
   }
 }

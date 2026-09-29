@@ -133,6 +133,7 @@ export function SiteDock() {
               label={t(`nav.${item.labelKey}`)}
               index={index}
               isActive={activeHref === item.href}
+              indicatorId="dock-nav-indicator"
             />
           ))}
         </nav>

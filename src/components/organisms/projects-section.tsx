@@ -1,82 +1,62 @@
-import { ScrollReveal } from "@/components/atoms/scroll-reveal"
-import { ProjectsShowcase } from "@/components/organisms/projects-showcase"
-import { projectsContent } from "@/data/projects"
-import { resolveEmbedAllowed } from "@/lib/embeddability"
-import { buildProjectGithubLinks } from "@/lib/project-github-links"
-import { VIEWPORT_SECTION } from "@/data/site"
 import { getTranslations } from "next-intl/server"
 
-/** Featured projects — split preview + HR details panel. */
+import {
+  SectionHeading,
+  SectionWatermark,
+} from "@/components/molecules/section-heading"
+import { WorkIndex, type WorkIndexProject } from "@/components/organisms/work-index"
+import { FEATURED_PROJECT_ID, projectsContent } from "@/data/projects"
+import { VIEWPORT_SECTION } from "@/data/site"
+
+const PROOF_PREVIEW = 4
+
+/** Selected work — editorial index that drives a live project stage. */
 export async function ProjectsSection() {
   const t = await getTranslations("projects")
 
-  const projects = await Promise.all(
-    projectsContent.map(async (project) => ({
-      id: project.id,
-      title: t(`items.${project.id}.title`),
-      descriptor: t(`items.${project.id}.descriptor`),
-      role: t(`items.${project.id}.role`),
-      period: project.period,
-      teamSizeLabel:
-        project.teamSize === 1
-          ? t("solo")
-          : t("teamSize", { count: project.teamSize }),
-      stack: project.stack,
-      bullets: project.bulletKeys.map((key) =>
-        t(`items.${project.id}.bullets.${key}` as Parameters<typeof t>[0])
-      ),
-      caseStudies: project.highlightKeys.map((key) => ({
-        label: t(`caseStudy.${key}` as Parameters<typeof t>[0]),
-        text: t(
-          `items.${project.id}.highlights.${key}` as Parameters<typeof t>[0]
-        ),
-      })),
-      proof: [
-        project.teamSize === 1
-          ? t("solo")
-          : t("teamSize", { count: project.teamSize }),
-        ...project.proofKeys.map((key) =>
-          t(`proof.${key}` as Parameters<typeof t>[0])
-        ),
-      ],
-      liveLinks: [
-        { url: project.liveUrl, label: t("live") },
-        ...(project.liveLinks?.map((link) => ({
-          url: link.url,
-          label: t(link.labelKey as Parameters<typeof t>[0]),
-        })) ?? []),
-      ],
-      githubLinks: buildProjectGithubLinks(project, (key) => t(key)),
-      previewUrl: project.previewUrl ?? project.liveUrl,
-      previewType: project.previewType,
-      previewImage: project.previewImage,
-      previewImageFallback: project.previewImageFallback,
-      embedAllowed: await resolveEmbedAllowed(
-        project.previewUrl ?? project.liveUrl,
-        project.previewType
-      ),
-    }))
-  )
+  const projects: WorkIndexProject[] = projectsContent.map((project) => ({
+    id: project.id,
+    icon: project.icon,
+    title: t(`items.${project.id}.title`),
+    period: project.period,
+    outcome: t(`items.${project.id}.outcome`),
+    descriptor: t(`items.${project.id}.descriptor`),
+    role: t(`items.${project.id}.role`),
+    stack: project.stack,
+    proof: project.proofKeys
+      .slice(0, PROOF_PREVIEW)
+      .map((key) => t(`proof.${key}`)),
+    liveUrl: project.liveUrl,
+    featured: project.id === FEATURED_PROJECT_ID,
+  }))
 
   return (
     <section
       id="projects"
-      className={`page-section box-border min-h-0 gap-y-4 border-t border-border pt-10 pb-10 sm:pt-12 sm:pb-12 lg:grid-rows-[minmax(0,1fr)] lg:gap-y-3 lg:pt-8 lg:pb-6 [@media(min-width:1024px)_and_(max-height:50rem)]:gap-y-2 [@media(min-width:1024px)_and_(max-height:50rem)]:pt-6 [@media(min-width:1024px)_and_(max-height:50rem)]:pb-4 ${VIEWPORT_SECTION}`}
+      data-screen
+      className={`page-section box-border content-start gap-y-6 pt-10 pb-12 sm:pt-12 lg:grid-rows-[auto_minmax(0,1fr)] lg:gap-y-6 lg:py-8 short:gap-y-4 short:py-6 ${VIEWPORT_SECTION}`}
     >
-      <ScrollReveal className="col-span-10 grid h-full min-h-0 w-full grid-cols-subgrid lg:grid-rows-[minmax(0,1fr)]">
-        <ProjectsShowcase
-          projects={projects}
-          sectionLabel={`SYSTEM / ${t("badge")}`}
-          sectionTitle={t("title")}
-          sectionDescription={t("description")}
-          tabsLabel={t("tabsLabel")}
-          keyHighlightsLabel={t("keyHighlights")}
-          caseStudySectionLabel={t("shipped")}
-          featuredProjectBadge={t("featuredProjectBadge")}
-          stackLabel={t("caseStudy.stack")}
-          detailsCardLabel={t("detailsCard")}
-        />
-      </ScrollReveal>
+      <SectionWatermark index={3} />
+      <SectionHeading
+        index={3}
+        label={t("badge")}
+        title={t("title")}
+        description={t("description")}
+        titleClassName="short:text-4xl"
+        descriptionClassName="max-w-3xl"
+      />
+      <WorkIndex
+        projects={projects}
+        labels={{
+          viewDetails: t("viewDetails"),
+          live: t("live"),
+          featured: t("featuredProjectBadge"),
+          role: t("caseStudy.role"),
+          stack: t("caseStudy.stack"),
+          cursorView: t("cursorView"),
+          cursorLive: t("cursorLive"),
+        }}
+      />
     </section>
   )
 }

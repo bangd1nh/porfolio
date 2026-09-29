@@ -13,10 +13,21 @@ const PERSON_FRAGMENT = "#person"
 
 type PageMetadataInput = {
   locale: Locale
-  path: SiteRoutePath
+  path: SiteRoutePath | `/projects/${string}`
   title: string
   description: string
   isAbsoluteTitle?: boolean
+}
+
+function resolvePagePath(
+  locale: Locale,
+  path: PageMetadataInput["path"]
+): string {
+  if (path.startsWith("/projects/")) {
+    return path
+  }
+
+  return getLocalizedPath(locale, path as SiteRoutePath)
 }
 
 type JsonLdNode = Record<string, unknown>
@@ -59,7 +70,7 @@ export function buildPageMetadata({
   description,
   isAbsoluteTitle = false,
 }: PageMetadataInput): Metadata {
-  const pagePath = getLocalizedPath(locale, path)
+  const pagePath = resolvePagePath(locale, path)
   const ogImageUrl = getOgImageUrl(locale, { title, description })
 
   return {

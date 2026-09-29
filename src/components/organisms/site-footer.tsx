@@ -1,4 +1,4 @@
-import { GitBranch, Mail } from "lucide-react"
+import { GitBranch, Mail, Sparkles } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 import { contactLinks } from "@/data/contact"
@@ -62,8 +62,18 @@ export async function SiteFooter({
         </a>
       </nav>
 
-      <p className="text-xs text-muted-foreground md:col-span-10">
+      <p className="flex flex-wrap items-center gap-x-2 text-xs text-muted-foreground md:col-span-10">
         {t("builtWith")}
+        <span aria-hidden>·</span>
+        <a
+          href="https://claude.ai"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 font-medium text-foreground transition-colors duration-150 hover:text-primary motion-reduce:transition-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+        >
+          <Sparkles className="size-3 text-primary" aria-hidden />
+          {t("designedBy")}
+        </a>
       </p>
     </div>
   )

@@ -44,14 +44,14 @@ export function CareerTimeline({
         return (
           <li
             key={entry.id}
-            className="relative grid grid-cols-[1.5rem_minmax(0,1fr)] gap-4 pb-8 last:pb-0"
+            className="group/entry relative grid grid-cols-[1.5rem_minmax(0,1fr)] gap-4 pb-8 last:pb-0"
           >
             <div className="relative z-1 flex justify-center pt-1.5">
-              <span className="grid size-6 shrink-0 place-items-center border border-border bg-card text-foreground">
+              <span className="grid size-6 shrink-0 place-items-center border border-border bg-card text-foreground transition-[background-color,color,transform] duration-300 group-hover/entry:rotate-45 group-hover/entry:bg-primary group-hover/entry:text-primary-foreground motion-reduce:transition-none [&>svg]:transition-transform [&>svg]:duration-300 group-hover/entry:[&>svg]:-rotate-45">
                 <Icon className="size-3" aria-hidden />
               </span>
             </div>
-            <article className="min-w-0 grid gap-3 border border-border bg-card p-4 md:p-5">
+            <article className="min-w-0 grid gap-3 border border-border bg-card p-4 transition-[transform,box-shadow,border-color] duration-300 ease-out group-hover/entry:-translate-y-0.5 group-hover/entry:border-foreground/60 group-hover/entry:shadow-brutal-sm motion-reduce:transition-none md:p-5">
               <header className="grid gap-1">
                 <div className="grid gap-0.5 sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-3">
                   <h4 className="font-heading text-lg font-semibold tracking-tight">

@@ -3,7 +3,8 @@ import { hasLocale } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 
-import { DotSpotlightBackground } from "@/components/atoms/dot-spotlight-background"
+import { CustomCursor } from "@/components/atoms/custom-cursor"
+import { DotField } from "@/components/atoms/dot-field"
 import { JsonLd } from "@/components/atoms/json-ld"
 import { PageGrid } from "@/components/atoms/page-grid"
 import { ContactCtaSection } from "@/components/organisms/contact-cta-section"
@@ -11,7 +12,9 @@ import { FeaturedStackSection } from "@/components/organisms/featured-stack-sect
 import { HeroSection } from "@/components/organisms/hero-section"
 import { ProfileDetailSection } from "@/components/organisms/profile-detail-section"
 import { ProjectsSection } from "@/components/organisms/projects-section"
+import { SectionRail } from "@/components/organisms/section-rail"
 import { SiteDock } from "@/components/organisms/site-dock"
+import { PageMotion } from "@/components/providers/page-motion"
 import { routing, type Locale } from "@/i18n/routing"
 import { buildPageMetadata, getHomeJsonLd } from "@/lib/seo"
 
@@ -54,10 +57,13 @@ export default async function HomePage({ params }: PageProps) {
   return (
     <div className="relative min-h-full">
       <JsonLd data={getHomeJsonLd(locale, t("ogSiteName"))} />
-      <DotSpotlightBackground />
+      <DotField />
       <SiteDock />
+      <SectionRail />
+      <CustomCursor />
+      <PageMotion />
       <PageGrid className="relative z-10">
-        <main className="contents">
+        <main data-snap className="contents">
           <HeroSection />
           <ProfileDetailSection />
           <ProjectsSection />
