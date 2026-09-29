@@ -50,10 +50,15 @@ export function getAlternateOpenGraphLocale(locale: Locale): "vi_VN" | "en_US" {
 
 export function getOgImageUrl(
   locale: Locale,
-  extras?: { title: string; description: string }
+  extras?: { title: string; description: string; path?: string }
 ): URL {
   const ogImageUrl = new URL("/api/og", getSiteUrl())
   ogImageUrl.searchParams.set("locale", locale)
+
+  if (extras?.path) {
+    // Picks the card variant: home hero, project case study, or generic page.
+    ogImageUrl.searchParams.set("path", extras.path)
+  }
 
   if (extras) {
     ogImageUrl.searchParams.set("title", extras.title)
@@ -71,7 +76,7 @@ export function buildPageMetadata({
   isAbsoluteTitle = false,
 }: PageMetadataInput): Metadata {
   const pagePath = resolvePagePath(locale, path)
-  const ogImageUrl = getOgImageUrl(locale, { title, description })
+  const ogImageUrl = getOgImageUrl(locale, { title, description, path })
 
   return {
     title: isAbsoluteTitle ? { absolute: title } : title,
