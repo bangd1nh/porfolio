@@ -1523,6 +1523,7 @@ html.has-custom-cursor * {
   background: oklch(1 0 0);
   box-shadow: 6px 6px 0 0 var(--primary);
   padding: 1.1rem 1.4rem;
+  transform: rotate(-3deg);
 }
 
 /* About — hanging developer ID */
@@ -2256,6 +2257,151 @@ html.has-custom-cursor * {
   }
 }
 
+/* Enter-only content swaps. A changed React `key` remounts the node and the
+   animation plays once — CSS-only, transform/opacity, no JS per frame. */
+.motion-enter {
+  animation: motion-enter 350ms var(--ease-out-expo) both;
+}
+
+.motion-enter-x {
+  animation: motion-enter-x 400ms var(--ease-out-expo) both;
+  animation-delay: calc(80ms + var(--i, 0) * 60ms);
+}
+
+.motion-enter-host {
+  animation: motion-enter-host 200ms ease-out both;
+}
+
+.motion-enter-rise {
+  animation: motion-enter-rise 600ms var(--ease-out-expo) both;
+}
+
+.motion-enter-pop {
+  animation: motion-enter-pop 520ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Changed copy flashes like a highlighter. */
+.motion-flash {
+  animation: motion-flash 1.2s ease-out both;
+}
+
+@keyframes motion-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--enter-y, 14px));
+  }
+}
+
+@keyframes motion-enter-x {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes motion-enter-host {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}
+
+@keyframes motion-enter-rise {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+}
+
+@keyframes motion-enter-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6) rotate(-14deg);
+  }
+}
+
+@keyframes motion-flash {
+  from {
+    background-color: color-mix(in oklch, var(--primary) 45%, transparent);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+/* Draggable stickers — GSAP owns transform, CSS owns the lift shadow. */
+.draggable-sticker[data-state="hover"] {
+  box-shadow: 7px 9px 0 0 oklch(0 0 0 / 0.18);
+}
+
+.draggable-sticker[data-state="drag"] {
+  box-shadow: 10px 12px 0 0 oklch(0 0 0 / 0.22);
+}
+
+/* Dock — one underline glides to the active link (transform only). */
+.dock-nav-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 2px;
+  background: var(--primary);
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: left center;
+  transform: translateX(var(--indicator-x, 0)) scaleX(var(--indicator-w, 0));
+}
+
+.dock-nav-indicator[data-ready="true"] {
+  opacity: 1;
+  transition: transform 420ms var(--ease-out-expo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-enter,
+  .motion-enter-x,
+  .motion-enter-host,
+  .motion-enter-rise,
+  .motion-enter-pop,
+  .motion-flash {
+    animation: none;
+  }
+
+  .dock-nav-indicator[data-ready="true"] {
+    transition: none;
+  }
+}
+
+/* Sections out of view (PageMotion sets data-offscreen) pause their loops. */
+[data-offscreen="true"] .marquee-track,
+[data-offscreen="true"] .terminal-caret,
+[data-offscreen="true"] .hero-sticker,
+[data-offscreen="true"] .hero-badge-ring,
+[data-offscreen="true"] .pipeline-track,
+[data-offscreen="true"] .pipeline-packet,
+[data-offscreen="true"] .pipeline-node,
+[data-offscreen="true"] .case-sticker,
+[data-offscreen="true"] .id-card-swing,
+[data-offscreen="true"] .pulse-dot::after,
+[data-offscreen="true"] .scroll-cue-line::after {
+  animation-play-state: paused;
+}
+
+/* Lite motion tier (software rendering, see lib/motion-tier.ts): decorative
+   loops would re-composite every frame forever without a GPU. Content-bearing
+   motion (marquee, autoplay progress) stays. */
+html[data-motion="lite"] .hero-sticker,
+html[data-motion="lite"] .hero-badge-ring,
+html[data-motion="lite"] .pipeline-track,
+html[data-motion="lite"] .pipeline-packet,
+html[data-motion="lite"] .pipeline-node,
+html[data-motion="lite"] .case-sticker,
+html[data-motion="lite"] .id-card-swing,
+html[data-motion="lite"] .pulse-dot::after,
+html[data-motion="lite"] .scroll-cue-line::after {
+  animation: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .hero-sticker,
@@ -2309,9 +2455,10 @@ html.has-custom-cursor * {
   vertical-align: top;
 }
 
+/* No permanent will-change: one layer per word adds up fast. GSAP promotes
+   words only while they tween. */
 .reveal-word {
   display: inline-block;
-  will-change: transform;
 }
 
 /* Returning sessions skip the boot overlay — hold the hero until its entrance runs. */

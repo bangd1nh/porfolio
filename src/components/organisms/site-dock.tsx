@@ -2,7 +2,7 @@
 
 import { Menu, X } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useEffect, useId, useRef, useState } from "react"
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react"
 
 import { LocaleSwitcher } from "@/components/molecules/locale-switcher"
 import { NavLink } from "@/components/molecules/nav-link"
@@ -23,7 +23,39 @@ export function SiteDock() {
   const [activeHref, setActiveHref] = useState("#about")
   const menuId = useId()
   const progressRef = useRef<HTMLSpanElement>(null)
+  const navRef = useRef<HTMLElement>(null)
+  const indicatorRef = useRef<HTMLSpanElement>(null)
   const { visible } = useDockVisibility({ menuOpen })
+
+  // One underline glides to the active link: measured once per change and
+  // moved with transform only (no layout animation).
+  useLayoutEffect(() => {
+    const nav = navRef.current
+    const indicator = indicatorRef.current
+    if (!nav || !indicator) return
+
+    const place = () => {
+      const link = nav.querySelector<HTMLElement>("[data-nav-active]")
+      if (!link || link.offsetWidth === 0) {
+        indicator.dataset.ready = ""
+        return
+      }
+      const inset = 10
+      indicator.style.setProperty("--indicator-x", `${link.offsetLeft + inset}px`)
+      indicator.style.setProperty("--indicator-w", `${Math.max(0, link.offsetWidth - inset * 2)}`)
+      if (indicator.dataset.ready !== "true") {
+        // First placement jumps; later ones glide.
+        requestAnimationFrame(() => {
+          indicator.dataset.ready = "true"
+        })
+      }
+    }
+
+    place()
+    const resize = new ResizeObserver(place)
+    resize.observe(nav)
+    return () => resize.disconnect()
+  }, [activeHref, t])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -123,9 +155,11 @@ export function SiteDock() {
         />
 
         <nav
+          ref={navRef}
           aria-label={t("mainNavigation")}
-          className="hidden grid-flow-col items-center gap-0.5 lg:grid"
+          className="relative hidden grid-flow-col items-center gap-0.5 lg:grid"
         >
+          <span ref={indicatorRef} className="dock-nav-indicator" aria-hidden />
           {NAV_ITEMS.map((item, index) => (
             <NavLink
               key={item.href}
@@ -133,7 +167,7 @@ export function SiteDock() {
               label={t(`nav.${item.labelKey}`)}
               index={index}
               isActive={activeHref === item.href}
-              indicatorId="dock-nav-indicator"
+              sharedIndicator
             />
           ))}
         </nav>

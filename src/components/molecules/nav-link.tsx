@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { useRef } from "react"
 
 import { prefersReducedMotion, scrollToHashSection } from "@/lib/scroll-to-section"
@@ -11,8 +10,8 @@ type NavLinkProps = {
   label: string
   index?: number
   isActive?: boolean
-  /** Shared layout id — the active underline glides between links. */
-  indicatorId?: string
+  /** The parent draws one shared underline that glides between links. */
+  sharedIndicator?: boolean
   className?: string
   onNavigate?: () => void
 }
@@ -38,7 +37,7 @@ export function NavLink({
   label,
   index,
   isActive,
-  indicatorId,
+  sharedIndicator,
   className,
   onNavigate,
 }: NavLinkProps) {
@@ -48,12 +47,13 @@ export function NavLink({
     <a
       href={href}
       aria-current={isActive ? "location" : undefined}
+      data-nav-active={isActive ? "true" : undefined}
       className={cn(
         "group relative flex min-h-11 cursor-pointer items-center gap-1.5 rounded-none px-2.5 py-2 font-mono text-[11px] font-semibold tracking-[0.08em] uppercase lg:min-h-0 xl:px-3",
         "transition-colors duration-150 motion-reduce:transition-none after:absolute after:right-2.5 after:bottom-0.5 after:left-2.5 after:h-px after:origin-left after:bg-primary after:transition-transform after:duration-150 motion-reduce:after:transition-none",
         "hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
         isActive
-          ? cn("text-foreground", indicatorId ? "after:scale-x-0" : "after:scale-x-100")
+          ? cn("text-foreground", sharedIndicator ? "after:scale-x-0" : "after:scale-x-100")
           : "text-muted-foreground after:scale-x-0 hover:after:scale-x-100",
         className
       )}
@@ -85,14 +85,6 @@ export function NavLink({
         </span>
       ) : null}
       <span>{label}</span>
-      {isActive && indicatorId ? (
-        <motion.span
-          layoutId={indicatorId}
-          className="absolute right-2.5 bottom-0 left-2.5 h-0.5 bg-primary"
-          transition={{ type: "spring", stiffness: 420, damping: 34 }}
-          aria-hidden
-        />
-      ) : null}
     </a>
   )
 }

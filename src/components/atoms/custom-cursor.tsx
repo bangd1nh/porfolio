@@ -5,6 +5,7 @@ import gsap from "gsap"
 import { useRef } from "react"
 
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { useMotionTier } from "@/hooks/use-motion-tier"
 
 gsap.registerPlugin(useGSAP)
 
@@ -23,7 +24,10 @@ export function CustomCursor() {
   const labelRef = useRef<HTMLSpanElement>(null)
   const finePointer = useMediaQuery("(pointer: fine)")
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
-  const enabled = finePointer && !reducedMotion
+  // Two blended, always-moving fixed layers are costly to composite in
+  // software — lite-tier machines keep the native cursor.
+  const lite = useMotionTier() === "lite"
+  const enabled = finePointer && !reducedMotion && !lite
 
   useGSAP(
     () => {
@@ -47,8 +51,7 @@ export function CustomCursor() {
         dot.dataset.state = state
       }
 
-      const sync = () => {
-        const hit = document.elementFromPoint(pointerX, pointerY)
+      const sync = (hit: Element | null) => {
         const labelled = hit?.closest<HTMLElement>(LABELLED)
         if (labelled?.dataset.cursorLabel) {
           if (label.textContent !== labelled.dataset.cursorLabel) {
@@ -77,7 +80,18 @@ export function CustomCursor() {
         dotX(pointerX)
         dotY(pointerY)
         setVisible(true)
-        sync()
+        // The cursor layers are pointer-events: none, so the event target is
+        // what sits under the pointer — no hit-test needed per move.
+        sync(event.target instanceof Element ? event.target : null)
+      }
+      // Scrolling moves content under a still pointer: hit-test once per frame.
+      let scrollFrame = 0
+      const onScroll = () => {
+        if (scrollFrame) return
+        scrollFrame = window.requestAnimationFrame(() => {
+          scrollFrame = 0
+          sync(document.elementFromPoint(pointerX, pointerY))
+        })
       }
       const onDown = () => {
         ring.dataset.pressed = "true"
@@ -89,7 +103,7 @@ export function CustomCursor() {
 
       gsap.set([ring, dot], { x: pointerX, y: pointerY })
       window.addEventListener("pointermove", onMove, { passive: true })
-      window.addEventListener("scroll", sync, { passive: true })
+      window.addEventListener("scroll", onScroll, { passive: true })
       window.addEventListener("pointerdown", onDown)
       window.addEventListener("pointerup", onUp)
       root.addEventListener("pointerleave", onLeave)
@@ -97,7 +111,8 @@ export function CustomCursor() {
       return () => {
         root.classList.remove("has-custom-cursor")
         window.removeEventListener("pointermove", onMove)
-        window.removeEventListener("scroll", sync)
+        window.removeEventListener("scroll", onScroll)
+        if (scrollFrame) window.cancelAnimationFrame(scrollFrame)
         window.removeEventListener("pointerdown", onDown)
         window.removeEventListener("pointerup", onUp)
         root.removeEventListener("pointerleave", onLeave)
