@@ -73,7 +73,7 @@
       "note": "Active context / 2026",
       "roleLabel": "Role",
       "roleValue": "Fullstack Developer @ UC Talent Labs",
-      "mission": "Building HRTech products and AI-powered matching/search systems.",
+      "mission": "Shipping UCTalent's Smart ATS — billing, interview scheduling, referrals and AI matching.",
       "stackLabel": "Current stack",
       "stackValue": "Next.js · NestJS · FastAPI",
       "githubLabel": "GitHub activity",
@@ -186,13 +186,13 @@
       "uctalent": {
         "company": "UC Talent Labs",
         "role": "Fullstack Developer",
-        "summary": "HRTech product team building a talent marketplace, recruiter workspace, and AI-assisted search and matching workflows.",
+        "summary": "Referral-based tech hiring platform: the uctalent.io job board and the business.uctalent.io Smart ATS. I ship features end to end across NestJS, FastAPI, Next.js and the React ATS.",
         "bullets": {
-          "production": "Owned full-stack delivery for marketplace and recruiter workflows, including candidate sourcing, pipelines, and referral flows.",
-          "performance": "Built AI-assisted screening and matching plus semantic search with LLM tooling, embeddings, and Elasticsearch.",
-          "reliability": "Shipped Next.js experiences and NestJS/FastAPI services over GraphQL, PostgreSQL, Redis, and Elasticsearch.",
-          "endToEnd": "Connected search, matching, background jobs, and notifications across service boundaries with production fallbacks.",
-          "agile": "Took features from product/design handoff through implementation, review, release, and production debugging."
+          "production": "Built SaaS subscription billing: mid-period upgrades with unused-period credit, saved-card auto-renewal, grace period, cancel / turn off renewal, next-period plan changes and recruiter seat quotas.",
+          "performance": "Built interview scheduling on Google Calendar + Gmail: a week view of the recruiter's busy times, invitation emails, and a public page where candidates accept or request a new time.",
+          "reliability": "Built AI services in FastAPI: Gemini CV extraction and evaluation, CV/job embeddings, similar-job search, and re-ranked RAG job recommendations for talent profiles.",
+          "endToEnd": "Delivered the referral reward program: warranty periods with locked terms, email-link guarantee confirmation, payout milestones, admin invoicing and company referral bonuses.",
+          "agile": "Shipped job lifecycle and compliance: ATS status split from job-board publishing with admin review, edit / re-post with revision review, GA4 consent tracking and data deletion requests."
         }
       },
       "fsoft": {
@@ -279,20 +279,20 @@
       },
       "uctalent": {
         "title": "uctalent.io & business.uctalent.io",
-        "outcome": "SaaS ATS on production — semantic search and AI-assisted matching.",
+        "outcome": "Production SaaS ATS — billing, interview scheduling, referrals and AI matching.",
         "descriptor": "HRTech · Fullstack · AI",
         "role": "Fullstack developer · PIC ATS platform",
-        "summary": "SaaS HRTech platform — talent marketplace and recruiter workspace for sourcing, pipelines, AI-assisted matching, semantic search, and referral flows; designed RBAC and role-based permissions across the UC Talent ATS.",
+        "summary": "Referral-based tech hiring platform: uctalent.io is the job board for talents and referrers; business.uctalent.io is the Smart ATS where companies post jobs, run candidate pipelines, schedule interviews and pay for plans.",
         "bullets": {
-          "highlight1": "Owned full-stack ATS modules with Next.js, NestJS, GraphQL, and PostgreSQL in production.",
-          "highlight2": "Implemented semantic search with Elasticsearch, vector embeddings, and AI-assisted matching workflows.",
-          "highlight3": "Designed RBAC and tenant-scoped permissions for recruiter, admin, and candidate roles.",
-          "highlight4": "Shipped multi-tenant SaaS ATS model with isolated recruiter workspaces, tenant-scoped data, and production subscription flows."
+          "highlight1": "Subscription billing: upgrades with unused-period credit, saved-card renewal, grace period, cancel, next-period plan change and seat quotas.",
+          "highlight2": "Interview scheduling and candidate emails through the recruiter's connected Google Calendar and Gmail, with a public accept / reschedule page.",
+          "highlight3": "AI pipeline: Gemini CV extraction and evaluation, embeddings, similar-job search and re-ranked RAG job recommendations.",
+          "highlight4": "Referral warranty and payouts, job edit / re-post with revision review, and ATS status vs job-board publishing with admin review."
         },
         "highlights": {
-          "shipped": "SaaS marketplace and ATS modules: recruiter workspace, candidate pipelines, screening, AI matching, outreach, referrals, and tenant-scoped admin tooling.",
-          "decisions": "Designed RBAC and permission matrices for recruiter/admin/candidate roles; PostgreSQL schema migrations and seed strategies; Elasticsearch + vector embeddings for semantic search; GraphQL across NestJS, FastAPI, Redis queues, and background workers.",
-          "impact": "Production HRTech platform with role-gated ATS flows, evolvable data model, and shared search/matching services under full-stack ownership."
+          "shipped": "Billing (upgrade, renewal, grace, cancel, plan change, seat quota, quota history, VAT profile); interview scheduling with Google Calendar; Gmail-sent candidate and rejection emails; hiring team sharing and member invites; company talent pool; referral warranty, payouts and admin invoices; GA4/GTM consent banner; data deletion form and trust pages.",
+          "decisions": "Split the ATS lifecycle (jobs.ats_status) from job-board visibility with a data migration; snapshot screening questions per application so edited jobs flag outdated AI scores; lock referral terms at referral time; token-based public pages for candidates and clients; DDD hexagonal NestJS modules; a standard 5xx error contract with request IDs.",
+          "impact": "Recruiters go from posting a job to scheduling interviews in one workspace, paid plans renew and upgrade without manual ops, and referrers see reward terms that cannot change after they refer."
         }
       },
       "unchainlabs": {

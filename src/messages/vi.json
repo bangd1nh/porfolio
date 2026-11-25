@@ -73,7 +73,7 @@
       "note": "Bối cảnh đang hoạt động / 2026",
       "roleLabel": "Vai trò",
       "roleValue": "Fullstack Developer @ UC Talent Labs",
-      "mission": "Xây sản phẩm HRTech cùng hệ thống matching/search ứng dụng AI.",
+      "mission": "Đang làm Smart ATS của UCTalent — billing, lên lịch phỏng vấn, giới thiệu và matching AI.",
       "stackLabel": "Stack hiện tại",
       "stackValue": "Next.js · NestJS · FastAPI",
       "githubLabel": "Hoạt động GitHub",
@@ -186,13 +186,13 @@
       "uctalent": {
         "company": "UC Talent Labs",
         "role": "Fullstack Developer",
-        "summary": "Team sản phẩm HRTech xây talent marketplace, recruiter workspace và workflow tìm kiếm/matching hỗ trợ AI.",
+        "summary": "Nền tảng tuyển dụng tech dựa trên giới thiệu: job board uctalent.io và Smart ATS business.uctalent.io. Tôi làm tính năng end-to-end trên NestJS, FastAPI, Next.js và ATS React.",
         "bullets": {
-          "production": "Phụ trách full-stack cho marketplace và workflow recruiter: source ứng viên, pipeline và referral.",
-          "performance": "Xây screening/matching hỗ trợ AI và semantic search với LLM tooling, embeddings và Elasticsearch.",
-          "reliability": "Ship trải nghiệm Next.js cùng service NestJS/FastAPI trên GraphQL, PostgreSQL, Redis và Elasticsearch.",
-          "endToEnd": "Kết nối search, matching, background job và notification giữa các service với phương án fallback production.",
-          "agile": "Đưa tính năng từ bàn giao product/design qua implement, review, release đến debug production."
+          "production": "Xây hệ thống subscription SaaS: nâng gói giữa kỳ có trừ phần chưa dùng, tự gia hạn bằng thẻ đã lưu, thời gian ân hạn, hủy / tắt gia hạn, đổi gói từ kỳ sau và giới hạn seat recruiter.",
+          "performance": "Xây tính năng lên lịch phỏng vấn với Google Calendar + Gmail: lịch tuần hiển thị giờ bận của recruiter, email mời và trang public để ứng viên xác nhận hoặc xin đổi giờ.",
+          "reliability": "Xây các service AI bằng FastAPI: trích xuất và đánh giá CV bằng Gemini, embedding CV/job, tìm job tương tự và gợi ý job RAG có re-rank cho hồ sơ talent.",
+          "endToEnd": "Làm chương trình thưởng giới thiệu: thời gian bảo hành với điều khoản khóa cố định, xác nhận bảo hành qua link email, các mốc chi trả, hóa đơn cho admin và thưởng giới thiệu công ty.",
+          "agile": "Làm vòng đời job và compliance: tách trạng thái ATS khỏi việc đăng job board kèm admin duyệt, sửa / đăng lại job có duyệt bản sửa, tracking GA4 có consent và yêu cầu xóa dữ liệu."
         }
       },
       "fsoft": {
@@ -279,20 +279,20 @@
       },
       "uctalent": {
         "title": "uctalent.io & business.uctalent.io",
-        "outcome": "SaaS ATS production — semantic search và matching AI.",
+        "outcome": "SaaS ATS production — billing, lên lịch phỏng vấn, giới thiệu và matching AI.",
         "descriptor": "HRTech · Fullstack · AI",
         "role": "Fullstack developer · PIC ATS platform",
-        "summary": "Nền tảng SaaS HRTech: talent marketplace và recruiter workspace cho sourcing, pipeline, matching AI, semantic search và referral flow; thiết kế RBAC phân quyền các role trên ATS UC Talent.",
+        "summary": "Nền tảng tuyển dụng tech dựa trên giới thiệu: uctalent.io là job board cho talent và người giới thiệu; business.uctalent.io là Smart ATS để công ty đăng job, quản lý pipeline ứng viên, lên lịch phỏng vấn và mua gói.",
         "bullets": {
-          "highlight1": "Phụ trách module ATS full-stack với Next.js, NestJS, GraphQL và PostgreSQL trên production.",
-          "highlight2": "Triển khai semantic search với Elasticsearch, vector embeddings và workflow matching AI.",
-          "highlight3": "Thiết kế RBAC và phân quyền theo tenant cho recruiter, admin và candidate.",
-          "highlight4": "Ship mô hình SaaS ATS đa tenant với workspace recruiter tách biệt, dữ liệu theo tenant và luồng subscription trên production."
+          "highlight1": "Subscription: nâng gói có trừ phần chưa dùng, gia hạn bằng thẻ đã lưu, ân hạn, hủy gói, đổi gói từ kỳ sau và giới hạn seat.",
+          "highlight2": "Lên lịch phỏng vấn và gửi email ứng viên qua Google Calendar và Gmail đã kết nối của recruiter, kèm trang public để xác nhận / đổi giờ.",
+          "highlight3": "Pipeline AI: trích xuất và đánh giá CV bằng Gemini, embedding, tìm job tương tự và gợi ý job RAG có re-rank.",
+          "highlight4": "Bảo hành và chi trả thưởng giới thiệu, sửa / đăng lại job có duyệt bản sửa, tách trạng thái ATS khỏi job board kèm admin duyệt."
         },
         "highlights": {
-          "shipped": "Module SaaS marketplace và ATS: recruiter workspace, pipeline ứng viên, screening, matching AI, outreach, referral và tooling admin theo tenant.",
-          "decisions": "Thiết kế RBAC và ma trận phân quyền recruiter/admin/candidate; migrate schema PostgreSQL và chiến lược seed; Elasticsearch + vector embeddings cho semantic search; GraphQL qua NestJS, FastAPI, Redis queue và background worker.",
-          "impact": "Nền tảng HRTech production với luồng ATS theo role, data model có thể tiến hóa và dịch vụ search/matching dùng chung dưới trách nhiệm full-stack."
+          "shipped": "Billing (nâng gói, gia hạn, ân hạn, hủy, đổi gói, seat quota, lịch sử quota, thông tin VAT); lên lịch phỏng vấn với Google Calendar; email ứng viên và email từ chối gửi qua Gmail; chia sẻ job cho hiring team và mời thành viên; talent pool của công ty; bảo hành giới thiệu, chi trả và hóa đơn admin; banner consent GA4/GTM; form xóa dữ liệu và các trang trust.",
+          "decisions": "Tách vòng đời ATS (jobs.ats_status) khỏi hiển thị job board kèm migrate dữ liệu; lưu snapshot câu hỏi screening theo từng đơn ứng tuyển để job bị sửa thì đánh dấu điểm AI cũ; khóa điều khoản thưởng tại thời điểm giới thiệu; trang public dùng token cho ứng viên và khách hàng; module NestJS theo DDD hexagonal; chuẩn hóa lỗi 5xx kèm request ID.",
+          "impact": "Recruiter đi từ đăng job đến lên lịch phỏng vấn trong một workspace, gói trả phí tự gia hạn và nâng cấp không cần vận hành tay, người giới thiệu thấy điều khoản thưởng không đổi sau khi giới thiệu."
         }
       },
       "unchainlabs": {

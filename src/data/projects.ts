@@ -50,7 +50,7 @@ export const projectsContent: readonly ProjectItem[] = [
     liveLinks: [
       { url: "https://business.uctalent.io", labelKey: "liveAts" },
     ],
-    period: "03/2026 – Present",
+    period: "02/2026 – Present",
     teamSize: 6,
     stack: [
       "Next.js",
@@ -97,7 +97,7 @@ export const projectsContent: readonly ProjectItem[] = [
     id: "unchainlabs",
     icon: "/projects/unchainlabs-icon.png",
     liveUrl: "https://unchain-labs.com",
-    period: "03/2026 – Present",
+    period: "02/2026 – Present",
     teamSize: 1,
     stack: [
       "Next.js",
