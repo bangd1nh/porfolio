@@ -6,6 +6,7 @@ import Image from "next/image"
 import { useRef } from "react"
 
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { useMotionTier } from "@/hooks/use-motion-tier"
 
 gsap.registerPlugin(useGSAP)
 
@@ -44,11 +45,13 @@ export function IdCard({
   const cardRef = useRef<HTMLDivElement>(null)
   const finePointer = useMediaQuery("(pointer: fine)")
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
+  const lite = useMotionTier() === "lite"
 
   useGSAP(
     () => {
       const card = cardRef.current
-      if (!card || !finePointer || reducedMotion) return
+      // 3D tilt + live glare repaint is too heavy for software compositing.
+      if (!card || !finePointer || reducedMotion || lite) return
 
       const rotateX = gsap.quickTo(card, "rotationX", { duration: 0.6, ease: "power3.out" })
       const rotateY = gsap.quickTo(card, "rotationY", { duration: 0.6, ease: "power3.out" })
@@ -75,7 +78,7 @@ export function IdCard({
         card.removeEventListener("pointerleave", leave)
       }
     },
-    { dependencies: [finePointer, reducedMotion], revertOnUpdate: true }
+    { dependencies: [finePointer, reducedMotion, lite], revertOnUpdate: true }
   )
 
   return (

@@ -4,8 +4,10 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useLocale } from "next-intl"
+import { useEffect } from "react"
 
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { useMotionTier } from "@/hooks/use-motion-tier"
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -23,17 +25,55 @@ const TOGGLE = "play none none reverse"
  * - data-screen          → section softly recedes as the next screen arrives (lg+)
  * - data-spotlight       → pointer position exposed as --mx / --my
  * - data-magnetic        → element leans toward the pointer
+ *
+ * Every <section> also gets data-offscreen while out of view, which pauses its
+ * infinite CSS loops (see globals.css).
+ *
+ * On the "lite" motion tier (software rendering) reveals animate whole blocks
+ * instead of per-word/clip-path layers, and scroll scrubbing, parallax,
+ * spotlight and magnetic effects are skipped.
  */
 export function PageMotion() {
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
   // Locale swaps re-render copy in place; rebuild triggers for the new nodes.
   const locale = useLocale()
+  const lite = useMotionTier() === "lite"
+
+  useEffect(() => {
+    const sections = document.querySelectorAll<HTMLElement>("section")
+    if (sections.length === 0) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const section = entry.target as HTMLElement
+          if (entry.isIntersecting) delete section.dataset.offscreen
+          else section.dataset.offscreen = "true"
+        }
+      },
+      { rootMargin: "10% 0px" }
+    )
+    sections.forEach((section) => observer.observe(section))
+    return () => {
+      observer.disconnect()
+      sections.forEach((section) => delete section.dataset.offscreen)
+    }
+  }, [locale])
 
   useGSAP(
     () => {
       if (reducedMotion) return
 
       gsap.utils.toArray<HTMLElement>("[data-reveal='title']").forEach((el) => {
+        if (lite) {
+          gsap.from(el, {
+            y: 24,
+            autoAlpha: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 88%", toggleActions: TOGGLE },
+          })
+          return
+        }
         gsap.from(el.querySelectorAll("[data-word]"), {
           yPercent: 115,
           rotate: 4,
@@ -46,6 +86,10 @@ export function PageMotion() {
 
       gsap.utils.toArray<HTMLElement>("[data-reveal='words']").forEach((el) => {
         const trigger = { trigger: el, start: "top 85%", toggleActions: TOGGLE }
+        if (lite) {
+          gsap.from(el, { autoAlpha: 0, duration: 0.5, ease: "power2.out", scrollTrigger: trigger })
+          return
+        }
         gsap.from(el.querySelectorAll("[data-word]"), {
           opacity: 0.12,
           y: 10,
@@ -106,7 +150,7 @@ export function PageMotion() {
       gsap.utils.toArray<HTMLElement>("[data-reveal-group]").forEach((group) => {
         const items = Array.from(group.children) as HTMLElement[]
         if (items.length === 0) return
-        const wipe = group.dataset.revealGroup === "clip"
+        const wipe = !lite && group.dataset.revealGroup === "clip"
 
         gsap.fromTo(
           items,
@@ -124,6 +168,12 @@ export function PageMotion() {
           }
         )
       })
+
+      // Scrubbed effects repaint on every scroll frame — skip them in lite.
+      if (lite) {
+        document.fonts?.ready.then(() => ScrollTrigger.refresh())
+        return
+      }
 
       gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) => {
         const depth = Number(el.dataset.parallax) || 0.2
@@ -166,16 +216,23 @@ export function PageMotion() {
 
       document.fonts?.ready.then(() => ScrollTrigger.refresh())
     },
-    { dependencies: [reducedMotion, locale], revertOnUpdate: true }
+    { dependencies: [reducedMotion, locale, lite], revertOnUpdate: true }
   )
 
   useGSAP(
     () => {
       const finePointer = window.matchMedia("(pointer: fine)").matches
-      if (reducedMotion || !finePointer) return
+      if (reducedMotion || !finePointer || lite) return
 
       let spotlight: HTMLElement | null = null
-      const onMove = (event: PointerEvent) => {
+      let pending: PointerEvent | null = null
+      let frame = 0
+      // Layout reads + style writes at most once per frame, not per event.
+      const flush = () => {
+        frame = 0
+        const event = pending
+        pending = null
+        if (!event) return
         const target = (event.target as Element | null)?.closest<HTMLElement>(
           "[data-spotlight]"
         )
@@ -186,6 +243,10 @@ export function PageMotion() {
         spotlight.style.setProperty("--mx", `${event.clientX - rect.left}px`)
         spotlight.style.setProperty("--my", `${event.clientY - rect.top}px`)
         spotlight.dataset.spotlightActive = "true"
+      }
+      const onMove = (event: PointerEvent) => {
+        pending = event
+        if (!frame) frame = window.requestAnimationFrame(flush)
       }
       window.addEventListener("pointermove", onMove, { passive: true })
 
@@ -214,10 +275,11 @@ export function PageMotion() {
 
       return () => {
         window.removeEventListener("pointermove", onMove)
+        if (frame) window.cancelAnimationFrame(frame)
         cleanups.forEach((cleanup) => cleanup())
       }
     },
-    { dependencies: [reducedMotion, locale], revertOnUpdate: true }
+    { dependencies: [reducedMotion, locale, lite], revertOnUpdate: true }
   )
 
   return null

@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl"
 
 import { buildBlocks } from "@/data/build-blocks"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { useMotionTier } from "@/hooks/use-motion-tier"
 import { cn } from "@/lib/utils"
 
 type BuildBlocksStageProps = {
@@ -48,6 +49,9 @@ export function BuildBlocksStage({
   const t = useTranslations("contact.blocks")
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
   const compactLayout = useMediaQuery("(max-width: 1023px)")
+  // Software rendering gets the static flow layout instead of the physics pile.
+  const lite = useMotionTier() === "lite"
+  const staticLayout = reducedMotion || compactLayout || lite
   const containerRef = useRef<HTMLDivElement>(null)
   const chipRefs = useRef<Map<string, HTMLElement>>(new Map())
   const physicsRef = useRef<PhysicsRefs | null>(null)
@@ -61,7 +65,7 @@ export function BuildBlocksStage({
   }
 
   useEffect(() => {
-    if (reducedMotion || compactLayout) return
+    if (staticLayout) return
 
     const container = containerRef.current
     if (!container) return
@@ -83,7 +87,15 @@ export function BuildBlocksStage({
 
     let frame = 0
 
+    /** True once a frame with every body asleep has been rendered. */
+    let restingSynced = false
+
     const syncPoses = () => {
+      // A sleeping pile does not move — stop re-rendering React until it wakes.
+      const allAsleep = [...bodiesById.values()].every((body) => body.isSleeping)
+      if (allAsleep && restingSynced) return
+      restingSynced = allAsleep
+
       const next: Record<string, BlockPose> = {}
       for (const block of buildBlocks) {
         const body = bodiesById.get(block.id)
@@ -263,12 +275,12 @@ export function BuildBlocksStage({
       physicsRef.current = null
       dragRef.current = null
     }
-  }, [compactLayout, reducedMotion])
+  }, [staticLayout])
 
   // On compact screens, a flow layout keeps every chip readable and prevents
   // the physics pile from colliding with the footer. The draggable stage stays
   // available on larger viewports where there is room to interact with it.
-  if (reducedMotion || compactLayout) {
+  if (staticLayout) {
     return (
       <div
         className={cn(

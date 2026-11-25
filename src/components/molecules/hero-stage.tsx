@@ -7,6 +7,7 @@ import { useRef } from "react"
 
 import { SkillIcon } from "@/components/atoms/skill-icon"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { useMotionTier } from "@/hooks/use-motion-tier"
 import { scrollToHashSection } from "@/lib/scroll-to-section"
 
 gsap.registerPlugin(useGSAP)
@@ -38,10 +39,12 @@ export function HeroStage({ children, role, location, stack, badgeText, badgeLab
   const rootRef = useRef<HTMLDivElement>(null)
   const finePointer = useMediaQuery("(pointer: fine)")
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
+  const lite = useMotionTier() === "lite"
 
   useGSAP(
     () => {
-      if (!finePointer || reducedMotion) return
+      // Pointer parallax keeps several layers re-compositing on every move.
+      if (!finePointer || reducedMotion || lite) return
       const layers = gsap.utils.toArray<HTMLElement>("[data-depth]").map((el) => ({
         depth: Number(el.dataset.depth) || 0,
         x: gsap.quickTo(el, "x", { duration: 0.9, ease: "power3.out" }),
@@ -60,7 +63,7 @@ export function HeroStage({ children, role, location, stack, badgeText, badgeLab
       window.addEventListener("pointermove", onMove, { passive: true })
       return () => window.removeEventListener("pointermove", onMove)
     },
-    { scope: rootRef, dependencies: [finePointer, reducedMotion], revertOnUpdate: true }
+    { scope: rootRef, dependencies: [finePointer, reducedMotion, lite], revertOnUpdate: true }
   )
 
   const stackLiteral = stack.map((item) => `"${item}"`)

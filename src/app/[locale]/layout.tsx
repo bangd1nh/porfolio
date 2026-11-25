@@ -16,6 +16,7 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { profileContent } from "@/data/profile"
 import { routing, type Locale } from "@/i18n/routing"
 import { LLMS_TXT_PATH } from "@/lib/llms-txt"
+import { MOTION_TIER_SCRIPT } from "@/lib/motion-tier"
 import {
   getAbsoluteUrl,
   getAlternateOpenGraphLocale,
@@ -146,6 +147,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
       )}
     >
       <head>
+        {/* Resolve the motion tier before first paint — see lib/motion-tier. */}
+        <script dangerouslySetInnerHTML={{ __html: MOTION_TIER_SCRIPT }} />
         <link rel="describedby" href={getAbsoluteUrl(LLMS_TXT_PATH)} />
         <link
           rel="alternate"

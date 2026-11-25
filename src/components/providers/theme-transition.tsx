@@ -11,6 +11,7 @@ import {
 import { createPortal, flushSync } from "react-dom"
 import { useTheme } from "@teispace/next-themes"
 
+import { isLiteMotion } from "@/lib/motion-tier"
 import {
   THEME_BACKGROUNDS,
   THEME_REVEAL_EASING,
@@ -135,7 +136,8 @@ export function ThemeTransition({ children }: ThemeTransitionProps) {
         resolvedTheme === "dark" ? "dark" : "light"
       if (next === current) return
 
-      if (!originElement || prefersReducedMotion()) {
+      // The full-viewport clip-path reveal is expensive without a GPU.
+      if (!originElement || prefersReducedMotion() || isLiteMotion()) {
         setTheme(next)
         return
       }

@@ -1,13 +1,14 @@
 "use client"
 
 import { ArrowRight, ArrowUpRight } from "lucide-react"
-import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 
 import { TransitionLink } from "@/components/molecules/transition-link"
 import { Button } from "@/components/ui/button"
+import { useHasChanged } from "@/hooks/use-has-changed"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { cn } from "@/lib/utils"
 
 export type WorkIndexProject = {
   id: string
@@ -39,7 +40,6 @@ type WorkIndexProps = {
 /** Seconds each project stays on stage before autoplay advances. */
 const AUTOPLAY_SECONDS = 6
 const STACK_PREVIEW = 6
-const EASE = [0.16, 1, 0.3, 1] as const
 
 const pad = (value: number) => String(value).padStart(2, "0")
 const hostOf = (url: string) => url.replace(/^https?:\/\//, "").replace(/\/$/, "")
@@ -56,6 +56,8 @@ export function WorkIndex({ projects, labels }: WorkIndexProps) {
   const [inView, setInView] = useState(false)
   const isDesktop = useMediaQuery("(min-width: 1024px)")
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
+  // Stage swaps animate in (CSS, keyed remount) — not on first paint.
+  const stageChanged = useHasChanged(active)
   const autoplay = isDesktop && !reducedMotion && inView
   const project = projects[active] ?? projects[0]
 
@@ -160,7 +162,7 @@ export function WorkIndex({ projects, labels }: WorkIndexProps) {
           index={active}
           total={projects.length}
           labels={labels}
-          animate={!reducedMotion}
+          animate={stageChanged}
         />
       </div>
     </div>
@@ -181,8 +183,6 @@ function WorkStage({
   animate: boolean
 }) {
   const extraStack = project.stack.length - STACK_PREVIEW
-  const enter = animate ? { opacity: 0, y: 18 } : false
-  const exit = animate ? { opacity: 0, y: -10 } : undefined
 
   return (
     <article
@@ -197,18 +197,12 @@ function WorkStage({
         </span>
         <span className="min-w-0 flex-1 truncate border border-foreground/15 px-2.5 py-1 font-mono text-[11px] text-muted-foreground">
           <span className="text-foreground/40">https://</span>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.span
-              key={project.id}
-              className="inline-block text-foreground"
-              initial={animate ? { opacity: 0, x: -6 } : false}
-              animate={{ opacity: 1, x: 0 }}
-              exit={animate ? { opacity: 0, x: 6 } : undefined}
-              transition={{ duration: 0.2 }}
-            >
-              {hostOf(project.liveUrl)}
-            </motion.span>
-          </AnimatePresence>
+          <span
+            key={project.id}
+            className={cn("inline-block text-foreground", animate && "motion-enter-host")}
+          >
+            {hostOf(project.liveUrl)}
+          </span>
         </span>
         <span className="flex items-center gap-2 font-mono text-[10px] font-bold tracking-[0.12em]">
           <span className="pulse-dot size-1.5 bg-primary" aria-hidden />
@@ -225,48 +219,38 @@ function WorkStage({
         aria-label={`${labels.live}: ${project.title}`}
         className="work-stage-media relative grid min-h-0 place-items-center overflow-hidden border-b-2 border-border-brutal"
       >
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.span
-            key={`n-${project.id}`}
-            className="work-stage-number"
-            initial={animate ? { opacity: 0, y: 60 } : false}
-            animate={{ opacity: 1, y: 0 }}
-            exit={animate ? { opacity: 0, y: -60 } : undefined}
-            transition={{ duration: 0.6, ease: EASE }}
-            aria-hidden
-          >
-            {pad(index + 1)}
-          </motion.span>
-        </AnimatePresence>
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.span
-            key={project.id}
-            className="work-stage-sticker relative grid place-items-center"
-            initial={animate ? { opacity: 0, scale: 0.6, rotate: -14 } : false}
-            animate={{ opacity: 1, scale: 1, rotate: -3 }}
-            exit={animate ? { opacity: 0, scale: 0.85, rotate: 6 } : undefined}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          >
+        <span
+          key={`n-${project.id}`}
+          className={cn("work-stage-number", animate && "motion-enter-rise")}
+          aria-hidden
+        >
+          {pad(index + 1)}
+        </span>
+        <span
+          key={project.id}
+          className={cn(
+            "work-stage-sticker relative grid place-items-center",
+            animate && "motion-enter-pop"
+          )}
+        >
             <Image
               src={project.icon}
               alt={`${project.title} logo`}
               width={320}
               height={200}
               unoptimized
-              className="h-auto max-h-24 w-auto max-w-[11rem] object-contain short:max-h-16"
-            />
-          </motion.span>
-        </AnimatePresence>
+            className="h-auto max-h-24 w-auto max-w-[11rem] object-contain short:max-h-16"
+          />
+        </span>
       </a>
 
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
+        <div
           key={project.id}
-          className="grid content-start gap-3 px-5 py-4 short:gap-2 short:py-3"
-          initial={enter}
-          animate={{ opacity: 1, y: 0 }}
-          exit={exit}
-          transition={{ duration: 0.35, ease: EASE }}
+          className={cn(
+            "grid content-start gap-3 px-5 py-4 short:gap-2 short:py-3",
+            animate && "motion-enter"
+          )}
+          style={{ "--enter-y": "18px" } as React.CSSProperties}
         >
           <p className="font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase">
             {labels.role}
@@ -306,8 +290,7 @@ function WorkStage({
               </li>
             ) : null}
           </ul>
-        </motion.div>
-      </AnimatePresence>
+        </div>
 
       <footer className="flex flex-wrap gap-2 border-t border-border px-5 py-4 short:py-3">
         <Button

@@ -24,17 +24,16 @@ export function ProjectRevealCard({
   className,
 }: ProjectRevealCardProps) {
   const bodyId = useId()
-  const [clickOpen, setClickOpen] = useState(false)
-
-  useEffect(() => {
-    setClickOpen(false)
-  }, [label])
+  // Open state is tied to the label it was opened for, so switching to another
+  // project closes the card without a reset effect.
+  const [openLabel, setOpenLabel] = useState<string | null>(null)
+  const clickOpen = openLabel === label
 
   useEffect(() => {
     if (!clickOpen) return
 
     const onKeyDown = (event: globalThis.KeyboardEvent) => {
-      if (event.key === "Escape") setClickOpen(false)
+      if (event.key === "Escape") setOpenLabel(null)
     }
 
     document.addEventListener("keydown", onKeyDown)
@@ -57,7 +56,7 @@ export function ProjectRevealCard({
         )}
         aria-expanded={clickOpen}
         aria-controls={bodyId}
-        onClick={() => setClickOpen((open) => !open)}
+        onClick={() => setOpenLabel((open) => (open === label ? null : label))}
       >
         <span className="min-w-0 font-mono text-[10px] font-semibold tracking-[0.12em] text-foreground uppercase">
           {label}

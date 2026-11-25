@@ -1,6 +1,5 @@
 "use client"
 
-import { AnimatePresence, motion } from "framer-motion"
 import {
   ArrowUpRight,
   Check,
@@ -21,7 +20,6 @@ import { contactLinks } from "@/data/contact"
 import { projectsContent } from "@/data/projects"
 import { resumeLinks } from "@/data/resume"
 import { HOME_SECTIONS } from "@/data/site"
-import { useMediaQuery } from "@/hooks/use-media-query"
 import { cn } from "@/lib/utils"
 
 const INTENTS = ["fulltime", "freelance", "collab"] as const
@@ -61,7 +59,6 @@ export function ContactInteraction() {
   const t = useTranslations("contact")
   const blockT = useTranslations("contact.blocks")
   const projectT = useTranslations("projects")
-  const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
   const time = useDaNangTime()
   const [intent, setIntent] = useState<Intent>("fulltime")
   const [caps, setCaps] = useState<BuildBlockLabelKey[]>([])
@@ -113,14 +110,6 @@ export function ContactInteraction() {
     }
   }
 
-  /** Changed copy in the preview flashes like a highlighter. */
-  const flash = reducedMotion
-    ? {}
-    : {
-        initial: { backgroundColor: "color-mix(in oklch, var(--primary) 45%, transparent)" },
-        animate: { backgroundColor: "color-mix(in oklch, var(--primary) 0%, transparent)" },
-        transition: { duration: 1.2, ease: "easeOut" as const },
-      }
 
   const channels = [
     {
@@ -279,29 +268,21 @@ export function ContactInteraction() {
               {t("relatedWork")}
             </p>
             <div className="flex min-h-12 flex-wrap gap-2">
-              <AnimatePresence mode="popLayout" initial={false}>
-                {related.length === 0 ? (
-                  <motion.span
+              {related.length === 0 ? (
+                  <span
                     key="empty"
                     className="grid min-h-12 flex-1 place-items-center border-2 border-dashed border-foreground/20 font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
-                    initial={reducedMotion ? false : { opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={reducedMotion ? undefined : { opacity: 0 }}
                   >
                     ↑ {t("stepCaps")}
-                  </motion.span>
+                  </span>
                 ) : (
                   related.map((project) => {
                     const title = projectT(`items.${project.id}.title`)
                     return (
-                      <motion.span
+                      <span
                         key={project.id}
-                        layout={!reducedMotion}
-                        className="flex min-w-0 flex-1 basis-40"
-                        initial={reducedMotion ? false : { opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={reducedMotion ? undefined : { opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.3 }}
+                        className="motion-enter flex min-w-0 flex-1 basis-40"
+                        style={{ "--enter-y": "10px" } as React.CSSProperties}
                       >
                         <TransitionLink
                           href={`/projects/${project.id}`}
@@ -322,11 +303,10 @@ export function ContactInteraction() {
                             aria-hidden
                           />
                         </TransitionLink>
-                      </motion.span>
+                      </span>
                     )
                   })
                 )}
-              </AnimatePresence>
             </div>
           </div>
         </div>
@@ -357,22 +337,22 @@ export function ContactInteraction() {
             <span className="font-mono text-[10px] tracking-[0.12em] text-muted-foreground uppercase">
               {t("subject")}
             </span>
-            <motion.span key={subject} className="truncate font-semibold" {...flash}>
+            <span key={subject} className="motion-flash truncate font-semibold">
               {subject}
-            </motion.span>
+            </span>
           </p>
           <div className="min-h-0 overflow-y-auto px-4 py-4 text-sm leading-relaxed [scrollbar-width:thin] sm:text-base short:py-3 short:text-sm">
             <p>{t("greeting")}</p>
             <p className="mt-3">
-              <motion.span key={intent} {...flash}>
+              <span key={intent} className="motion-flash">
                 {t(`bodyIntent.${intent}`)}
-              </motion.span>
+              </span>
               {capList ? (
                 <>
                   {" "}
-                  <motion.span key={capList} className="font-semibold" {...flash}>
+                  <span key={capList} className="motion-flash font-semibold">
                     {t("bodyCaps", { list: capList })}
-                  </motion.span>
+                  </span>
                 </>
               ) : null}
             </p>

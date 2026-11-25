@@ -1,10 +1,9 @@
 "use client"
 
-import { AnimatePresence, motion } from "framer-motion"
 import { Briefcase, GitBranch, GraduationCap } from "lucide-react"
 import { useId, useState } from "react"
 
-import { useMediaQuery } from "@/hooks/use-media-query"
+import { useHasChanged } from "@/hooks/use-has-changed"
 import { cn } from "@/lib/utils"
 
 export type JourneyEntry = {
@@ -30,7 +29,6 @@ type JourneyTabsProps = {
 
 /** Bullets beyond this are dropped on short desktop screens. */
 const COMPACT_BULLETS = 3
-const EASE = [0.16, 1, 0.3, 1] as const
 
 /**
  * Horizontal career rail — each stop is a tab; the yellow track fills up to
@@ -39,7 +37,8 @@ const EASE = [0.16, 1, 0.3, 1] as const
 export function JourneyTabs({ entries, label, currentLabel, className }: JourneyTabsProps) {
   const baseId = useId()
   const [active, setActive] = useState(entries.length - 1)
-  const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
+  // Story swaps animate in (CSS, keyed remount) — not on first paint.
+  const animate = useHasChanged(active)
   const entry = entries[active]
   const fill = entries.length > 1 ? active / (entries.length - 1) : 1
 
@@ -110,14 +109,12 @@ export function JourneyTabs({ entries, label, currentLabel, className }: Journey
         aria-labelledby={`${baseId}-tab-${active}`}
         className="relative max-h-full min-h-0 self-start overflow-hidden border-3 border-border-brutal bg-card shadow-brutal"
       >
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.article
+          <article
             key={entry.id}
-            className="grid content-start gap-3 p-5 short:gap-2 short:p-4"
-            initial={reducedMotion ? false : { opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reducedMotion ? undefined : { opacity: 0, y: -8 }}
-            transition={{ duration: 0.35, ease: EASE }}
+            className={cn(
+              "grid content-start gap-3 p-5 short:gap-2 short:p-4",
+              animate && "motion-enter"
+            )}
           >
             <header className="flex flex-wrap items-start justify-between gap-3">
               <div className="flex min-w-0 items-center gap-3">
@@ -151,21 +148,20 @@ export function JourneyTabs({ entries, label, currentLabel, className }: Journey
             {bullets.length > 0 ? (
               <ul className="grid gap-2 border-t border-border pt-3">
                 {bullets.map((bullet, index) => (
-                  <motion.li
+                  <li
                     key={bullet}
                     className={cn(
                       "grid grid-cols-[1.5rem_minmax(0,1fr)] gap-2 text-sm leading-relaxed",
-                      index >= COMPACT_BULLETS && "short:hidden"
+                      index >= COMPACT_BULLETS && "short:hidden",
+                      animate && "motion-enter-x"
                     )}
-                    initial={reducedMotion ? false : { opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.08 + index * 0.06, duration: 0.4, ease: EASE }}
+                    style={{ "--i": index } as React.CSSProperties}
                   >
                     <span className="pt-0.5 font-mono text-[10px] font-bold text-primary">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span>{bullet}</span>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             ) : null}
@@ -181,8 +177,7 @@ export function JourneyTabs({ entries, label, currentLabel, className }: Journey
                 {entry.linkLabel}
               </a>
             ) : null}
-          </motion.article>
-        </AnimatePresence>
+          </article>
       </div>
     </div>
   )
